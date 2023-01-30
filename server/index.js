@@ -3,7 +3,6 @@ const app = express();
 
 app.use(express.json());
 
-// const db = require('./persistence');
 const db = require("./models");
 
 // Routers
@@ -16,9 +15,4 @@ db.sequelize.sync().then(() => {
   });
 });
 
-// db.init().then(() => {
-//   app.listen(3213, () => console.log('Listening on port 3213'));
-// }).catch((err) => {
-//   console.error(err);
-//   process.exit(1);
-// });
+
