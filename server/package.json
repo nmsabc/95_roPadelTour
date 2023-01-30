@@ -1,14 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "",
+  "description": "barebones all for ro padel tour",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js",
     "start-watch": "nodemon index.js --inspect=0.0.0.0:9219"
   },
-  "author": "",
+  "author": "Sebastian Ivan, MBA",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
