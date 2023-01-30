@@ -1,6 +1,18 @@
 version: '1.0'
 
 services:
+  frontend_server:
+    image: ropadeltour_client_1
+    command: sh -c "yarn install && npm start"
+    ports: 
+      - '3000:3000'
+    working_dir: /client/
+    volumes: 
+      - ./client/:/client/
+    networks:
+      - public
+      - private
+
   backend_server:
     image: ropadeltour_server_1
     command: sh -c "yarn install && yarn run start"
