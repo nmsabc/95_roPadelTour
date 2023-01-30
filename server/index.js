@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 app.use(express.json());
 
 // used to resolve the FE being blocked by CORS policy
-let cors = require("cors");
 app.use(cors());
 
 const db = require("./models");
