@@ -1,0 +1,38 @@
+version: '1.0'
+
+services:
+  backend_server:
+    image: ropadeltour_server_1
+    command: sh -c "yarn install && yarn run start"
+    ports: 
+      - '3213:3213'
+    working_dir: /server
+    volumes: 
+      - ./server:/server
+    environment:
+      MYSQL_HOST: mysql_for_backend_server
+      MYSQL_USER: root
+      MYSQL_PASSWORD: /run/secrets/db-password
+      MYSQL_DB: ropadeltour_v100
+    networks:
+      - public
+      - private
+
+  mysql_for_backend_server:
+    image: mysql:8.0
+    volumes:
+      - ropadeltour_v100-mysql-data:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: /run/secrets/db-password
+      MYSQL_DATABASE: ropadeltour_v100
+    networks:
+      - private
+volumes:
+  ropadeltour_v100-mysql-data:
+networks:
+  public:
+  private:
+
+secrets:
+  db-password:
+    file: server/config//password.txt

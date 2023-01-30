@@ -1,0 +1,56 @@
+services:
+  server:
+    build:
+      args:
+      - NODE_ENV=development
+      context: server
+      target: development
+    command: sh -c "yarn install && npm run start"
+    environment:
+      - DATABASE_DB=ropadeltour_v100
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=/run/secrets/db-password
+      - DATABASE_HOST=host.docker.internal
+      - NODE_ENV=development
+    ports:
+      - 3213:3123
+      - 9219:9219
+      - 9220:9220
+    secrets:
+      - db-password
+    volumes:
+      - ./server:/code/:ro
+      - ./server/package.json:/code/package.json
+      - ./server/package-lock.json:/code/package-lock.json
+    networks:
+      - public
+      - private
+    depends_on:
+      - mysql_db
+  mysql_db:
+    # We use a mariadb image which supports both amd64 & arm64 architecture
+    image: mariadb:10.6.4-focal
+    # If you really want to use MySQL, uncomment the following line
+    #image: mysql:8.0.27
+    command: '--default-authentication-plugin=mysql_native_password'
+    restart: always
+    ports:
+      - 3306:3306
+    secrets:
+      - db-password
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - private
+    environment:
+      - MYSQL_DATABASE=ropadeltour_v100
+      - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
+networks:
+  public:
+  private:
+volumes:
+  back-notused:
+  db-data:
+secrets:
+  db-password:
+    file: server/config/db_password.txt
