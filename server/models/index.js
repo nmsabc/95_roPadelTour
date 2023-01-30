@@ -16,6 +16,7 @@ if (config.use_env_variable) {
   // 30 Jan 2023 - by Sebastianule
   // console.log(sequelize) // and so I foudn that the config should have the host "host": "mysql_for_backend_server",
   // as is in the compose.yaml file under the service mysql_for_backend_server
+  // well done
 }
 
 fs
