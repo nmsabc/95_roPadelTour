@@ -55,7 +55,9 @@ function App() {
       {listOfPosts.map((value, key) => {
         return (
           <div className="post">
-            <div className="postinfo">The user_ {value.username} _has written_ {value.title} _containing_ {value.postText}</div>
+            <div className="title">{value.title}</div>
+            <div className="body">{value.postText}</div>
+            <div className="footer">by: {value.username}</div>
           </div>
         );
       })}
