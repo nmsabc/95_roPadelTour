@@ -11,6 +11,7 @@ function App() {
 
   return (
     <div className="App">
+      <p>FE works</p>
     </div>
   );
 }
