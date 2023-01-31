@@ -2,7 +2,7 @@
 // https://reactjs.org/docs/components-and-props.html
 
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import * as ReactDOMClient from 'react-dom/client';
 
 function formatDate(date) {
