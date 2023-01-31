@@ -1,3 +1,6 @@
+// thsi is an exe4rcise on components extraction in React
+// https://reactjs.org/docs/components-and-props.html
+
 import React from "react";
 import ReactDOM from "react-dom";
 import * as ReactDOMClient from 'react-dom/client';
