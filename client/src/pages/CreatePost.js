@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { Formik, Form, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styled from "@emotion/styled";
+import axios from "axios";
+
 
 import "../styles/formik_styles.css";
 import "../styles/formik_styles-custom.css";
@@ -101,8 +103,11 @@ function CreatePost() {
             .oneOf([true], "You must accept the terms and conditions."),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          console.log(values);
+          // console.log(values);
           await new Promise(r => setTimeout(r, 500));
+          axios.post("http://localhost:3213/posts", values).then((response) => {
+            // console.log("Data inserted");
+          });
           setSubmitting(false);
         }}
       >

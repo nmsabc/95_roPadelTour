@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Formik, Form, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styled from "@emotion/styled";
+import axios from "axios";
 
 import "../styles/formik_styles.css";
 import "../styles/formik_styles-custom.css";
@@ -113,7 +114,7 @@ function CreatePlayer() {
               .max(20, "Must be 20 characters or less")
               .required("Required"),
             full_address: Yup.string()
-              .max(20, "Must be 20 characters or less")
+              .max(50, "Must be 50 characters or less")
               .required("Required"),            
             addressType: Yup.string()
               // specify the set of valid values for job type
@@ -123,8 +124,8 @@ function CreatePlayer() {
                 "Invalid Address Type"
               )
               .required("Required"),
-            points: Yup.string()
-            .max(99, "Must be at start between 1 and 99 points"),
+            points: Yup.number()
+            .max(99, "Must be at start not above 99 points"),
             acceptedTerms: Yup.boolean()
               .required("Required")
               .oneOf([true], "You must accept emails and the terms and conditions."),
@@ -132,6 +133,9 @@ function CreatePlayer() {
         onSubmit={async (values, { setSubmitting }) => {
           console.log(values);
           await new Promise(r => setTimeout(r, 500));
+          axios.post("http://localhost:3213/players", values).then((response) => {
+            // console.log("Data inserted");
+          });
           setSubmitting(false);
         }}
       >
