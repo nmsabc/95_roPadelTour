@@ -1,15 +1,11 @@
-import React from 'react'
-import {Formik, Form, useField, Field,} from "formik";
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
+import { Formik, Form, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styled from "@emotion/styled";
 
 import "../styles/formik_styles.css";
 import "../styles/formik_styles-custom.css";
-
-function AddPlayer() {
-  return <AddPlayerForm />;
-
-}
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -40,7 +36,6 @@ const MyCheckbox = ({ children, ...props }) => {
     </>
   );
 };
-
 
 // Styled components ....
 const StyledSelect = styled.select`
@@ -80,51 +75,63 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
-const  AddPlayerForm = () =>{
-
-  const formikInitialValues ={
-    firstName: "",
-    lastName: "",
-    ursername: "",
-    email: "",
-    phone: "",
-    adress_city: "",
-    full_address: "",
-    acceptedTerms: false, // added for our checkbox
-    jobType: "" // added for our select
-  }
-  
-  return(
+// And now we can use these
+function CreatePlayer() {
+  return (
     <>
-    <h1> Add a new Player</h1>
-    <Formik
-        initialValues={formikInitialValues}
+      <h3> Add a new Player</h3>
+      <Formik
+        initialValues={{
+          first_name: "",
+          fam_name: "",
+          username: "",
+          email: "",
+          phone: "",
+          address_city: "",
+          full_address: "",
+          addressType: "", // added for our select
+          points: "",
+          acceptedTerms: true, // added for our checkbox
+        }}
         validationSchema={Yup.object({
-          first_name: Yup.string()
-            .max(15, "Must be 15 characters or less")
-            .required("Required"),
-          fam_name: Yup.string()
-            .max(20, "Must be 20 characters or less")
-            .required("Required"),
-          email: Yup.string()
-            .email("Invalid email addresss`")
-            .required("Required"),
-          acceptedEmails: Yup.boolean()
-            .required("Required")
-            .oneOf([true], "You must accept the terms and conditions."),
-          jobType: Yup.string()
-            // specify the set of valid values for job type
-            // @see http://bit.ly/yup-mixed-oneOf
-            .oneOf(
-              ["Home", "Work", "Other"],
-              "Invalid Job Type"
-            )
-            .required("Required")
+            first_name: Yup.string()
+              .max(15, "Must be 15 characters or less")
+              .required("Required"),
+            fam_name: Yup.string()
+              .max(20, "Must be 20 characters or less")
+              .required("Required"),
+            username: Yup.string()
+              .max(20, "Must be 20 characters or less")
+              .required("Required"),
+            email: Yup.string()
+              .email("Invalid email addresss`")
+              .required("Required"),
+            phone: Yup.string()
+              .max(20, "Must be 20 characters or less")
+              .required("Required"),
+            address_city: Yup.string()
+              .max(20, "Must be 20 characters or less")
+              .required("Required"),
+            full_address: Yup.string()
+              .max(20, "Must be 20 characters or less")
+              .required("Required"),            
+            addressType: Yup.string()
+              // specify the set of valid values for job type
+              // @see http://bit.ly/yup-mixed-oneOf
+              .oneOf(
+                ["home", "work", "cityclub", "other"],
+                "Invalid Address Type"
+              )
+              .required("Required"),
+            points: Yup.string()
+            .max(99, "Must be at start between 1 and 99 points"),
+            acceptedTerms: Yup.boolean()
+              .required("Required")
+              .oneOf([true], "You must accept emails and the terms and conditions."),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          await new Promise(r => setTimeout(r, 500));
           console.log(values);
-
+          await new Promise(r => setTimeout(r, 500));
           setSubmitting(false);
         }}
       >
@@ -133,35 +140,66 @@ const  AddPlayerForm = () =>{
             label="First Name"
             name="first_name"
             type="text"
-            placeholder="Jane"
+            placeholder="First name"
           />
           <MyTextInput
             label="Last Name"
             name="fam_name"
             type="text"
-            placeholder="Doe"
+            placeholder="Last name"
           />
           <MyTextInput
-            label="Email Address"
-            name="email"
-            type="email"
-            placeholder="jane@formik.com"
+            label="Username"
+            name="username"
+            type="text"
+            placeholder="Username"
           />
-          <MySelect label="Address Type" name="addType">
-            <option value="">Select address type</option>
-            <option value="designer">Home</option>
-            <option value="development">Work</option>
+          <MyTextInput
+            label="Email"
+            name="email"
+            type="text"
+            placeholder="email"
+          />
+          <MyTextInput
+            label="Mobile phone"
+            name="phone"
+            type="text"
+            placeholder="phone"
+          />
+          <MyTextInput
+            label="City of residence"
+            name="address_city"
+            type="text"
+            placeholder="Address in the residence city"
+          />
+          <MyTextInput
+            label="Full adresss"
+            name="full_address"
+            type="text"
+            placeholder="your full address"
+          />
+          <MySelect label="Address type" name="addressType">
+            <option value="">Select the address type</option>
+            <option value="home">Home</option>
+            <option value="work">Work</option>
+            <option value="cityclub">City club</option>
             <option value="other">Other</option>
           </MySelect>
+          <MyTextInput
+            label="Inital points"
+            name="points"
+            type="text"
+            placeholder="10"
+          />
           <MyCheckbox name="acceptedTerms">
-            I accept emails with RoPadelTour info
+            I accept the email and the terms and conditions
           </MyCheckbox>
 
-          <button type="submit">Create Player</button>
+          <button type="submit">Add Player</button>
         </Form>
       </Formik>
     </>
-  )
-}
+  );
+};
 
-export default AddPlayer;
+export default CreatePlayer;

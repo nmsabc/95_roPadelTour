@@ -76,7 +76,7 @@ const MySelect = ({ label, ...props }) => {
 };
 
 // And now we can use these
-function CreatePostForm() {
+function CreatePost() {
   return (
     <>
       <h3>Add your message below</h3>
@@ -136,4 +136,4 @@ function CreatePostForm() {
   );
 };
 
-export default CreatePostForm;
+export default CreatePost;
