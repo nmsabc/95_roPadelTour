@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
-import { Formik, Form, useField, useFormikContext } from "formik";
+import { Formik, Form, useField, useFormikContext , resetForm } from "formik";
 import * as Yup from "yup";
 import styled from "@emotion/styled";
 import axios from "axios";
@@ -77,65 +77,79 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
+const formikValidationSchem = Yup.object({
+  title: Yup.string()
+    .max(15, "Must be 15 characters or less")
+    .required("Required"),
+  postText: Yup.string()
+    .max(500, "Must be 500 characters or less")
+    .required("Required"),
+  username: Yup.string()
+    .required("Required"),
+  acceptedTerms: Yup.boolean()
+    .required("Required")
+    .oneOf([true], "You must accept the terms and conditions."),
+})
+
+const formikInitialValues = {
+  title: "",
+  username: "",
+  postText: "",
+  acceptedTerms: false, // added for our checkbox
+}
+
+const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
+  // console.log(values);
+  await new Promise(r => setTimeout(r, 500));
+  axios.post("http://localhost:3213/posts", values).then((response) => {
+    // console.log("Data inserted");
+  });
+  setSubmitting(false);
+  resetForm({values: ''});
+
+}
+const FormFields = () => {
+  return(
+    <Form>
+    <MyTextInput
+      label="Title"
+      name="title"
+      type="text"
+      placeholder="Your post title"
+    />
+    <MyTextInput
+      label="Username"
+      name="username"
+      type="text"
+      placeholder="some form of username"
+    />
+    <MyTextInput
+      label="Post text message"
+      name="postText"
+      type="textbox"
+      placeholder="some comment"
+    />
+    <MyCheckbox name="acceptedTerms">
+      I accept the terms and conditions
+    </MyCheckbox>
+    <button type="submit">Add Post</button>
+  </Form>
+  )
+}
+
 // And now we can use these
 function CreatePost() {
+  const [newPost, setNewPost] = React.useState('');
+
   return (
     <>
       <h3>Add your message below</h3>
       <Formik
-        initialValues={{
-          title: "",
-          username: "",
-          postText: "",
-          acceptedTerms: false, // added for our checkbox
-        }}
-        validationSchema={Yup.object({
-          title: Yup.string()
-            .max(15, "Must be 15 characters or less")
-            .required("Required"),
-          postText: Yup.string()
-            .max(500, "Must be 500 characters or less")
-            .required("Required"),
-          username: Yup.string()
-            .required("Required"),
-          acceptedTerms: Yup.boolean()
-            .required("Required")
-            .oneOf([true], "You must accept the terms and conditions."),
-        })}
-        onSubmit={async (values, { setSubmitting }) => {
-          // console.log(values);
-          await new Promise(r => setTimeout(r, 500));
-          axios.post("http://localhost:3213/posts", values).then((response) => {
-            // console.log("Data inserted");
-          });
-          setSubmitting(false);
-        }}
+        initialValues={formikInitialValues}
+        validationSchema={formikValidationSchem}
+        onSubmit={formikOnSumbit}
       >
-        <Form>
-          <MyTextInput
-            label="Title"
-            name="title"
-            type="text"
-            placeholder="Your post title"
-          />
-          <MyTextInput
-            label="Username"
-            name="username"
-            type="text"
-            placeholder="some form of username"
-          />
-          <MyTextInput
-            label="Post text message"
-            name="postText"
-            type="textbox"
-            placeholder="some comment"
-          />
-          <MyCheckbox name="acceptedTerms">
-            I accept the terms and conditions
-          </MyCheckbox>
-
-          <button type="submit">Add Post</button>
-        </Form>
+        <FormFields />
       </Formik>
     </>
   );

@@ -76,70 +76,71 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
-// And now we can use these
-function CreatePlayer() {
-  return (
-    <>
-      <h3> Add a new Player</h3>
-      <Formik
-        initialValues={{
-          first_name: "",
-          fam_name: "",
-          username: "",
-          email: "",
-          phone: "",
-          address_city: "",
-          full_address: "",
-          addressType: "", // added for our select
-          points: "",
-          acceptedTerms: true, // added for our checkbox
-        }}
-        validationSchema={Yup.object({
-            first_name: Yup.string()
-              .max(15, "Must be 15 characters or less")
-              .required("Required"),
-            fam_name: Yup.string()
-              .max(20, "Must be 20 characters or less")
-              .required("Required"),
-            username: Yup.string()
-              .max(20, "Must be 20 characters or less")
-              .required("Required"),
-            email: Yup.string()
-              .email("Invalid email addresss`")
-              .required("Required"),
-            phone: Yup.string()
-              .max(20, "Must be 20 characters or less")
-              .required("Required"),
-            address_city: Yup.string()
-              .max(20, "Must be 20 characters or less")
-              .required("Required"),
-            full_address: Yup.string()
-              .max(50, "Must be 50 characters or less")
-              .required("Required"),            
-            addressType: Yup.string()
-              // specify the set of valid values for job type
-              // @see http://bit.ly/yup-mixed-oneOf
-              .oneOf(
-                ["home", "work", "cityclub", "other"],
-                "Invalid Address Type"
-              )
-              .required("Required"),
-            points: Yup.number()
-            .max(99, "Must be at start not above 99 points"),
-            acceptedTerms: Yup.boolean()
-              .required("Required")
-              .oneOf([true], "You must accept emails and the terms and conditions."),
-        })}
-        onSubmit={async (values, { setSubmitting }) => {
-          console.log(values);
-          await new Promise(r => setTimeout(r, 500));
-          axios.post("http://localhost:3213/players", values).then((response) => {
-            // console.log("Data inserted");
-          });
-          setSubmitting(false);
-        }}
-      >
-        <Form>
+const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
+  // console.log(values);
+  await new Promise(r => setTimeout(r, 500));
+  axios.post("http://localhost:3213/players", values).then((response) => {
+    // console.log("Data inserted");
+  });
+  setSubmitting(false);
+  resetForm({values: ''});
+
+}
+
+const formikInitialValues = {
+  first_name: "",
+  fam_name: "",
+  username: "",
+  email: "",
+  phone: "",
+  address_city: "",
+  full_address: "",
+  addressType: "", // added for our select
+  points: "",
+  acceptedTerms: true, // added for our checkbox
+}
+
+const formikValidationSchema = Yup.object({
+  first_name: Yup.string()
+    .max(15, "Must be 15 characters or less")
+    .required("Required"),
+  fam_name: Yup.string()
+    .max(20, "Must be 20 characters or less")
+    .required("Required"),
+  username: Yup.string()
+    .max(20, "Must be 20 characters or less")
+    .required("Required"),
+  email: Yup.string()
+    .email("Invalid email addresss`")
+    .required("Required"),
+  phone: Yup.string()
+    .max(20, "Must be 20 characters or less")
+    .required("Required"),
+  address_city: Yup.string()
+    .max(20, "Must be 20 characters or less")
+    .required("Required"),
+  full_address: Yup.string()
+    .max(50, "Must be 50 characters or less")
+    .required("Required"),            
+  addressType: Yup.string()
+    // specify the set of valid values for job type
+    // @see http://bit.ly/yup-mixed-oneOf
+    .oneOf(
+      ["home", "work", "cityclub", "other"],
+      "Invalid Address Type"
+    )
+    .required("Required"),
+  points: Yup.number()
+  .max(99, "Must be at start not above 99 points"),
+  acceptedTerms: Yup.boolean()
+    .required("Required")
+    .oneOf([true], "You must accept emails and the terms and conditions."),
+})
+
+
+const PlayerFromFields = () => {
+  return(
+    <Form>
           <MyTextInput
             label="First Name"
             name="first_name"
@@ -201,6 +202,20 @@ function CreatePlayer() {
 
           <button type="submit">Add Player</button>
         </Form>
+  )
+}
+
+// And now we can use these
+function CreatePlayer() {
+  return (
+    <>
+      <h3> Add a new Player</h3>
+      <Formik
+        initialValues={formikInitialValues}
+        validationSchema={formikValidationSchema}
+        onSubmit={formikOnSumbit}
+      >
+        <PlayerFromFields />
       </Formik>
     </>
   );
