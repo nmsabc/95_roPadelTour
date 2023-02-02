@@ -83,8 +83,8 @@ function CreatePostForm() {
       <Formik
         initialValues={{
           title: "",
-          postText: "",
           username: "",
+          postText: "",
           acceptedTerms: false, // added for our checkbox
         }}
         validationSchema={Yup.object({
@@ -114,16 +114,16 @@ function CreatePostForm() {
             placeholder="Your post title"
           />
           <MyTextInput
-            label="Post text message"
-            name="postText"
-            type="textbox"
-            placeholder="some comment"
-          />
-          <MyTextInput
             label="Username"
             name="username"
             type="text"
             placeholder="some form of username"
+          />
+          <MyTextInput
+            label="Post text message"
+            name="postText"
+            type="textbox"
+            placeholder="some comment"
           />
           <MyCheckbox name="acceptedTerms">
             I accept the terms and conditions
