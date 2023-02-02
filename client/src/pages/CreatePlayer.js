@@ -76,15 +76,10 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
-const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
-  // console.log(values);
-  await new Promise(r => setTimeout(r, 500));
-  axios.post("http://localhost:3213/players", values).then((response) => {
-    // console.log("Data inserted");
-  });
-  setSubmitting(false);
-  resetForm({values: ''});
-
+const FormHeader = () => {
+  return(
+    <h3> Add a new player</h3>
+  )
 }
 
 const formikInitialValues = {
@@ -204,12 +199,21 @@ const PlayerFromFields = () => {
         </Form>
   )
 }
+const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
+  // console.log(values);
+  await new Promise(r => setTimeout(r, 500));
+  axios.post("http://localhost:3213/players", values).then((response) => {
+    // console.log("Data inserted");
+  });
+  setSubmitting(false);
+  resetForm({values: ''});
 
-// And now we can use these
+}
+
 function CreatePlayer() {
   return (
     <>
-      <h3> Add a new Player</h3>
+      <FormHeader />
       <Formik
         initialValues={formikInitialValues}
         validationSchema={formikValidationSchema}

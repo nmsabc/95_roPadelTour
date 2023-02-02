@@ -77,6 +77,19 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
+const FormHeader = () => {
+  return(
+    <h3>Add your new message</h3>
+  )
+}
+
+const formikInitialValues = {
+  title: "",
+  username: "",
+  postText: "",
+  acceptedTerms: false, // added for our checkbox
+}
+
 const formikValidationSchem = Yup.object({
   title: Yup.string()
     .max(15, "Must be 15 characters or less")
@@ -91,23 +104,6 @@ const formikValidationSchem = Yup.object({
     .oneOf([true], "You must accept the terms and conditions."),
 })
 
-const formikInitialValues = {
-  title: "",
-  username: "",
-  postText: "",
-  acceptedTerms: false, // added for our checkbox
-}
-
-const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
-  // console.log(values);
-  await new Promise(r => setTimeout(r, 500));
-  axios.post("http://localhost:3213/posts", values).then((response) => {
-    // console.log("Data inserted");
-  });
-  setSubmitting(false);
-  resetForm({values: ''});
-
-}
 const FormFields = () => {
   return(
     <Form>
@@ -137,13 +133,23 @@ const FormFields = () => {
   )
 }
 
-// And now we can use these
+const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
+  // console.log(values);
+  await new Promise(r => setTimeout(r, 500));
+  axios.post("http://localhost:3213/posts", values).then((response) => {
+    // console.log("Data inserted");
+  });
+  setSubmitting(false);
+  resetForm({values: ''});
+
+}
+
 function CreatePost() {
   const [newPost, setNewPost] = React.useState('');
 
   return (
     <>
-      <h3>Add your message below</h3>
+      <FormHeader />
       <Formik
         initialValues={formikInitialValues}
         validationSchema={formikValidationSchem}
