@@ -180,7 +180,9 @@
   }
   
   input[type="email"],
+  input[type="username"],
   input[type="text"],
+  input[type="textbox"],
   input[type="number"] {
     padding: 0.65rem 0.5rem;
     font-size: 1rem;
@@ -195,28 +197,40 @@
   
   @media (prefers-color-scheme: dark) {
     input[type="email"],
+    input[type="username"],
     input[type="text"],
+    input[type="textbox"],
     input[type="number"] {
       background-color: var(--gray-800);
       border-color: var(--gray-700);
-      color: white;
+      color: rgb(255, 255, 255);
     }
   
+    input[type="username"],
     input[type="email"]::placeholder,
     input[type="text"]::placeholder,
     input[type="number"]::placeholder,
+    input[type="textbox"]::placeholder,
     select,
     textarea {
       color: var(--gray-500);
     }
   }
-  
+  input[type="username"],
   input[type="email"],
   input[type="text"],
   input[type="number"],
+  input[type="textbox"],
   textarea,
   select {
     width: 400px;
+  }
+  
+  input[type="textbox"],
+  textarea,
+  select {
+    height: 100px;
+    line-break: auto;
   }
   
   select {

@@ -3,7 +3,6 @@ import ReactDOM from "react-dom";
 import { Formik, Form, useField, useFormikContext } from "formik";
 import * as Yup from "yup";
 import styled from "@emotion/styled";
-
 import "../styles/formik_styles.css";
 import "../styles/formik_styles-custom.css";
 
@@ -76,29 +75,39 @@ const MySelect = ({ label, ...props }) => {
 };
 
 // And now we can use these
-function CreatePostForm() {
+function CreateUser() {
   return (
     <>
-      <h3>Add your message below</h3>
+      <h1>Subscribe!</h1>
       <Formik
         initialValues={{
-          title: "",
-          postText: "",
-          username: "",
+          firstName: "",
+          lastName: "",
+          email: "",
           acceptedTerms: false, // added for our checkbox
+          jobType: "" // added for our select
         }}
         validationSchema={Yup.object({
-          title: Yup.string()
+          firstName: Yup.string()
             .max(15, "Must be 15 characters or less")
             .required("Required"),
-          postText: Yup.string()
-            .max(500, "Must be 500 characters or less")
+          lastName: Yup.string()
+            .max(20, "Must be 20 characters or less")
             .required("Required"),
-          username: Yup.string()
+          email: Yup.string()
+            .email("Invalid email addresss`")
             .required("Required"),
           acceptedTerms: Yup.boolean()
             .required("Required")
             .oneOf([true], "You must accept the terms and conditions."),
+          jobType: Yup.string()
+            // specify the set of valid values for job type
+            // @see http://bit.ly/yup-mixed-oneOf
+            .oneOf(
+              ["designer", "development", "product", "other"],
+              "Invalid Job Type"
+            )
+            .required("Required")
         })}
         onSubmit={async (values, { setSubmitting }) => {
           console.log(values);
@@ -108,32 +117,39 @@ function CreatePostForm() {
       >
         <Form>
           <MyTextInput
-            label="Title"
-            name="title"
+            label="First Name"
+            name="firstName"
             type="text"
-            placeholder="Your post title"
+            placeholder="Jane"
           />
           <MyTextInput
-            label="Post text message"
-            name="postText"
-            type="textbox"
-            placeholder="some comment"
+            label="Last Name"
+            name="lastName"
+            type="text"
+            placeholder="Doe"
           />
           <MyTextInput
-            label="Username"
-            name="username"
-            type="text"
-            placeholder="some form of username"
+            label="Email Address"
+            name="email"
+            type="email"
+            placeholder="jane@formik.com"
           />
+          <MySelect label="Job Type" name="jobType">
+            <option value="">Select a job type</option>
+            <option value="designer">Designer</option>
+            <option value="development">Developer</option>
+            <option value="product">Product Manager</option>
+            <option value="other">Other</option>
+          </MySelect>
           <MyCheckbox name="acceptedTerms">
             I accept the terms and conditions
           </MyCheckbox>
 
-          <button type="submit">Add Post</button>
+          <button type="submit">add data</button>
         </Form>
       </Formik>
     </>
   );
 };
 
-export default CreatePostForm;
+export default CreateUser;

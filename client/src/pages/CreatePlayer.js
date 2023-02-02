@@ -1,5 +1,5 @@
 import React from 'react'
-import {Formik, Form, useField,} from "formik";
+import {Formik, Form, useField, Field,} from "formik";
 import * as Yup from "yup";
 import styled from "@emotion/styled";
 
@@ -80,23 +80,25 @@ const MySelect = ({ label, ...props }) => {
   );
 };
 
-
 const  AddPlayerForm = () =>{
+
+  const formikInitialValues ={
+    firstName: "",
+    lastName: "",
+    ursername: "",
+    email: "",
+    phone: "",
+    adress_city: "",
+    full_address: "",
+    acceptedTerms: false, // added for our checkbox
+    jobType: "" // added for our select
+  }
+  
   return(
     <>
     <h1> Add a new Player</h1>
     <Formik
-        initialValues={{
-          firstName: "",
-          lastName: "",
-          ursername: "",
-          email: "",
-          phone: "",
-          adress_city: "",
-          full_address: "",
-          acceptedTerms: false, // added for our checkbox
-          jobType: "" // added for our select
-        }}
+        initialValues={formikInitialValues}
         validationSchema={Yup.object({
           first_name: Yup.string()
             .max(15, "Must be 15 characters or less")
@@ -121,6 +123,8 @@ const  AddPlayerForm = () =>{
         })}
         onSubmit={async (values, { setSubmitting }) => {
           await new Promise(r => setTimeout(r, 500));
+          console.log(values);
+
           setSubmitting(false);
         }}
       >
@@ -153,7 +157,7 @@ const  AddPlayerForm = () =>{
             I accept emails with RoPadelTour info
           </MyCheckbox>
 
-          <button type="submit">Submit</button>
+          <button type="submit">Create Player</button>
         </Form>
       </Formik>
     </>
