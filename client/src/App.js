@@ -28,11 +28,11 @@ function App() {
           <Route path="/OldHome" element={<OldAppStart />} exact />
           <Route path="/hello-world" element={<HelloToTheWorld />} exact />
           <Route path="/createPost" element={<CreatePost />} exact />
-          <Route path="/Post/:id" element={<Post />} exact />
+          <Route path="/Post/byId/:id" element={<Post />} exact />
           <Route path="/createPlayer" element={<CreatePlayer />} exact />
-          <Route path="/Player/:id" element={<Player />} exact />
+          <Route path="/Player/byId/:id" element={<Player />} exact />
           <Route path="/createRanking" element={<CreateRanking />} exact />
-          <Route path="/Ranking/:id" element={<Ranking />} exact />
+          <Route path="/Ranking/byId/:id" element={<Ranking />} exact />
         </Routes>
       </Router>
     </div>
