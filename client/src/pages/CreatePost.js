@@ -95,7 +95,7 @@ const formikValidationSchem = Yup.object({
     .max(15, "Must be 15 characters or less")
     .required("Required"),
   postText: Yup.string()
-    .max(500, "Must be 500 characters or less")
+    .max(255, "Must be 255 characters or less")
     .required("Required"),
   username: Yup.string()
     .required("Required"),

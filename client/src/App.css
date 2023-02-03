@@ -14,7 +14,7 @@ body {
 
 .post {
   width: 400px;
-  height: 150px;
+  height: 200px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@ body {
   padding-top: 5px;
   border-top: 1px solid lightgray;
   padding-right: 15px;
-  background-color: #1ebfff;
+  background-color: dodgerblue;
   color: white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -80,34 +80,35 @@ body {
 .postPage {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 40%;
   height: 100%;
 }
 
 .leftSide {
   flex: 50%;
-  height: calc(100vh - 70px);
+  height: calc(30vh - 50px);
   display: grid;
   place-items: center;
 }
 
 .rightSide {
   flex: 50%;
-  height: calc(100vh - 70px);
+  height: calc(30vh - 50px);
   display: grid;
   place-items: center;
 }
 
 #individual {
-  height: 500px;
-  width: 600px;
+  width: 400px;
+  height: 200px;
 }
 
 #individual .title,
 #individual .footer {
-  font-size: 30px;
+  font-size:medium;
 }
 
 #individual .body {
-  font-size: 25px;
+  font-size: medium;
+
 }
