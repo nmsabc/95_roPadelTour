@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import { Formik, Form, useField, useFormikContext , resetForm } from "formik";
+import { useNavigate} from 'react-router-dom'
+import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
 import styled from "@emotion/styled";
 import axios from "axios";
@@ -8,6 +9,7 @@ import axios from "axios";
 
 import "../styles/formik_styles.css";
 import "../styles/formik_styles-custom.css";
+
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -141,11 +143,11 @@ const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
   });
   setSubmitting(false);
   resetForm({values: ''});
-
 }
 
 function CreatePost() {
   const [newPost, setNewPost] = React.useState('');
+  let navigate = useNavigate();
 
   return (
     <>
@@ -153,7 +155,14 @@ function CreatePost() {
       <Formik
         initialValues={formikInitialValues}
         validationSchema={formikValidationSchem}
-        onSubmit={formikOnSumbit}
+        // onSubmit={formikOnSumbit}
+        onSubmit={async (values, { setSubmitting }) => {
+          console.log(values);
+          await new Promise(r => setTimeout(r, 500));
+          setSubmitting(false);
+          navigate("/");
+
+        }}
       >
         <FormFields />
       </Formik>
