@@ -8,8 +8,9 @@ function Post() {
     let { id } = useParams();
     const [postObject, setPostObject] = useState([]);
 
-    useEffect(() => {
+    useState(() => {
         axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
+          // console.log(response);
           setPostObject(response.data);
         });
       });
