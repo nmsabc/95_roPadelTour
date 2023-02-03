@@ -1,10 +1,12 @@
 import React from 'react'
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [listOfPosts, setListOfPosts] = useState([]);
+  let navigate = useNavigate();
   
   useEffect(() => {
     axios.get("http://localhost:3213/players").then((response) => {
@@ -40,8 +42,10 @@ function Home() {
       <p>The list of posts </p>
       {listOfPosts.map((value, key) => {
         return (
-          <div className="post_id" key={key}>
-            <div className="post_info">Post_ {value.title} _ from _ {value.username}</div>
+          <div className="post" key={key} onClick= {() =>{navigate(`/post/${value.id}`)}}>
+            <div className="title" key={key}>{value.title}</div>
+            <div className="body" >{value.postText}</div>
+            <div className="footer" >{value.username}</div>
           </div>
         );
       })}
