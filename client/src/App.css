@@ -3,7 +3,7 @@
   height: auto;
   display: flex;
   align-items: center;
-  padding-top: 40px;
+  padding-top: 10px;
   flex-direction: column;
 }
 
@@ -14,11 +14,11 @@ body {
 
 .post {
   width: 400px;
-  height: 300px;
+  height: 200px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 10px;
   border: 1px solid lightgray;
   font-family: Arial, Helvetica, sans-serif;
 
@@ -31,27 +31,84 @@ body {
 }
 .post .title {
   flex: 20%;
+  padding-left: 15px;
+  padding-top: 5px;
   border-bottom: 1px solid lightgray;
   background-color: dodgerblue;
   display: grid;
-  place-content: center;
+  place-content: left;
   color: white;
 }
 
 .post .body {
   flex: 60%;
+  padding-left: 15px;
+  padding-top: 5px;
   display: grid;
   place-content: center;
 }
 
 .post .footer {
   flex: 20%;
+  text-align: right;
+  padding-top: 5px;
   border-top: 1px solid lightgray;
-  display: flex;
-  align-items: center;
-  padding-left: 15px;
+  padding-right: 15px;
   background-color: dodgerblue;
   color: white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+
+}
+
+.top-menu {
+  width: 50%;
+  height: 30px;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.top-menu a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+/* INDIVIDUAL POST */
+.postPage {
+  display: flex;
+  flex-direction: row;
+  width: 40%;
+  height: 100%;
+}
+
+.leftSide {
+  flex: 50%;
+  height: calc(30vh - 50px);
+  display: grid;
+  place-items: center;
+}
+
+.rightSide {
+  flex: 50%;
+  height: calc(30vh - 50px);
+  display: grid;
+  place-items: center;
+}
+
+#individual {
+  width: 400px;
+  height: 200px;
+}
+
+#individual .title,
+#individual .footer {
+  font-size:medium;
+}
+
+#individual .body {
+  font-size: medium;
+
 }
