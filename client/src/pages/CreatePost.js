@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { useNavigate} from 'react-router-dom'
-import { Formik, Form, useField } from "formik";
+import { Formik, Form, useField, Field } from "formik";
 import * as Yup from "yup";
 import styled from "@emotion/styled";
 import axios from "axios";
@@ -94,7 +94,7 @@ const formikInitialValues = {
 
 const formikValidationSchem = Yup.object({
   title: Yup.string()
-    .max(15, "Must be 15 characters or less")
+    .max(30, "Must be 30 characters or less")
     .required("Required"),
   postText: Yup.string()
     .max(255, "Must be 255 characters or less")
@@ -109,29 +109,38 @@ const formikValidationSchem = Yup.object({
 const FormFields = () => {
   return(
     <Form>
-    <MyTextInput
-      label="Title"
-      name="title"
-      type="text"
-      placeholder="Your post title"
-    />
-    <MyTextInput
-      label="Username"
-      name="username"
-      type="text"
-      placeholder="some form of username"
-    />
-    <MyTextInput
-      label="Post text message"
-      name="postText"
-      type="textbox"
-      placeholder="some comment"
-    />
-    <MyCheckbox name="acceptedTerms">
-      I accept the terms and conditions
-    </MyCheckbox>
-    <button type="submit">Add Post</button>
-  </Form>
+      <MyTextInput
+        label="Title"
+        name="title"
+        type="text"
+        placeholder="Your post title"
+      />
+      <MyTextInput
+        label="Username"
+        name="username"
+        type="text"
+        placeholder="some form of username"
+      />
+      <MyTextInput
+        label="Your text message (max 255 chars)"
+        name="postText"
+        type="textbox"
+        placeholder="some comment"
+      />
+      {/* <br /> */}
+      {/* <label for="postText">Post text message</label>
+      <Field 
+        label="Post text message"
+        name="postText"
+        as="textarea" 
+        className="form-textarea" 
+        placeholder="some comment"
+      /> */}
+      <MyCheckbox name="acceptedTerms">
+        I accept the terms and conditions
+      </MyCheckbox>
+      <button type="submit" className="btn btn-default">Add Post</button>
+    </Form>
   )
 }
 
@@ -139,29 +148,39 @@ const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
   // console.log(values);
   await new Promise(r => setTimeout(r, 500));
   axios.post("http://localhost:3213/posts", values).then((response) => {
-    // console.log("Data inserted");
+    console.log("Data inserted");
+    setSubmitting(false);
+    resetForm({values: ''});
   });
-  setSubmitting(false);
-  resetForm({values: ''});
 }
 
 function CreatePost() {
   const [newPost, setNewPost] = React.useState('');
-  let navigate = useNavigate();
-
+  const navigate = useNavigate();
   return (
     <>
       <FormHeader />
       <Formik
         initialValues={formikInitialValues}
         validationSchema={formikValidationSchem}
-        // onSubmit={formikOnSumbit}
-        onSubmit={async (values, { setSubmitting }) => {
-          console.log(values);
-          await new Promise(r => setTimeout(r, 500));
-          setSubmitting(false);
-          navigate("/");
+        
+        ///////////////        ///////////////
+        // replaced with the onSubmit from below
+        // the reason I cannot use this outside is because 
+        // I cannot pass navigate to the const formikOnSubmit 
 
+        // onSubmit={formikOnSumbit} 
+
+        ///////////////        ///////////////
+
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
+          await new Promise(r => setTimeout(r, 500));
+          axios.post("http://localhost:3213/posts", values).then((response) => {
+            // console.log("Data inserted");
+            setSubmitting(false);
+            resetForm({values: ''});
+            navigate("/");
+          });
         }}
       >
         <FormFields />

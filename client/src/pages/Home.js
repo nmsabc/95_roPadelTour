@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function Home() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [listOfPosts, setListOfPosts] = useState([]);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   
   useEffect(() => {
     axios.get("http://localhost:3213/players").then((response) => {
