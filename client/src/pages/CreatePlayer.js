@@ -192,7 +192,7 @@ const PlayerFromFields = () => {
             placeholder="10"
           />
           <MyCheckbox name="acceptedTerms">
-            I accept the email and the terms and conditions
+          I accept the terms and conditions and follow-up <br /> emails and communications
           </MyCheckbox>
 
           <button type="submit">Add Player</button>

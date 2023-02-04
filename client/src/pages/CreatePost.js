@@ -89,7 +89,7 @@ const formikInitialValues = {
   title: "",
   username: "",
   postText: "",
-  acceptedTerms: false, // added for our checkbox
+  acceptedTerms: true, // added for our checkbox
 }
 
 const formikValidationSchem = Yup.object({
@@ -137,7 +137,7 @@ const FormFields = () => {
         placeholder="some comment"
       /> */}
       <MyCheckbox name="acceptedTerms">
-        I accept the terms and conditions
+        I accept the terms and conditions and follow-up <br /> emails and communications
       </MyCheckbox>
       <button type="submit">Add Post</button>
     </Form>
