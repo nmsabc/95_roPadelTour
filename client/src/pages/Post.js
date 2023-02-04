@@ -32,13 +32,12 @@ function Post() {
         <div className="add-comment">{CreateComment(id)}</div>
       </div>
       <div className="rightSide">
-        Comment Section
-        <div className="existing-comments">
+        <div className="addCommentContainer">
           {commentsList.map((value, key) => {
             return (
               <>
-                <div className="exi_comm" key={key}>
-                  <div className="exi_comm_user">User: {value.username} said: {value.commentBudy}
+                <div className="listOfComments" key={key}>
+                  <div className="comment">User: {value.username} said: {value.commentBudy}
                 </div>
                 </div>
               </>

@@ -4,13 +4,24 @@ const { Comments } = require("../models");
 
 router.get("/:postId", async (req, res) => {
     const postId = req.params.postId;
-    const comments = await Comments.findAll({ where: { PostId : postId } });
+    const comments = await Comments.findAll({ 
+      where: { PostId : postId }, 
+      order: [
+        ['createdAt', 'DESC']
+      ],
+    });
     res.json(comments);
   });
 
   
 router.get("/", async (req, res) => {
-    const listOfComments = await Comments.findAll();
+    const listOfComments = await Comments.findAll(
+      {
+        order: [
+          ['createdAt', 'DESC']
+        ],
+      }
+    );
     res.json(listOfComments);
   });
   

@@ -11,6 +11,12 @@ import Player from "./pages/Player";
 import CreateRanking from "./pages/CreateRanking";
 import Ranking from "./pages/Ranking";
 
+//learn props propagation and state sharing in React
+import MasterLifter from "./pages/stateSharing/MasterLifter";
+import DoubleInputBoxes from "./pages/stateSharing/DoubleInputBoxes";
+import FilterableList from "./pages/stateSharing/FilterableList";
+
+let data_str_in_js = "https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/"
 function App() {
   return (
     <div className="App">
@@ -21,6 +27,12 @@ function App() {
           {/* <Link to="/Post">Post </Link> */}
           <Link to="/createPlayer">New Player </Link>
           <Link to="/createRanking">New Ranking</Link>
+
+          {/* learn props propagation and state sharing in React */}
+          <Link to="/masterlifter">Master Lifter</Link>
+          <Link to="/dubleinputs">2xInputs</Link>
+          <Link to="/filterablelist">FilterableList</Link>
+          <Link to={data_str_in_js}> ..:: data_str_in_js</Link>
         </div>
 
         <Routes>
@@ -33,6 +45,15 @@ function App() {
           <Route path="/player/:id" element={<Player />} exact />
           <Route path="/createRanking" element={<CreateRanking />} exact />
           <Route path="/ranking/:id" element={<Ranking />} exact />
+
+          {/* learn props propagation and state sharing in React */}
+          <Route path="/masterlifter" element={<MasterLifter />} exact/>
+          <Route path="/dubleinputs" element={<DoubleInputBoxes />} exact/>
+          <Route path="/filterablelist" element={<FilterableList />} exact/>
+
+          {/* learn some more */}
+          <Route path="/datastructuresinjs" element={<data_str_in_js />} exact/>
+
         </Routes>
       </Router>
     </div>

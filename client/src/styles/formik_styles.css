@@ -226,6 +226,12 @@
     width: 400px;
   }
   
+  input[type="usernametext"]  ,
+  select {
+    width: 200px;
+  }
+
+
   input[type="textbox"],
   textarea,
   select {
