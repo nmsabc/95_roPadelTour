@@ -65,11 +65,12 @@ const formikCommentValidationSchema = Yup.object({
 
 const formikCommentonSubmit = async (values, { setSubmitting, resetForm }) => {
   await new Promise((r) => setTimeout(r, 500));
-  console.log(" we will inser this: ...", values)
+  console.log(" we will insert this: ...", values)
   axios.post("http://localhost:3213/comments", values).then((response) => {
-    console.log("Comment Data inserted");
+    console.log(values.commentBudy);
     setSubmitting(false);
     resetForm({ values: "" });
+
   });
 };
 
@@ -88,6 +89,7 @@ function CreateComment(Post_no) {
         <CommentFormFields />
       </Formik>
     </div>
+
   );
 }
 

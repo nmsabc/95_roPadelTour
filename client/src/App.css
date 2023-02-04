@@ -85,6 +85,7 @@ body {
 }
 
 .leftSide {
+  display: flex;
   flex: 50%;
   height: calc(30vh - 50px);
   display: grid;
@@ -99,8 +100,25 @@ body {
   padding-left: 15px;
 }
 
-#existing-comments{
-  padding-left: 5px;
+.existing-comments{
+  padding-left: 2px;
+
+}
+
+.exi_comm{
+  width: 400px;
+  height: 30px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  border: 1px solid lightgray;
+  font-family: Arial, Helvetica, sans-serif;
+
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+#exi_comm_user{
+  margin-left: 10px;
 }
 
 #individual {
@@ -120,7 +138,7 @@ body {
 
 /* Comments specific forms*/
 
-.add-cooment{
+.add-comment{
   width: 400px;
   height: 200px;
   border-radius: 10px;

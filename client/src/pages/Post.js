@@ -8,6 +8,7 @@ function Post() {
   let { id } = useParams();
   const [postObject, setPostObject] = useState([]);
   const [commentsList, setCommentsList] = useState([]);
+  // conct [newComment, setNewComment] = useState("");
 
   useState(() => {
     axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
@@ -28,7 +29,7 @@ function Post() {
           <div className="body">{postObject.postText}</div>
           <div className="footer">{postObject.username}</div>
         </div>
-        <div className="add-cooment">{CreateComment(id)}</div>
+        <div className="add-comment">{CreateComment(id)}</div>
       </div>
       <div className="rightSide">
         Comment Section
@@ -36,7 +37,10 @@ function Post() {
           {commentsList.map((value, key) => {
             return (
               <>
-                <div className="exi_co" key={key}>User: {value.username} said: {value.commentBudy}</div>
+                <div className="exi_comm" key={key}>
+                  <div className="exi_comm_user">User: {value.username} said: {value.commentBudy}
+                </div>
+                </div>
               </>
             );
           })}
