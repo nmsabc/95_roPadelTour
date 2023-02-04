@@ -6,6 +6,11 @@ select {
   width: 400px;
 }
 
+input[type="usernametext"],
+select {
+  width: 360px;
+}
+
 label {
   margin-top: 1rem;
 }

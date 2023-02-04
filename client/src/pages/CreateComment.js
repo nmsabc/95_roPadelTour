@@ -33,12 +33,17 @@ const CommentFormFields = () => {
           className="form-textarea"
           placeholder="place your comment below ..."
         />
-            <MyTextInput
-              name="username"
-              type="text"
-              placeholder="your username ... "
-            />
-            <button type="submit">Go!</button>
+        <div className="comment">
+          <MyTextInput
+            name="username"
+            type="text"
+            className="username-input"
+            placeholder="your username ... "
+          />
+          <button type="submit" className="btn">
+            Go!
+          </button>
+        </div>
       </Form>
     </div>
   );
@@ -59,12 +64,11 @@ const formikCommentValidationSchema = Yup.object({
 
 const formikCommentonSubmit = async (values, { setSubmitting, resetForm }) => {
   await new Promise((r) => setTimeout(r, 500));
-  console.log(" we will insert this: ...", values)
+  console.log(" we will insert this: ...", values);
   axios.post("http://localhost:3213/comments", values).then((response) => {
     console.log(values.commentBudy);
     setSubmitting(false);
     resetForm({ values: "" });
-
   });
 };
 
@@ -83,7 +87,6 @@ function CreateComment(Post_no) {
         <CommentFormFields />
       </Formik>
     </div>
-
   );
 }
 
