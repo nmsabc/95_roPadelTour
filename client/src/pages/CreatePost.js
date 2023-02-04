@@ -139,7 +139,7 @@ const FormFields = () => {
       <MyCheckbox name="acceptedTerms">
         I accept the terms and conditions
       </MyCheckbox>
-      <button type="submit" className="btn btn-default">Add Post</button>
+      <button type="submit">Add Post</button>
     </Form>
   )
 }
