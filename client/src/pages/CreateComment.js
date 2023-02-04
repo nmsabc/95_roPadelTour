@@ -33,18 +33,12 @@ const CommentFormFields = () => {
           className="form-textarea"
           placeholder="place your comment below ..."
         />
-        <div className="username-submit">
-          <div className="username-input">
             <MyTextInput
               name="username"
               type="text"
               placeholder="your username ... "
             />
-          </div>
-          <div className="btn btn-default">
             <button type="submit">Go!</button>
-          </div>
-        </div>
       </Form>
     </div>
   );

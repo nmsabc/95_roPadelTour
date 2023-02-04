@@ -140,7 +140,7 @@ body {
 
 .add-comment{
   width: 400px;
-  height: 200px;
+  height: 400px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -163,23 +163,17 @@ body {
   height: 80px;
 }
 
-.username-submit{
-  width: 73%;
-  padding-top: 5px;
+.username-input {
+  width: 360px;
+  height: 13px;
   margin-left: 20px;
-  display: flex;
-
-}
-
-#username-input {
-  width: 10px;
-  margin-left: 20px;
+  display: grid;
   place-items: center;
-  margin-top: 1rem;
+  height: 80px;
 
   }
 
-#btn {
+.btn {
   width: 10px;
   display: grid;
   place-items: right;
