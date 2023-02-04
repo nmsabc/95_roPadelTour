@@ -36,9 +36,7 @@ function Post() {
           {commentsList.map((value, key) => {
             return (
               <>
-                <div className="exi_co">User {value.username} said: {value.commentBudy}</div>
-                <div className="exi_co-hr"><hr /></div>
-
+                <div className="exi_co" key={key}>User: {value.username} said: {value.commentBudy}</div>
               </>
             );
           })}

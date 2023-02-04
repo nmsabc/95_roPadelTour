@@ -96,6 +96,11 @@ body {
   height: calc(30vh - 50px);
   display: grid;
   place-items: center;
+  padding-left: 15px;
+}
+
+#existing-comments{
+  padding-left: 5px;
 }
 
 #individual {
