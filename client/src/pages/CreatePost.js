@@ -148,7 +148,7 @@ const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
   // console.log(values);
   await new Promise(r => setTimeout(r, 500));
   axios.post("http://localhost:3213/posts", values).then((response) => {
-    console.log("Data inserted");
+    // console.log("Data inserted");
     setSubmitting(false);
     resetForm({values: ''});
   });
