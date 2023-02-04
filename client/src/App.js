@@ -11,8 +11,9 @@ import Player from "./pages/Player";
 import CreateRanking from "./pages/CreateRanking";
 import Ranking from "./pages/Ranking";
 
-//learn masterlif up
-import MasterLifter from "./pages/liftingStateUp/MasterLifter";
+//learn props propagation and state sharing in React
+import MasterLifter from "./pages/stateSharing/MasterLifter";
+import DoubleInputBoxes from "./pages/stateSharing/DoubleInputBoxes";
 
 function App() {
   return (
@@ -25,8 +26,9 @@ function App() {
           <Link to="/createPlayer">New Player </Link>
           <Link to="/createRanking">New Ranking</Link>
 
-          {/* learn masterlif up */}
+          {/* learn props propagation and state sharing in React */}
           <Link to="/masterlifter">Master Lifter</Link>
+          <Link to="/dubleinputs">2xInputs</Link>
         </div>
 
         <Routes>
@@ -40,8 +42,9 @@ function App() {
           <Route path="/createRanking" element={<CreateRanking />} exact />
           <Route path="/ranking/:id" element={<Ranking />} exact />
 
-          {/* learn masterlif up */}
+          {/* learn props propagation and state sharing in React */}
           <Route path="/masterlifter" element={<MasterLifter />} exact/>
+          <Route path="/dubleinputs" element={<DoubleInputBoxes />} exact/>
         </Routes>
       </Router>
     </div>
