@@ -20,6 +20,8 @@ function App() {
   return (
     <div className="App">
       <Router>
+      <NavbarDark />
+
         <div className="top-menu">
           <Link to="/">Home </Link>
           <Link to="/createPost">New Post </Link>
