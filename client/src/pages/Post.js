@@ -33,7 +33,6 @@ function Post() {
       </div>
       <div className="rightSide">
         <div className="addCommentContainer">
-        Comment Section
           {commentsList.map((value, key) => {
             return (
               <>

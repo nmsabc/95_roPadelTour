@@ -18,7 +18,7 @@ body {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 20px;
   border: 1px solid lightgray;
   font-family: Arial, Helvetica, sans-serif;
 
@@ -85,11 +85,11 @@ body {
 }
 
 .leftSide {
-  display: flex;
   flex: 50%;
   height: calc(30vh - 50px);
   display: grid;
   place-items: center;
+  padding-left: 15px;
 }
 
 .rightSide {
@@ -185,7 +185,7 @@ body {
   width: 100%;
   display: grid;
   place-items: center;
-  margin-top: 25px;
+  margin-top: 10px;
 }
 
 .addCommentContainer input,
