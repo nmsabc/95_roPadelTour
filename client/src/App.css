@@ -225,3 +225,14 @@ button {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
 }
+
+/* learning master lifter props propagation */
+.master-lifter-panel {
+  width: 50%;
+  height: auto;
+  padding: 30px;
+  border: 1px solid lightgray;
+  border-radius: 12px;
+  margin-top: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

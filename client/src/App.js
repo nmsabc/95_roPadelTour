@@ -11,6 +11,9 @@ import Player from "./pages/Player";
 import CreateRanking from "./pages/CreateRanking";
 import Ranking from "./pages/Ranking";
 
+//learn masterlif up
+import MasterLifter from "./pages/liftingStateUp/MasterLifter";
+
 function App() {
   return (
     <div className="App">
@@ -21,6 +24,9 @@ function App() {
           {/* <Link to="/Post">Post </Link> */}
           <Link to="/createPlayer">New Player </Link>
           <Link to="/createRanking">New Ranking</Link>
+
+          {/* learn masterlif up */}
+          <Link to="/masterlifter">Master Lifter</Link>
         </div>
 
         <Routes>
@@ -33,6 +39,9 @@ function App() {
           <Route path="/player/:id" element={<Player />} exact />
           <Route path="/createRanking" element={<CreateRanking />} exact />
           <Route path="/ranking/:id" element={<Ranking />} exact />
+
+          {/* learn masterlif up */}
+          <Route path="/masterlifter" element={<MasterLifter />} exact/>
         </Routes>
       </Router>
     </div>
