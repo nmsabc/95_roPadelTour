@@ -14,6 +14,8 @@ import Ranking from "./pages/Ranking";
 //learn masterlif up
 import MasterLifter from "./pages/liftingStateUp/MasterLifter";
 
+import NavbarDark from "./Menu/NavbarDark";
+
 function App() {
   return (
     <div className="App">
@@ -41,7 +43,7 @@ function App() {
           <Route path="/ranking/:id" element={<Ranking />} exact />
 
           {/* learn masterlif up */}
-          <Route path="/masterlifter" element={<MasterLifter />} exact/>
+          <Route path="/masterlifter" element={<MasterLifter />} exact />
         </Routes>
       </Router>
     </div>
