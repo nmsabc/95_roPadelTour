@@ -14,6 +14,7 @@ import Ranking from "./pages/Ranking";
 //learn props propagation and state sharing in React
 import MasterLifter from "./pages/stateSharing/MasterLifter";
 import DoubleInputBoxes from "./pages/stateSharing/DoubleInputBoxes";
+import FilterableList from "./pages/stateSharing/FilterableList";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           {/* learn props propagation and state sharing in React */}
           <Link to="/masterlifter">Master Lifter</Link>
           <Link to="/dubleinputs">2xInputs</Link>
+          <Link to="/filterablelist">FilterableList</Link>
         </div>
 
         <Routes>
@@ -45,6 +47,7 @@ function App() {
           {/* learn props propagation and state sharing in React */}
           <Route path="/masterlifter" element={<MasterLifter />} exact/>
           <Route path="/dubleinputs" element={<DoubleInputBoxes />} exact/>
+          <Route path="/filterablelist" element={<FilterableList />} exact/>
         </Routes>
       </Router>
     </div>
