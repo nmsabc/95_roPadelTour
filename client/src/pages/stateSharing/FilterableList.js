@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { foods, filterItems } from "./FilterableListData.js";
+import { foods, filterItems } from "./data/FilterableListData.js";
 
 function FilterableList() {
   const [query, setQuery] = useState("");
   const results = filterItems(foods, query);
-  console.log(results)
+  console.log(results);
 
   function handleChange(e) {
     setQuery(e.target.value);
@@ -18,7 +18,7 @@ function FilterableList() {
     </div>
   );
 }
-function SearchBar({query, onChange}) {
+function SearchBar({ query, onChange }) {
   // const [query, setQuery] = useState(''); // stage 1 - Remove state from the child components
 
   // function handleChange(e) {   // stage 1 - Remove state from the child components
