@@ -22,7 +22,7 @@ function Post() {
   });
 
   return (
-    <div c  ssName="postPage">
+    <div className="postPage">
       <div className="leftSide">
         <div className="post" id="individual">
           <div className="title"> {postObject.title} </div>
