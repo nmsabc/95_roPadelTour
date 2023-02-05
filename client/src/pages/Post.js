@@ -22,7 +22,7 @@ function Post() {
   });
 
   return (
-    <div className="postPage">
+    <div c  ssName="postPage">
       <div className="leftSide">
         <div className="post" id="individual">
           <div className="title"> {postObject.title} </div>
@@ -35,12 +35,14 @@ function Post() {
         <div className="addCommentContainer">
           {commentsList.map((value, key) => {
             return (
-              <>
-                <div className="listOfComments" key={key}>
-                  <div className="comment">User: {value.username} said: {value.commentBudy}
-                </div>
-                </div>
-              </>
+              <table className="table" key={key}>
+                <tbody>
+                  <tr key={key}>
+                    <td>{value.username}:</td>
+                    <td>{value.commentBudy}</td>
+                  </tr>
+                </tbody>
+              </table>
             );
           })}
         </div>

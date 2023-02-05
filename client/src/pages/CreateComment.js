@@ -25,7 +25,7 @@ const CommentFormFields = () => {
     <div className="comments-form">
       <Form>
         <div className="commentLabel">
-          <label for="comment">Place your comment below</label>
+          <label className="comment">Place your comment below</label>
         </div>
         <Field
           name="commentBudy"
@@ -64,9 +64,7 @@ const formikCommentValidationSchema = Yup.object({
 
 const formikCommentonSubmit = async (values, { setSubmitting, resetForm }) => {
   await new Promise((r) => setTimeout(r, 500));
-  console.log(" we will insert this: ...", values);
   axios.post("http://localhost:3213/comments", values).then((response) => {
-    console.log(values.commentBudy);
     setSubmitting(false);
     resetForm({ values: "" });
   });
