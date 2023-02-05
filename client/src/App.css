@@ -139,35 +139,30 @@ body {
 /* Comments specific forms*/
 
 .add-comment{
-  width: 400px;
-  height: 400px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
   /* border: 0.1px solid rgb(133, 129, 129); */
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .commentLabel{
-  margin-left: 20px;
+  margin-left: 10px;
   display: grid;
 }
 
 .form-textarea {
   width: 360px;
-  height: 13px;
-  margin-left: 20px;
+  margin-top: 10px;
+  margin-left: 10px;
   display: grid;
   place-items: center;
   height: 80px;
 }
 
 .text-input{
-  width: 160px;
-  margin-left: 20px;
-  display: grid;
-  place-items: center;
+  margin-top: 10px;
+  margin-left: 10px;
 }
 
 .username-input {
@@ -179,7 +174,11 @@ body {
   }
 
 .btn {
-  width: auto;
+  flex: 50%;
+  margin-top: 10px;
+  width: 50%;
+  /* margin-left: 20px; */
+  align-self: center;
 }
 
 .rightSide .addCommentContainer {
@@ -215,7 +214,7 @@ button {
   align-items: center;
 }
 
-.comment-box .comment {
+.single-comment .comment {
   width: 100%;
   height: auto;
   padding: 30px;

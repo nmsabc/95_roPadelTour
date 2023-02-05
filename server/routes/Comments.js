@@ -35,6 +35,14 @@ router.get("/", async (req, res) => {
     const comment = req.body;
     await Comments.create(comment);
     res.json(comment);
+  });  
+
+  router.delete("/byId/:id", async (req, res) => {
+    const comment_Id = req.params.id;
+    await Comments.destroy({where: { id : comment_Id }, });
+    res.json({
+      id: comment_Id,
+      message: "comment was deleted "});
   });
   
 
