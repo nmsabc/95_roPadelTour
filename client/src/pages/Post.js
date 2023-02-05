@@ -8,7 +8,6 @@ function Post() {
   let { id } = useParams();
   const [postObject, setPostObject] = useState([]);
   const [commentsList, setCommentsList] = useState([]);
-  // conct [newComment, setNewComment] = useState("");
 
   useState(() => {
     axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
