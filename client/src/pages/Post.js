@@ -22,11 +22,12 @@ function Post() {
   };
 
   const addCommentInPost = () => {
-    axios.post("http://localhost:3213/comments/", commentToInsert).then((response) =>{
-      setNewCommentInPost("");
-      setNewUsrForComment("");
-
-    });
+    axios
+      .post("http://localhost:3213/comments/", commentToInsert)
+      .then((response) => {
+        setNewCommentInPost("");
+        setNewUsrForComment("");
+      });
   };
 
   const deletePost = async (commentId) => {
