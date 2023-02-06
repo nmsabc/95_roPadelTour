@@ -17,14 +17,19 @@ function Post() {
   };
 
   const addCommentInPost = () => {
-    axios.post("http://localhost:3213/comments/", commentToInsert);
+    axios
+      .post("http://localhost:3213/comments/", commentToInsert)
+      .then((response) => {
+        setNewCommentInPost("");
+        setNewUsrForComment("");
+      });
   };
 
-  
   const deletePost = async (commentId) => {
-    await new Promise(r => setTimeout(r, 500));
-    axios.delete(`http://localhost:3213/comments/byId/${commentId}`).then((response) => {
-    });
+    await new Promise((r) => setTimeout(r, 500));
+    axios
+      .delete(`http://localhost:3213/comments/byId/${commentId}`)
+      .then((response) => {});
   };
   // This works very fine also. However the one above is simpler
   // const deletePost = async (commentId) => {
@@ -67,6 +72,7 @@ function Post() {
               name="commentBudy"
               type="text"
               placeholder="Your comment"
+              value={newCommentInPost}
               onChange={(e) => {
                 setNewCommentInPost(e.target.value);
               }}
@@ -76,6 +82,7 @@ function Post() {
               name="username"
               type="text"
               placeholder="Your username"
+              value={newUsrForComment}
               onChange={(e) => {
                 setNewUsrForComment(e.target.value);
               }}
