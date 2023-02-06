@@ -13,17 +13,11 @@ router.post("/", async (req, res) => {
 
   const saltRounds = 10;
   const salt = await bcrypt.genSalt(saltRounds);
-  //   const hashedPasswd = await bcrypt.hash(password,salt);
+  const hashedPasswd = await bcrypt.hash(password, salt);
   // Store hash in your password DB.
-  //   await Users.create({ username: username, password: hashedPasswd });
-
-  bcrypt.hash(password, saltRounds).then((hashedPasswd) => {
-    Users.create({ username: username, password: hashedPasswd });
-    res.json({
-      message: "user was created",
-      username: username,
-      hash: hashedPasswd,
-    });
+  await Users.create({ username: username, password: hashedPasswd });
+  res.json({
+    message: "done: user created ok",
   });
 });
 
