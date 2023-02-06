@@ -2,10 +2,11 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
-import RecommendIcon from '@mui/icons-material/Recommend';
-import EditIcon from '@mui/icons-material/Edit';
-import AddCommentIcon from '@mui/icons-material/AddComment';
+import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
+import RecommendIcon from "@mui/icons-material/Recommend";
+import EditIcon from "@mui/icons-material/Edit";
+import AddCommentIcon from "@mui/icons-material/AddComment";
+import Button from "@mui/material/Button";
 
 function Post() {
   let { id } = useParams();
@@ -24,11 +25,11 @@ function Post() {
     axios.post("http://localhost:3213/comments/", commentToInsert);
   };
 
-  
   const deletePost = async (commentId) => {
-    await new Promise(r => setTimeout(r, 500));
-    axios.delete(`http://localhost:3213/comments/byId/${commentId}`).then((response) => {
-    });
+    await new Promise((r) => setTimeout(r, 500));
+    axios
+      .delete(`http://localhost:3213/comments/byId/${commentId}`)
+      .then((response) => {});
   };
   // This works very fine also. However the one above is simpler
   // const deletePost = async (commentId) => {
@@ -57,9 +58,17 @@ function Post() {
     <div className="postPage">
       <div className="leftSide">
         <div className="post" id="individual">
-          <div className="title"><EditIcon /> {postObject.title}</div>
-          <div className="body">{postObject.postText} <EditIcon /></div>
-          <div className="footer"> <RecommendIcon />{postObject.username}</div>
+          <div className="title">
+            <EditIcon /> {postObject.title}
+          </div>
+          <div className="body">
+            {postObject.postText} <EditIcon />
+          </div>
+          <div className="footer">
+            {" "}
+            <RecommendIcon />
+            {postObject.username}
+          </div>
         </div>
         <div className="add-comment">
           <div className="add-comment">
@@ -84,9 +93,14 @@ function Post() {
                 setNewUsrForComment(e.target.value);
               }}
             />
-            <button className="btn" onClick={addCommentInPost}>
-              Komm! <AddCommentIcon />
-            </button>
+            <div className="btn">
+              <Button
+                variant="contained"
+                onClick={addCommentInPost}
+              >
+                Save Comment
+              </Button>
+            </div>
           </div>
         </div>
       </div>
@@ -99,9 +113,13 @@ function Post() {
               <table className="table" key={key}>
                 <tbody>
                   <tr key={key}>
-                    <td><RecommendIcon /></td>
                     <td>
-                      <span onClick={() => deletePost(value.id)}><DeleteSweepIcon /></span>
+                      <RecommendIcon />
+                    </td>
+                    <td>
+                      <span onClick={() => deletePost(value.id)}>
+                        <DeleteSweepIcon />
+                      </span>
                     </td>
                     <td>{value.username}:</td>
                     <td>{value.commentBudy}</td>

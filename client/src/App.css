@@ -170,6 +170,7 @@ body {
   margin-left: 20px;
   display: grid;
   place-items: center;
+  margin-bottom: 10px;
   }
 
 .btn {
