@@ -2,6 +2,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import RecommendIcon from '@mui/icons-material/Recommend';
 
 function Post() {
   let { id } = useParams();
@@ -95,10 +97,11 @@ function Post() {
               <table className="table" key={key}>
                 <tbody>
                   <tr key={key}>
-                    <td>U: {value.username}:</td>
+                    <td><RecommendIcon /></td>
+                    <td>{value.username}:</td>
                     <td>{value.commentBudy}</td>
                     <td>
-                      <span onClick={() => deletePost(value.id)}>Delete</span>
+                      <span onClick={() => deletePost(value.id)}><DeleteSweepIcon /></span>
                     </td>
                     {/* <td><span onClick={() => null}>Delete</span></td> */}
                   </tr>
