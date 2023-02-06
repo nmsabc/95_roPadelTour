@@ -35,7 +35,6 @@ body {
   padding-top: 5px;
   border-bottom: 1px solid lightgray;
   background-color: dodgerblue;
-  display: grid;
   place-content: left;
   color: white;
 }
@@ -171,6 +170,7 @@ body {
   margin-left: 20px;
   display: grid;
   place-items: center;
+  margin-bottom: 10px;
   }
 
 .btn {

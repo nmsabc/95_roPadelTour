@@ -11,6 +11,9 @@ import Player from "./pages/Player";
 import CreateRanking from "./pages/CreateRanking";
 import Ranking from "./pages/Ranking";
 
+// Material UI - branch 8 from 3 - startup using MUi
+import SignIn from "./pages/SigIn"; 
+
 //learn props propagation and state sharing in React
 import MasterLifter from "./pages/stateSharing/MasterLifter";
 import DoubleInputBoxes from "./pages/stateSharing/DoubleInputBoxes";
@@ -32,7 +35,10 @@ function App() {
           <Link to="/masterlifter">Master Lifter</Link>
           <Link to="/dubleinputs">2xInputs</Link>
           <Link to="/filterablelist">FilterableList</Link>
-          <Link to={data_str_in_js}> ..:: data_str_in_js</Link>
+          <Link to={data_str_in_js}>data_str_in_js</Link>
+
+          {/* material UI */}
+          <Link to="/signin">SingIn</Link>
         </div>
 
         <Routes>
@@ -53,6 +59,11 @@ function App() {
 
           {/* learn some more */}
           <Route path="/datastructuresinjs" element={<data_str_in_js />} exact/>
+
+          {/* material UI */}
+          <Route path="/signin" element={<SignIn />} exact/>
+
+
 
         </Routes>
       </Router>
