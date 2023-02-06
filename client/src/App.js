@@ -13,6 +13,8 @@ import Ranking from "./pages/Ranking";
 
 // Material UI - branch 8 from 3 - startup using MUi
 import SignIn from "./pages/SigIn"; 
+import SignUp from "./pages/SignUp"; 
+import ResetPassword from "./pages/ResetPassword"; 
 
 //learn props propagation and state sharing in React
 import MasterLifter from "./pages/stateSharing/MasterLifter";
@@ -62,6 +64,8 @@ function App() {
 
           {/* material UI */}
           <Route path="/signin" element={<SignIn />} exact/>
+          <Route path="/signup" element={<SignUp />} exact/>
+          <Route path="/resetpassword" element={<ResetPassword />} exact/>
 
 
 

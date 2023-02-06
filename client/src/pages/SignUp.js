@@ -35,8 +35,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
-  const handleSubmit = (event) => {
+export default function SignUp() {
+
+  const handleSingUpSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const login_data = {
@@ -44,12 +45,11 @@ export default function SignIn() {
       password: data.get("password"),
     };
     axios
-      .post("http://localhost:3213/auth/login", login_data)
+      .post("http://localhost:3213/auth", login_data)
       .then((response) => {
         console.log({
           login_res: response.data.message,
         });
-        console.log(data.get("remember"));
       });
   };
 
@@ -70,11 +70,11 @@ export default function SignIn() {
             {/* <LockIcon /> */}
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign up with a new user below
           </Typography>
           <Box
             component="form"
-            onSubmit={handleSubmit}
+            onSubmit={handleSingUpSubmit}
             noValidate
             sx={{ mt: 1 }}
           >
@@ -84,8 +84,8 @@ export default function SignIn() {
               fullWidth
               id="username"
               name="username"
-              label="Username or Email Address"
-              type="username"
+              label="Email Address"
+              type="email"
               autoComplete="username"
               autoFocus
             />
@@ -96,11 +96,6 @@ export default function SignIn() {
               name="password"
               label="Password"
               type="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="true" name="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
@@ -108,17 +103,16 @@ export default function SignIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Create User
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="resetpassword" variant="body2">
-                  Forgot password?
-                </Link>
+                {/* <Link href="#" variant="body2">
+                </Link> */}
               </Grid>
               <Grid item>
-                <Link href="signup" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                <Link href="resetpassword" variant="body2">
+                  {"Forgot password?"}
                 </Link>
               </Grid>
             </Grid>
