@@ -23,6 +23,9 @@ app.use("/players", playerRouter);
 const rankingRouter = require("./routes/Rankings");
 app.use("/rankings", rankingRouter);
 
+const userRouter = require("./routes/Users");
+app.use("/auth", userRouter);
+
 db.sequelize.sync().then(() => {
   app.listen(3213, () => {
     console.log("Server running on port 3213");
