@@ -4,6 +4,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import RecommendIcon from '@mui/icons-material/Recommend';
+import EditIcon from '@mui/icons-material/Edit';
+import AddCommentIcon from '@mui/icons-material/AddComment';
 
 function Post() {
   let { id } = useParams();
@@ -55,9 +57,9 @@ function Post() {
     <div className="postPage">
       <div className="leftSide">
         <div className="post" id="individual">
-          <div className="title"> {postObject.title} </div>
-          <div className="body">{postObject.postText}</div>
-          <div className="footer">{postObject.username}</div>
+          <div className="title"><EditIcon /> {postObject.title}</div>
+          <div className="body">{postObject.postText} <EditIcon /></div>
+          <div className="footer"> <RecommendIcon />{postObject.username}</div>
         </div>
         <div className="add-comment">
           <div className="add-comment">
@@ -83,7 +85,7 @@ function Post() {
               }}
             />
             <button className="btn" onClick={addCommentInPost}>
-              Komm!
+              Komm! <AddCommentIcon />
             </button>
           </div>
         </div>
@@ -98,11 +100,11 @@ function Post() {
                 <tbody>
                   <tr key={key}>
                     <td><RecommendIcon /></td>
-                    <td>{value.username}:</td>
-                    <td>{value.commentBudy}</td>
                     <td>
                       <span onClick={() => deletePost(value.id)}><DeleteSweepIcon /></span>
                     </td>
+                    <td>{value.username}:</td>
+                    <td>{value.commentBudy}</td>
                     {/* <td><span onClick={() => null}>Delete</span></td> */}
                   </tr>
                 </tbody>
