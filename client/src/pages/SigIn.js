@@ -46,10 +46,8 @@ export default function SignIn() {
     axios
       .post("http://localhost:3213/auth/login", login_data)
       .then((response) => {
-        console.log({
-          login_res: response.data.message,
-        });
-        console.log(data.get("remember"));
+        if(response.data.error) alert(response.data.error)
+        sessionStorage.setItem("sessionToken", response.data)
       });
   };
 
