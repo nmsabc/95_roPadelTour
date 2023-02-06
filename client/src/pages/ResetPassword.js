@@ -69,10 +69,10 @@ export default function SignUp() {
             <LockOutlinedIcon />
             {/* <LockIcon /> */}
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h6">
             Reset your password 
           </Typography>          
-          <Typography component="h10" variant="h10">
+          <Typography align="center" variant="caption">
            An email with instructions to reset your password will be sent to your Email Address
           </Typography>
           <Box

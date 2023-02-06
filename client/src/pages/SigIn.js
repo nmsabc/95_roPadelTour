@@ -85,7 +85,7 @@ export default function SignIn() {
               id="username"
               name="username"
               label="Username or Email Address"
-              type="username"
+              type="email"
               autoComplete="username"
               autoFocus
             />
