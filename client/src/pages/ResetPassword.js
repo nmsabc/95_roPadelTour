@@ -73,7 +73,7 @@ export default function SignUp() {
             Reset your password 
           </Typography>          
           <Typography align="center" variant="caption">
-           An email with instructions to reset your password will be sent to your Email Address
+           An email with instructions to reset your password will be sent to your email address
           </Typography>
           <Box
             component="form"
@@ -102,7 +102,8 @@ export default function SignUp() {
             </Button>
             <Grid container>
               <Grid item xs>
-                {/* <Link href="#" variant="body2">
+                {/* <Link href="signin" variant="body2">
+                  I remember my password SignIn
                 </Link> */}
               </Grid>
               <Grid item>

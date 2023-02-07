@@ -42,4 +42,20 @@ add this code to the server _index.js_
 see more here https://stackoverflow.com/questions/46522749/how-to-solve-redirect-has-been-blocked-by-cors-policy-no-access-control-allow
 
 
+### add Formik
 
+to be able to create forms easier
+
+### add Material-UI
+
+to make the FE simple and nicer
+
+## Authentication
+### use bycript 
+
+to encript a simple passwd before storing it in the DB
+
+
+### add JWT
+
+jsonwebtoken - to be able to store sessions info
