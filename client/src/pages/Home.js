@@ -10,14 +10,10 @@ function Home() {
   
   useEffect(() => {
     axios.get("http://localhost:3213/players").then((response) => {
-      // console.log(response.data);
-      console.log("Number of PLAYERS in the DB is : ", response.data.length);
       setListOfPlayers(response.data);
     });
     
     axios.get("http://localhost:3213/posts").then((response) => {
-      // console.log(response.data);
-      console.log("Number of posts in the DB is : ", response.data.length);
       setListOfPosts(response.data);
     });
   }, []);  
