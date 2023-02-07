@@ -59,3 +59,9 @@ to encript a simple passwd before storing it in the DB
 ### add JWT
 
 jsonwebtoken - to be able to store sessions info
+
+### add the midleware
+
+with this you can validate if the user is logged in or not
+and move to next() actions
+

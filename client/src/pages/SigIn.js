@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -36,6 +37,10 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+
+  const navigate = useNavigate();
+
+  //handle Submit action
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -46,13 +51,13 @@ export default function SignIn() {
     axios
       .post("http://localhost:3213/auth/login", login_data)
       .then((response) => {
-        if(response.data.error) {
-          alert(response.data.error)
-        }
-        else{
-          sessionStorage.setItem("sessionToken", response.data)
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          sessionStorage.setItem("sessionToken", response.data);
         }
       });
+      navigate("/");
   };
 
   return (
@@ -101,7 +106,9 @@ export default function SignIn() {
               autoComplete="current-password"
             />
             <FormControlLabel
-              control={<Checkbox value="true" name="remember" color="primary" />}
+              control={
+                <Checkbox value="true" name="remember" color="primary" />
+              }
               label="Remember me"
             />
             <Button

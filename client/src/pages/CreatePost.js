@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { useNavigate} from 'react-router-dom'
 import { Formik, Form, useField, Field } from "formik";
 import * as Yup from "yup";
@@ -164,7 +163,8 @@ function CreatePost() {
         initialValues={formikInitialValues}
         validationSchema={formikValidationSchem}
         
-        ///////////////        ///////////////
+        ///////////////       ///////////////
+        // TODO 
         // replaced with the onSubmit from below
         // the reason I cannot use this outside is because 
         // I cannot pass navigate to the const formikOnSubmit 
