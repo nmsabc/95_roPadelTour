@@ -3,10 +3,10 @@ const router = express.Router();
 const { Comments } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 
-router.get("/:postId", async (req, res) => {
-  const postId = req.params.postId;
+router.get("/byPostId/:PostId", async (req, res) => {
+  const PostId = req.params.PostId;
   const comments = await Comments.findAll({
-    where: { PostId: postId },
+    where: { PostId: PostId },
     order: [["createdAt", "DESC"]],
   });
   res.json(comments);

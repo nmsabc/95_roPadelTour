@@ -8,6 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+
+    // TODO one should modify this to associate this to the user
     username: {
       type: DataTypes.STRING,
       allowNull: false,

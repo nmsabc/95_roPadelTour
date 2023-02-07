@@ -22,11 +22,21 @@ function Post() {
   };
 
   const addCommentInPost = () => {
+    console.log("1...", commentToInsert);
     axios
-      .post("http://localhost:3213/comments/", commentToInsert)
+      .post("http://localhost:3213/comments/", commentToInsert, {
+        headers: {
+          accessToken: sessionStorage.getItem("sessionToken"),
+        },
+      })
       .then((response) => {
-        setNewCommentInPost("");
-        setNewUsrForComment("");
+        if (response.data.error) {
+          alert(response.data.error);
+        } else {
+          setCommentsList([...commentsList, commentToInsert])
+          setNewCommentInPost("");
+          setNewUsrForComment("");
+        }
       });
   };
 
@@ -36,28 +46,21 @@ function Post() {
       .delete(`http://localhost:3213/comments/byId/${commentId}`)
       .then((response) => {});
   };
-  // This works very fine also. However the one above is simpler
-  // const deletePost = async (commentId) => {
-  //   const del_response = await fetch(
-  //     `http://localhost:3213/comments/byId/${commentId}`,
-  //     { method: "DELETE" }
-  //   );
-  //   del_response.ok &&
-  //     setCommentsList(
-  //       commentsList.filter((comment) => comment.id !== commentId)
-  //     );
-  // };
 
   useEffect(() => {
     axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
       // console.log(response);
       setPostObject(response.data);
     });
-    axios.get(`http://localhost:3213/comments/${id}`).then((response) => {
-      // console.log(response);
-      setCommentsList(response.data);
-    });
-  }, [commentsList]);
+  }, []);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3213/comments/byPostId/${id}`)
+      .then((response) => {
+        // console.log(response);
+        setCommentsList(response.data);
+      });
+  }, []);
 
   return (
     <div className="postPage">
@@ -101,10 +104,7 @@ function Post() {
               }}
             />
             <div className="btn">
-              <Button
-                variant="contained"
-                onClick={addCommentInPost}
-              >
+              <Button variant="contained" onClick={addCommentInPost}>
                 Save Comment
               </Button>
             </div>

@@ -1,7 +1,7 @@
-import { verify } from "jsonwebtoken";
+const { verify } = require("jsonwebtoken");
 
 const validateToken = (req, res, next) => {
-  const accessToken = req.header("sessionToken");
+  const accessToken = req.header("accessToken");
   if (!accessToken)
     return res.json({ error: "Access token not available, please login" });
 
@@ -13,7 +13,7 @@ const validateToken = (req, res, next) => {
   } catch (error) {
     return {
       Error: error,
-      Message: "sessionToken is invalid, please SingIn again!",
+      Message: "AccessToken is invalid, please SignIn!",
     };
   }
 };
