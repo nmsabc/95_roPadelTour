@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import RecommendIcon from "@mui/icons-material/Recommend";
 import EditIcon from "@mui/icons-material/Edit";
@@ -14,6 +13,7 @@ function Post() {
   const [commentsList, setCommentsList] = useState([]);
   const [newCommentInPost, setNewCommentInPost] = useState("");
   const [newUsrForComment, setNewUsrForComment] = useState("");
+  const [renderNow, setRenderToOnNow] = useState({});
 
   const commentToInsert = {
     commentBudy: newCommentInPost,
@@ -22,18 +22,17 @@ function Post() {
   };
 
   const addCommentInPost = () => {
-    console.log("1...", commentToInsert);
     axios
       .post("http://localhost:3213/comments/", commentToInsert, {
         headers: {
           accessToken: sessionStorage.getItem("sessionToken"),
         },
       })
-      .then((response) => {
-        if (response.data.error) {
-          alert(response.data.error);
+      .then((response_insert) => {
+        if (response_insert.data.error) {
+          alert(response_insert.data.error);
         } else {
-          setCommentsList([...commentsList, commentToInsert])
+          setRenderToOnNow(Date.now);
           setNewCommentInPost("");
           setNewUsrForComment("");
         }
@@ -44,23 +43,21 @@ function Post() {
     await new Promise((r) => setTimeout(r, 500));
     axios
       .delete(`http://localhost:3213/comments/byId/${commentId}`)
-      .then((response) => {});
+      .then((response_delete) => {
+        setRenderToOnNow(Date.now);
+      });
   };
 
   useEffect(() => {
     axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
-      // console.log(response);
       setPostObject(response.data);
     });
-  }, []);
-  useEffect(() => {
     axios
       .get(`http://localhost:3213/comments/byPostId/${id}`)
       .then((response) => {
-        // console.log(response);
         setCommentsList(response.data);
       });
-  }, []);
+  }, [renderNow]);
 
   return (
     <div className="postPage">
