@@ -2,22 +2,22 @@
   "development": {
     "username": "root",
     "password": "secret",
-    "database": "ropadeltour_v100",
-    "host": "mysql_for_backend_server",
+    "database": "rpt",
+    "host": "mysql_for_rpt",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
     "password": "secret",
-    "database": "ropadeltour_v100_test",
-    "host": "mysql_for_backend_server",
+    "database": "rpt_test",
+    "host": "mysql_for_rpt",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
     "password": "secret",
-    "database": "ropadeltour_v100_prod",
-    "host": "mysql_for_backend_server",
+    "database": "rpt_prod",
+    "host": "mysql_for_rpt",
     "dialect": "mysql"
   }
 }
