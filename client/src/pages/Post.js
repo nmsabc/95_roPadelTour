@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useRef} from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
@@ -6,6 +6,7 @@ import RecommendIcon from "@mui/icons-material/Recommend";
 import EditIcon from "@mui/icons-material/Edit";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import Button from "@mui/material/Button";
+import CountComments from "./CountComments";
 
 function Post() {
   let { id } = useParams();
@@ -14,6 +15,7 @@ function Post() {
   const [newCommentInPost, setNewCommentInPost] = useState("");
   const [newUsrForComment, setNewUsrForComment] = useState("");
   const [renderNow, setRenderToOnNow] = useState({});
+  const inputRef = useRef(null);
 
   const commentToInsert = {
     commentBudy: newCommentInPost,
@@ -35,6 +37,10 @@ function Post() {
           setRenderToOnNow(Date.now);
           setNewCommentInPost("");
           setNewUsrForComment("");
+          inputRef.current.focus();
+          const c1=CountComments({ param2: 45, param3: 57, param1: 81 })
+          const c2=CountComments({ param1: 5, param2: 345, param3: 98 })
+          console.log('testing one ...', c1, c2)
         }
       });
   };
@@ -45,6 +51,7 @@ function Post() {
       .delete(`http://localhost:3213/comments/byId/${commentId}`)
       .then((response_delete) => {
         setRenderToOnNow(Date.now);
+        inputRef.current.focus();
       });
   };
 
@@ -86,6 +93,7 @@ function Post() {
               type="text"
               placeholder="Your comment"
               value={newCommentInPost}
+              ref={inputRef}
               onChange={(e) => {
                 setNewCommentInPost(e.target.value);
               }}
