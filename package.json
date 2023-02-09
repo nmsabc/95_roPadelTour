@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "package.json": "^2.0.1",
-    "wait-port": "^1.0.4"
-  }
-}
