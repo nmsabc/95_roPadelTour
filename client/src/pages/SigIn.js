@@ -54,7 +54,8 @@ export default function SignIn() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          sessionStorage.setItem("sessionToken", response.data);
+          // sessionStorage.setItem("sessionToken", response.data);
+          localStorage.setItem("sessionToken", response.data);
         }
       });
       navigate("/");

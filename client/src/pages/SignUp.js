@@ -47,9 +47,6 @@ export default function SignUp() {
     axios
       .post("http://localhost:3213/auth", login_data)
       .then((response) => {
-        console.log({
-          login_res: response.data.message,
-        });
       });
   };
 
