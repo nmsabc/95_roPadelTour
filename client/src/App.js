@@ -23,15 +23,22 @@ import FilterableList from "./pages/stateSharing/FilterableList";
 
 // AuthContext for admin, users and menu
 import { AuthContext } from "./helpers/AuthContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [authState, setAuthState] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("sessionToken")) {
+      setAuthState(true);
+    }
+  }, []);
+
   let data_str_in_js =
-  "https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/";
+    "https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/";
   return (
     <div className="App">
-      <AuthContext.Provider value={{authState, setAuthState}}>
+      <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <div className="top-menu">
             <Link to="/">Home </Link>
