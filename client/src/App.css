@@ -78,24 +78,26 @@ body {
 .postPage {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 80%;
   height: 100%;
 }
 
 .leftSide {
-  flex: 50%;
+  flex: 20%;
   height: calc(30vh - 50px);
   display: grid;
   place-items: center;
   padding-left: 15px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .rightSide {
-  flex: 50%;
+  flex: 80%;
   height: calc(30vh - 50px);
   display: grid;
-  place-items: center;
-  padding-left: 15px;
+  place-items: left;
+  padding-left: 25px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .existing-comments{
@@ -204,6 +206,13 @@ button {
 .addCommentContainer input {
   border: 2px solid dodgerblue;
 }
+
+.addCommentContainer td {
+  border: 0px solid dodgerblue;
+  place-items: left;
+  display:inline;
+}
+
 
 .rightSide .listOfComments {
   flex: 80%;

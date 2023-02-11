@@ -115,9 +115,7 @@ function Post() {
                 <tbody>
                   <tr key={key}>
                     <td>
-                      <RecommendIcon />
-                    </td>
-                    <td>
+                      <RecommendIcon />{" "}
                       <span onClick={() => deletePost(value.id)}>
                         <DeleteSweepIcon />
                       </span>
