@@ -46,7 +46,6 @@ function App() {
         if (response.data.error) {
           setAuthState({...authState, validUser:false});
         } else {
-          console.log("1...", response.data);
           setAuthState({
             username: response.data.username,
             id: response.data.id,

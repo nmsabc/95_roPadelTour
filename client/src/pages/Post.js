@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
@@ -6,7 +6,8 @@ import RecommendIcon from "@mui/icons-material/Recommend";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import CommentIcon from "@mui/icons-material/Comment";
-import SendIcon from '@mui/icons-material/Send';
+import SendIcon from "@mui/icons-material/Send";
+import { AuthContext } from "../helpers/AuthContext";
 
 var ld = require("lodash");
 
@@ -18,6 +19,7 @@ function Post() {
   const [newUsrForComment, setNewUsrForComment] = useState("");
   const [renderNow, setRenderToOnNow] = useState({});
   const inputRef = useRef(null);
+  const { authState } = useContext(AuthContext);
 
   const commentToInsert = {
     commentBudy: newCommentInPost,
@@ -47,7 +49,11 @@ function Post() {
   const deletePost = async (commentId) => {
     await new Promise((r) => setTimeout(r, 500));
     axios
-      .delete(`http://localhost:3213/comments/byId/${commentId}`)
+      .delete(`http://localhost:3213/comments/byId/${commentId}`, {
+        headers: {
+          accessToken: localStorage.getItem("sessionToken"),
+        },
+      })
       .then((response_delete) => {
         setRenderToOnNow(Date.now);
         inputRef.current.focus();
@@ -76,9 +82,11 @@ function Post() {
             {postObject.postText} <EditIcon />
           </div>
           <div className="footer">
-            <span>{"  "}{postObject.username}</span>
-            <CommentIcon />
-            {" "}{commentsList.length}
+            <span>
+              {"  "}
+              {postObject.username}
+            </span>
+            <CommentIcon /> {commentsList.length}
           </div>
         </div>
         <div className="add-comment">
@@ -98,7 +106,11 @@ function Post() {
               }}
             />
             <div className="btn">
-              <Button variant="contained" endIcon={<SendIcon />} onClick={addCommentInPost}>
+              <Button
+                variant="contained"
+                endIcon={<SendIcon />}
+                onClick={addCommentInPost}
+              >
                 Save Comment
               </Button>
             </div>
@@ -116,9 +128,10 @@ function Post() {
                   <tr key={key}>
                     <td>
                       <RecommendIcon />{" "}
-                      <span onClick={() => deletePost(value.id)}>
+                      {authState.username === value.username &&
+                        <span onClick={() => deletePost(value.id)}>
                         <DeleteSweepIcon />
-                      </span>
+                      </span>}
                     </td>
                     <td>{ld.truncate(value.username, { length: 12 })}: </td>
                     <td>{value.commentBudy}</td>
