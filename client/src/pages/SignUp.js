@@ -105,8 +105,9 @@ export default function SignUp() {
             </Button>
             <Grid container>
               <Grid item xs>
-                {/* <Link href="#" variant="body2">
-                </Link> */}
+                <Link href="signin" variant="body2">
+                {"Sign In"}
+                </Link>
               </Grid>
               <Grid item>
                 <Link href="resetpassword" variant="body2">

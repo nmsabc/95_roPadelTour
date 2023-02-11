@@ -1,13 +1,23 @@
 import React from 'react'
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../helpers/AuthContext";
+
 
 function Home() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
   const [listOfPosts, setListOfPosts] = useState([]);
   const navigate = useNavigate();
+  const { authState } = useContext(AuthContext);
+
   
+  useEffect(() => {
+    if (!authState.validUser) {
+      navigate("/signin");
+    }
+  }, []);
+
   useEffect(() => {
     axios.get("http://localhost:3213/players").then((response) => {
       setListOfPlayers(response.data);

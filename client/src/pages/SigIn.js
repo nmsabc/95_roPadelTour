@@ -112,12 +112,12 @@ export default function SignIn() {
               type="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={
                 <Checkbox value="true" name="remember" color="primary" />
               }
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth

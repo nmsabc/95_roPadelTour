@@ -34,7 +34,6 @@ import { useEffect, useState } from "react";
 //used to truncate the username in the menu
 var ld = require("lodash");
 
-
 function App() {
   const [authState, setAuthState] = useState({
     username: "",
@@ -68,11 +67,11 @@ function App() {
     <div className="App">
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
-          <div className="top-menu">
-            <Link to="/">Home </Link>
-            {/* logged in or not */}
-            {authState.validUser ? (
+          {/* logged in or not */}
+          {authState.validUser ? (
+            <div className="top-menu">
               <>
+                <Link to="/">Home </Link>
                 <Link to="/createPost">New Post </Link>
                 {/* <Link to="/Post">Post </Link> */}
                 <Link to="/createPlayer">New Player </Link>
@@ -89,12 +88,10 @@ function App() {
                   {ld.truncate(authState.username, { length: 10 })}
                 </div>
               </>
-            ) : (
-              <>
-                <Link to="/signin">SingIn</Link>
-              </>
-            )}
-          </div>
+            </div>
+          ) : (
+            <>{/* <Link to="/signin">SingIn</Link> */}</>
+          )}
 
           <Routes>
             <Route path="/" element={<Home />} exact />

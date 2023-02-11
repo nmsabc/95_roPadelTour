@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import RecommendIcon from "@mui/icons-material/Recommend";
@@ -13,6 +13,7 @@ var ld = require("lodash");
 
 function Post() {
   let { id } = useParams();
+  const navigate = useNavigate();
   const [postObject, setPostObject] = useState([]);
   const [commentsList, setCommentsList] = useState([]);
   const [newCommentInPost, setNewCommentInPost] = useState("");
@@ -20,6 +21,23 @@ function Post() {
   const [renderNow, setRenderToOnNow] = useState({});
   const inputRef = useRef(null);
   const { authState } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!authState.validUser) {
+      navigate("/signin");
+    }
+  }, []);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
+      setPostObject(response.data);
+    });
+    axios
+      .get(`http://localhost:3213/comments/byPostId/${id}`)
+      .then((response) => {
+        setCommentsList(response.data);
+      });
+  }, [id, renderNow]);
 
   const commentToInsert = {
     commentBudy: newCommentInPost,
@@ -59,17 +77,6 @@ function Post() {
         inputRef.current.focus();
       });
   };
-
-  useEffect(() => {
-    axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
-      setPostObject(response.data);
-    });
-    axios
-      .get(`http://localhost:3213/comments/byPostId/${id}`)
-      .then((response) => {
-        setCommentsList(response.data);
-      });
-  }, [id, renderNow]);
 
   return (
     <div className="postPage">
@@ -128,10 +135,11 @@ function Post() {
                   <tr key={key}>
                     <td>
                       <RecommendIcon />{" "}
-                      {authState.username === value.username &&
+                      {authState.username === value.username && (
                         <span onClick={() => deletePost(value.id)}>
-                        <DeleteSweepIcon />
-                      </span>}
+                          <DeleteSweepIcon />
+                        </span>
+                      )}
                     </td>
                     <td>{ld.truncate(value.username, { length: 12 })}: </td>
                     <td>{value.commentBudy}</td>
