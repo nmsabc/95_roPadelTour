@@ -6,6 +6,8 @@ import RecommendIcon from "@mui/icons-material/Recommend";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import CommentIcon from "@mui/icons-material/Comment";
+import SendIcon from '@mui/icons-material/Send';
+
 var ld = require("lodash");
 
 function Post() {
@@ -96,7 +98,7 @@ function Post() {
               }}
             />
             <div className="btn">
-              <Button variant="contained" onClick={addCommentInPost}>
+              <Button variant="contained" endIcon={<SendIcon />} onClick={addCommentInPost}>
                 Save Comment
               </Button>
             </div>
