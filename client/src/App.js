@@ -11,6 +11,9 @@ import Player from "./pages/Player";
 import CreateRanking from "./pages/CreateRanking";
 import Ranking from "./pages/Ranking";
 
+// page not found
+import PageNotFound from "./pages/PageNotFound";
+
 // Material UI - branch 8 from 3 - startup using MUi
 import SignIn from "./pages/SigIn";
 import SignUp from "./pages/SignUp";
@@ -28,6 +31,10 @@ import FilterableList from "./pages/stateSharing/FilterableList";
 import { AuthContext } from "./helpers/AuthContext";
 import { useEffect, useState } from "react";
 
+//used to truncate the username in the menu
+var ld = require("lodash");
+
+
 function App() {
   const [authState, setAuthState] = useState({
     username: "",
@@ -44,7 +51,7 @@ function App() {
       })
       .then((response) => {
         if (response.data.error) {
-          setAuthState({...authState, validUser:false});
+          setAuthState({ ...authState, validUser: false });
         } else {
           setAuthState({
             username: response.data.username,
@@ -75,10 +82,12 @@ function App() {
                 <Link to="/dubleinputs">2xInputs</Link>
                 <Link to="/filterablelist">FilterableList</Link>
                 <Link to={data_str_in_js}>data_str_in_js</Link>
-                <Link to="/signout">
-                  <LogoutIcon />
-                </Link>
-                {authState.username}
+                <div className="loginContainer">
+                  <Link to="/signout">
+                    <LogoutIcon />
+                  </Link>
+                  {ld.truncate(authState.username, { length: 10 })}
+                </div>
               </>
             ) : (
               <>
@@ -115,6 +124,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} exact />
             <Route path="/resetpassword" element={<ResetPassword />} exact />
             <Route path="/signout" element={<SignOut />} exact />
+            <Route path="*" element={<PageNotFound />} exact />
           </Routes>
         </Router>
       </AuthContext.Provider>

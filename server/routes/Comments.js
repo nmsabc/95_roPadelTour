@@ -30,7 +30,10 @@ router.post("/", validateToken, async (req, res) => {
   const logedInUsename = req.user.username;
   comment.username = logedInUsename;
   await Comments.create(comment);
-  res.json(comment);
+  res.json({
+    "id": comment.id,
+    "message": "comment was just created",
+  });
 });
 
 router.delete("/byId/:commentId", validateToken,async (req, res) => {
