@@ -1,3 +1,19 @@
+## Docker specific
+
+build the docker repo on https://hub.docker.com/
+
+build the local image
+    docker build -t <hub-user>/<repo-name>[:<tag>]
+    docker build -t lotus21investments/rpt_fe:3_fe_fe_mysql
+push the docker image
+    docker push <hub-user>/<repo-name>:<tag>
+
+pull the image like
+        docker pull lotus21investments/rpt_fe:3_fe_be_mysql
+
+create your docker compose
+    docker-compose up
+
 ## BE
 
 + start w the init_L
