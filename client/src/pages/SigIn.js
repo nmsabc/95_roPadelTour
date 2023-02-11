@@ -55,9 +55,13 @@ export default function SignIn() {
           alert(response.data.error);
         } else {
           // sessionStorage.setItem("sessionToken", response.data);
-          localStorage.setItem("sessionToken", response.data);
+          localStorage.setItem("sessionToken", response.data.accessToken);
           //AuthContext
-          setAuthState(true);
+          setAuthState({
+            username: response.data.username,
+            id: response.data.id,
+            validUser: true,
+          });
           navigate("/");
         }
       });

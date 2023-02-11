@@ -4,11 +4,15 @@ import { useNavigate } from "react-router-dom";
 
 function SignOut() {
   const navigate = useNavigate();
-  const { setAuthState } = useContext(AuthContext);
+  const { authState, setAuthState } = useContext(AuthContext);
 
   useEffect(() => {
     localStorage.removeItem("sessionToken")
-    setAuthState(false);
+    setAuthState({
+      username: "",
+      id: 0,
+      validUser: false,
+    });
     navigate("/");
   });
 

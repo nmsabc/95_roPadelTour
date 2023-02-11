@@ -16,7 +16,7 @@ import SignIn from "./pages/SigIn";
 import SignUp from "./pages/SignUp";
 import ResetPassword from "./pages/ResetPassword";
 import SignOut from "./pages/SignOut";
-import LogoutIcon from '@mui/icons-material/Logout';
+import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 
 //learn props propagation and state sharing in React
@@ -29,7 +29,11 @@ import { AuthContext } from "./helpers/AuthContext";
 import { useEffect, useState } from "react";
 
 function App() {
-  const [authState, setAuthState] = useState(false);
+  const [authState, setAuthState] = useState({
+    username: "",
+    id: 0,
+    validUser: false,
+  });
 
   useEffect(() => {
     axios
@@ -40,10 +44,14 @@ function App() {
       })
       .then((response) => {
         if (response.data.error) {
-          setAuthState(false);
+          setAuthState({...authState, validUser:false});
         } else {
-          console.log(response.data)
-          setAuthState(true);
+          console.log("1...", response.data);
+          setAuthState({
+            username: response.data.username,
+            id: response.data.id,
+            validUser: true,
+          });
         }
       });
   }, []);
@@ -57,7 +65,7 @@ function App() {
           <div className="top-menu">
             <Link to="/">Home </Link>
             {/* logged in or not */}
-            {authState ? (
+            {authState.validUser ? (
               <>
                 <Link to="/createPost">New Post </Link>
                 {/* <Link to="/Post">Post </Link> */}
@@ -68,7 +76,10 @@ function App() {
                 <Link to="/dubleinputs">2xInputs</Link>
                 <Link to="/filterablelist">FilterableList</Link>
                 <Link to={data_str_in_js}>data_str_in_js</Link>
-                <Link to="/signout"><LogoutIcon /></Link>
+                <Link to="/signout">
+                  <LogoutIcon />
+                </Link>
+                {authState.username}
               </>
             ) : (
               <>

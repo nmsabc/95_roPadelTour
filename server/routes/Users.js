@@ -43,7 +43,11 @@ router.post("/login", async (req, res) => {
           },
           "Geheim"
         );
-        res.json(accessToken);
+        res.json({
+          accessToken: accessToken,
+          username: user.username,
+          id: user.id,
+        });
       } else
         res.json({
           error: "login failed because of user-password combination!",
@@ -53,8 +57,13 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/validateuser", validateToken, async (req, res) => {
-  res.status(200).json({'validatedUser' : true, "user": req.user})
-
+  res
+    .status(200)
+    .json({
+      username: req.user.username,
+      id: req.user.id,
+      validatedUser: true,
+    });
 });
 
 module.exports = router;
