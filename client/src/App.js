@@ -15,6 +15,7 @@ import Ranking from "./pages/Ranking";
 import SignIn from "./pages/SigIn";
 import SignUp from "./pages/SignUp";
 import ResetPassword from "./pages/ResetPassword";
+import SignOut from "./pages/SignOut";
 
 //learn props propagation and state sharing in React
 import MasterLifter from "./pages/stateSharing/MasterLifter";
@@ -57,6 +58,11 @@ function App() {
                 <Link to="/signin">SingIn</Link>
               </>
             )}
+            {authState && (
+              <>
+                <Link to="/signout">LogOut</Link>
+              </>
+            )}
           </div>
 
           <Routes>
@@ -86,6 +92,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} exact />
             <Route path="/signup" element={<SignUp />} exact />
             <Route path="/resetpassword" element={<ResetPassword />} exact />
+            <Route path="/signout" element={<SignOut />} exact />
           </Routes>
         </Router>
       </AuthContext.Provider>
