@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -14,6 +14,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../helpers/AuthContext";
 
 function Copyright(props) {
   return (
@@ -36,8 +37,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-
   const navigate = useNavigate();
+  const { setAuthState } = useContext(AuthContext);
 
   //handle Submit action
   const handleSubmit = (event) => {
@@ -55,9 +56,11 @@ export default function SignIn() {
         } else {
           // sessionStorage.setItem("sessionToken", response.data);
           localStorage.setItem("sessionToken", response.data);
+          //AuthContext
+          setAuthState(true);
+          navigate("/");
         }
       });
-      navigate("/");
   };
 
   return (

@@ -21,60 +21,67 @@ import MasterLifter from "./pages/stateSharing/MasterLifter";
 import DoubleInputBoxes from "./pages/stateSharing/DoubleInputBoxes";
 import FilterableList from "./pages/stateSharing/FilterableList";
 
-let data_str_in_js =
-  "https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/";
+// AuthContext for admin, users and menu
+import { AuthContext } from "./helpers/AuthContext";
+import { useState } from "react";
+
 function App() {
+  const [authState, setAuthState] = useState(false);
+  let data_str_in_js =
+  "https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/";
   return (
     <div className="App">
-      <Router>
-        <div className="top-menu">
-          <Link to="/">Home </Link>
-          <Link to="/createPost">New Post </Link>
-          {/* <Link to="/Post">Post </Link> */}
-          <Link to="/createPlayer">New Player </Link>
-          <Link to="/createRanking">New Ranking</Link>
-          {/* learn props propagation and state sharing in React */}
-          <Link to="/masterlifter">Master Lifter</Link>
-          <Link to="/dubleinputs">2xInputs</Link>
-          <Link to="/filterablelist">FilterableList</Link>
-          <Link to={data_str_in_js}>data_str_in_js</Link>
-          {/* material UI */}
-          {!localStorage.getItem("sessionToken") && (
-            <>
-              <Link to="/signin">SingIn</Link>
-            </>
-          )}
-        </div>
+      <AuthContext.Provider value={{authState, setAuthState}}>
+        <Router>
+          <div className="top-menu">
+            <Link to="/">Home </Link>
+            <Link to="/createPost">New Post </Link>
+            {/* <Link to="/Post">Post </Link> */}
+            <Link to="/createPlayer">New Player </Link>
+            <Link to="/createRanking">New Ranking</Link>
+            {/* learn props propagation and state sharing in React */}
+            <Link to="/masterlifter">Master Lifter</Link>
+            <Link to="/dubleinputs">2xInputs</Link>
+            <Link to="/filterablelist">FilterableList</Link>
+            <Link to={data_str_in_js}>data_str_in_js</Link>
+            {/* logged in or not */}
+            {!authState && (
+              <>
+                <Link to="/signin">SingIn</Link>
+              </>
+            )}
+          </div>
 
-        <Routes>
-          <Route path="/" element={<Home />} exact />
-          <Route path="/OldHome" element={<OldAppStart />} exact />
-          <Route path="/hello-world" element={<HelloToTheWorld />} exact />
-          <Route path="/createPost" element={<CreatePost />} exact />
-          <Route path="/post/:id" element={<Post />} exact />
-          <Route path="/createPlayer" element={<CreatePlayer />} exact />
-          <Route path="/player/:id" element={<Player />} exact />
-          <Route path="/createRanking" element={<CreateRanking />} exact />
-          <Route path="/ranking/:id" element={<Ranking />} exact />
+          <Routes>
+            <Route path="/" element={<Home />} exact />
+            <Route path="/OldHome" element={<OldAppStart />} exact />
+            <Route path="/hello-world" element={<HelloToTheWorld />} exact />
+            <Route path="/createPost" element={<CreatePost />} exact />
+            <Route path="/post/:id" element={<Post />} exact />
+            <Route path="/createPlayer" element={<CreatePlayer />} exact />
+            <Route path="/player/:id" element={<Player />} exact />
+            <Route path="/createRanking" element={<CreateRanking />} exact />
+            <Route path="/ranking/:id" element={<Ranking />} exact />
 
-          {/* learn props propagation and state sharing in React */}
-          <Route path="/masterlifter" element={<MasterLifter />} exact />
-          <Route path="/dubleinputs" element={<DoubleInputBoxes />} exact />
-          <Route path="/filterablelist" element={<FilterableList />} exact />
+            {/* learn props propagation and state sharing in React */}
+            <Route path="/masterlifter" element={<MasterLifter />} exact />
+            <Route path="/dubleinputs" element={<DoubleInputBoxes />} exact />
+            <Route path="/filterablelist" element={<FilterableList />} exact />
 
-          {/* learn some more */}
-          <Route
-            path="/datastructuresinjs"
-            element={<data_str_in_js />}
-            exact
-          />
+            {/* learn some more */}
+            <Route
+              path="/datastructuresinjs"
+              element={<data_str_in_js />}
+              exact
+            />
 
-          {/* material UI */}
-          <Route path="/signin" element={<SignIn />} exact />
-          <Route path="/signup" element={<SignUp />} exact />
-          <Route path="/resetpassword" element={<ResetPassword />} exact />
-        </Routes>
-      </Router>
+            {/* material UI */}
+            <Route path="/signin" element={<SignIn />} exact />
+            <Route path="/signup" element={<SignUp />} exact />
+            <Route path="/resetpassword" element={<ResetPassword />} exact />
+          </Routes>
+        </Router>
+      </AuthContext.Provider>
     </div>
   );
 }
