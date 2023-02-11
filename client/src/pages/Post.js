@@ -95,16 +95,6 @@ function Post() {
                 setNewCommentInPost(e.target.value);
               }}
             />
-            <input
-              className="text-input"
-              name="username"
-              type="text"
-              placeholder="Your username"
-              value={newUsrForComment}
-              onChange={(e) => {
-                setNewUsrForComment(e.target.value);
-              }}
-            />
             <div className="btn">
               <Button variant="contained" onClick={addCommentInPost}>
                 Save Comment
