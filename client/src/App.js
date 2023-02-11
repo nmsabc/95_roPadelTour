@@ -42,6 +42,7 @@ function App() {
         if (response.data.error) {
           setAuthState(false);
         } else {
+          console.log(response.data)
           setAuthState(true);
         }
       });

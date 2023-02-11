@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/validateuser", validateToken, async (req, res) => {
-  res.status(200).json({'validateuser' : true})
+  res.status(200).json({'validatedUser' : true, "user": req.user})
 
 });
 

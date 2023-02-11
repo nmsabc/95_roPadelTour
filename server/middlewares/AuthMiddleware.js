@@ -12,10 +12,7 @@ const validateToken = (req, res, next) => {
       return next();
     }
   } catch (error) {
-    return {
-      Error: error,
-      Message: "AccessToken is invalid, please SignIn!",
-    };
+    return res.json({ error: error });
   }
 };
 
