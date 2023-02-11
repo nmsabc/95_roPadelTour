@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 
 app.use(express.json());
+
+// used to resolve the FE being blocked by CORS policy
+app.use(cors());
 
 const db = require("./models");
 
@@ -9,12 +13,18 @@ const db = require("./models");
 const postRouter = require("./routes/Posts");
 app.use("/posts", postRouter);
 
+//Comments
+const commentsRouter = require("./routes/Comments");
+app.use("/comments", commentsRouter);
+
 const playerRouter = require("./routes/Players");
 app.use("/players", playerRouter);
 
 const rankingRouter = require("./routes/Rankings");
 app.use("/rankings", rankingRouter);
 
+const userRouter = require("./routes/Users");
+app.use("/auth", userRouter);
 
 db.sequelize.sync().then(() => {
   app.listen(3213, () => {
