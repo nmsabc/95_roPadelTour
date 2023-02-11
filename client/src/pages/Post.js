@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import Button from "@mui/material/Button";
 import CountComments from "./CountComments";
+var ld = require("lodash");
 
 function Post() {
   let { id } = useParams();
@@ -38,9 +39,9 @@ function Post() {
           setNewCommentInPost("");
           setNewUsrForComment("");
           inputRef.current.focus();
-          const c1=CountComments({ param2: 45, param3: 57, param1: 81 })
-          const c2=CountComments({ param1: 5, param2: 345, param3: 98 })
-          console.log('testing one ...', c1, c2)
+          const c1 = CountComments({ param2: 45, param3: 57, param1: 81 });
+          const c2 = CountComments({ param1: 5, param2: 345, param3: 98 });
+          console.log("testing one ...", c1, c2);
         }
       });
   };
@@ -133,7 +134,7 @@ function Post() {
                         <DeleteSweepIcon />
                       </span>
                     </td>
-                    <td>{value.username}:</td>
+                    <td>{ld.truncate(value.username, { length: 12 })}: </td>
                     <td>{value.commentBudy}</td>
                     {/* <td><span onClick={() => null}>Delete</span></td> */}
                   </tr>
