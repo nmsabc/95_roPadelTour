@@ -3,6 +3,7 @@ const router = express.Router();
 const { Users } = require("../models");
 const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
+const { validateToken } = require("../middlewares/AuthMiddleware");
 
 router.get("/", async (req, res) => {
   const listOfUsers = await Users.findAll();
@@ -35,10 +36,13 @@ router.post("/login", async (req, res) => {
     // we contonue and also verify if the passwd was a correct one
     bcrypt.compare(password, user.password).then((result) => {
       if (result) {
-        const accessToken = sign({
-          username: user.username,
-          id: user.id,
-        }, "Geheim");
+        const accessToken = sign(
+          {
+            username: user.username,
+            id: user.id,
+          },
+          "Geheim"
+        );
         res.json(accessToken);
       } else
         res.json({
@@ -46,6 +50,11 @@ router.post("/login", async (req, res) => {
         });
     });
   }
+});
+
+router.get("/validateuser", validateToken, async (req, res) => {
+  res.status(200).json({'validateuser' : true})
+
 });
 
 module.exports = router;

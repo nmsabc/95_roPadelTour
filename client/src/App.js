@@ -16,6 +16,8 @@ import SignIn from "./pages/SigIn";
 import SignUp from "./pages/SignUp";
 import ResetPassword from "./pages/ResetPassword";
 import SignOut from "./pages/SignOut";
+import LogoutIcon from '@mui/icons-material/Logout';
+import axios from "axios";
 
 //learn props propagation and state sharing in React
 import MasterLifter from "./pages/stateSharing/MasterLifter";
@@ -30,9 +32,19 @@ function App() {
   const [authState, setAuthState] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("sessionToken")) {
-      setAuthState(true);
-    }
+    axios
+      .get("http://localhost:3213/auth/validateuser", {
+        headers: {
+          accessToken: localStorage.getItem("sessionToken"),
+        },
+      })
+      .then((response) => {
+        if (response.data.error) {
+          setAuthState(false);
+        } else {
+          setAuthState(true);
+        }
+      });
   }, []);
 
   let data_str_in_js =
@@ -43,24 +55,23 @@ function App() {
         <Router>
           <div className="top-menu">
             <Link to="/">Home </Link>
-            <Link to="/createPost">New Post </Link>
-            {/* <Link to="/Post">Post </Link> */}
-            <Link to="/createPlayer">New Player </Link>
-            <Link to="/createRanking">New Ranking</Link>
-            {/* learn props propagation and state sharing in React */}
-            <Link to="/masterlifter">Master Lifter</Link>
-            <Link to="/dubleinputs">2xInputs</Link>
-            <Link to="/filterablelist">FilterableList</Link>
-            <Link to={data_str_in_js}>data_str_in_js</Link>
             {/* logged in or not */}
-            {!authState && (
+            {authState ? (
+              <>
+                <Link to="/createPost">New Post </Link>
+                {/* <Link to="/Post">Post </Link> */}
+                <Link to="/createPlayer">New Player </Link>
+                <Link to="/createRanking">New Ranking</Link>
+                {/* learn props propagation and state sharing in React */}
+                <Link to="/masterlifter">Master Lifter</Link>
+                <Link to="/dubleinputs">2xInputs</Link>
+                <Link to="/filterablelist">FilterableList</Link>
+                <Link to={data_str_in_js}>data_str_in_js</Link>
+                <Link to="/signout"><LogoutIcon /></Link>
+              </>
+            ) : (
               <>
                 <Link to="/signin">SingIn</Link>
-              </>
-            )}
-            {authState && (
-              <>
-                <Link to="/signout">LogOut</Link>
               </>
             )}
           </div>
