@@ -4,9 +4,8 @@ import axios from "axios";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import RecommendIcon from "@mui/icons-material/Recommend";
 import EditIcon from "@mui/icons-material/Edit";
-import AddCommentIcon from "@mui/icons-material/AddComment";
 import Button from "@mui/material/Button";
-import CountComments from "./CountComments";
+import CommentIcon from "@mui/icons-material/Comment";
 var ld = require("lodash");
 
 function Post() {
@@ -39,9 +38,6 @@ function Post() {
           setNewCommentInPost("");
           setNewUsrForComment("");
           inputRef.current.focus();
-          const c1 = CountComments({ param2: 45, param3: 57, param1: 81 });
-          const c2 = CountComments({ param1: 5, param2: 345, param3: 98 });
-          console.log("testing one ...", c1, c2);
         }
       });
   };
@@ -65,7 +61,7 @@ function Post() {
       .then((response) => {
         setCommentsList(response.data);
       });
-  }, [renderNow]);
+  }, [id, renderNow]);
 
   return (
     <div className="postPage">
@@ -78,9 +74,9 @@ function Post() {
             {postObject.postText} <EditIcon />
           </div>
           <div className="footer">
-            {" "}
-            <RecommendIcon />
-            {postObject.username}
+            <span>{"  "}{postObject.username}</span>
+            <CommentIcon />
+            {" "}{commentsList.length}
           </div>
         </div>
         <div className="add-comment">
