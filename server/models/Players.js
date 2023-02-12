@@ -30,5 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
   
+  Players.associate = (models) => {
+    Players.belongsTo(models.Users, {
+      onDelete: "cascade",
+    });
+  };
     return Players;
   };

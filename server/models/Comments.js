@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "cascade",
     });
   };
+
   Comments.associate = (models) => {
     Comments.belongsTo(models.Posts, {
       onDelete: "cascade",

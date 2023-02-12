@@ -1,16 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { Comments } = require("../models");
+const { Comments, Users } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
-
-router.get("/byPostId/:PostId", async (req, res) => {
-  const PostId = req.params.PostId;
-  const comments = await Comments.findAll({
-    where: { PostId: PostId },
-    order: [["createdAt", "DESC"]],
-  });
-  res.json(comments);
-});
 
 router.get("/", async (req, res) => {
   const listOfComments = await Comments.findAll({
@@ -21,7 +12,22 @@ router.get("/", async (req, res) => {
 
 router.get("/byId/:id", async (req, res) => {
   const id = req.params.id;
-  const comments = await Comments.findByPk(id);
+  // const comments = await Comments.findByPk(id);
+  const comment = await Comments.findOne({
+    include: { model: Users },
+    where: { id: id },
+    order: [["createdAt", "DESC"]],
+  });
+  res.json(comment);
+});
+
+router.get("/byPostId/:PostId", async (req, res) => {
+  const PostId = req.params.PostId;
+  const comments = await Comments.findOne({
+    include: { model: Users },
+    where: { PostId: PostId },
+    order: [["createdAt", "DESC"]],
+  });
   res.json(comments);
 });
 
