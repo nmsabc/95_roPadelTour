@@ -12,6 +12,7 @@ var ld = require("lodash");
 
 function Home() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
+  const [listOfUsers, setListOfUsers] = useState([]);
   const [listOfPosts, setListOfPosts] = useState([]);
   const [renderNow, setRenderToOnNow] = useState("");
   const navigate = useNavigate();
@@ -26,6 +27,12 @@ function Home() {
   useEffect(() => {
     axios.get("http://localhost:3213/players").then((response) => {
       setListOfPlayers(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios.get("http://localhost:3213/auth/").then((response) => {
+      setListOfUsers(response.data);
     });
   }, []);
 
@@ -99,12 +106,12 @@ function Home() {
               <div className="footer">
                 <div className="post-grid-thirds">
                   <div className="footer-col">
-                    {ld.truncate(value.username, { length: 13 })}
+                    {ld.truncate(value.User.username, { length: 13 })}
                   </div>
                   <div className="footer-col">
                     <ThumbUpOffAltIcon />
                   </div>
-                  {authState.username === value.username && (
+                  {authState.username === value.User.username && (
                     <div
                       className="footer-col"
                       onClick={() => deletePost(value.id)}

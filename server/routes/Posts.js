@@ -1,10 +1,10 @@
 const express = require("express");
 const { validateToken } = require("../middlewares/AuthMiddleware");
 const router = express.Router();
-const { Posts } = require("../models");
+const { Posts, Users } = require("../models");
 
 router.get("/", async (req, res) => {
-  const listOfPosts = await Posts.findAll();
+  const listOfPosts = await Posts.findAll({ include: {model: Users} });
   res.json(listOfPosts);
 });
 
@@ -16,7 +16,7 @@ router.get("/byId/:id", async (req, res) => {
 
 router.get("/byUserId/:id", async (req, res) => {
   const id = req.params.id;
-  const post = await Posts.findAll({where: {}});
+  const post = await Posts.findAll({ where: {} });
   res.json(post);
 });
 
