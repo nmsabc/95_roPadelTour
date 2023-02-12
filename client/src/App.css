@@ -49,7 +49,6 @@ body {
 
 .post .footer {
   flex: 20%;
-  text-align: right;
   padding-top: 5px;
   border-top: 1px solid lightgray;
   padding-right: 15px;
@@ -180,6 +179,21 @@ body {
   width: 50%;
   /* margin-left: 20px; */
   align-self: center;
+}
+
+.post-grid-thirds {
+  display: flex;
+  justify-content: space-between;
+}
+.post-grid-thirds .footer-col {
+  text-align: center;
+  width: 32%;
+}
+
+.post-grid-thirds .footer-col-ts {
+  text-align: center;
+  width: 32%;
+  font-size: small;
 }
 
 .rightSide .addCommentContainer {
