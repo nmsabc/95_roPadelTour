@@ -1,5 +1,6 @@
 const express = require("express");
-const router = express.Router();  
+const { validateToken } = require("../middlewares/AuthMiddleware");
+const router = express.Router();
 const { Posts } = require("../models");
 
 router.get("/", async (req, res) => {
@@ -13,10 +14,23 @@ router.get("/byId/:id", async (req, res) => {
   res.json(post);
 });
 
+router.get("/byUserId/:id", async (req, res) => {
+  const id = req.params.id;
+  const post = await Posts.findAll({where: {}});
+  res.json(post);
+});
+
 router.post("/", async (req, res) => {
   const post = req.body;
   await Posts.create(post);
   res.json(post);
+});
+
+router.delete("/byId/:postId", validateToken, async (req, res) => {
+  const id_of_post_to_del = req.params.postId;
+  console.log("3..")
+  await Posts.destroy({ where: { id: id_of_post_to_del } });
+  res.json({ id: id_of_post_to_del, message: "was deleted" });
 });
 
 module.exports = router;

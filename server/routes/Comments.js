@@ -29,14 +29,15 @@ router.post("/", validateToken, async (req, res) => {
   const comment = req.body;
   const logedInUsename = req.user.username;
   comment.username = logedInUsename;
+  comment.UserId = 1;
   await Comments.create(comment);
   res.json({
-    "id": comment.id,
-    "message": "comment was just created",
+    id: comment.id,
+    message: "comment was just created",
   });
 });
 
-router.delete("/byId/:commentId", validateToken,async (req, res) => {
+router.delete("/byId/:commentId", validateToken, async (req, res) => {
   const commentId = req.params.commentId;
   await Comments.destroy({ where: { id: commentId } });
   res.json({

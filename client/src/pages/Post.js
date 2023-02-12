@@ -40,8 +40,9 @@ function Post() {
   }, [id, renderNow]);
 
   const commentToInsert = {
-    commentBudy: newCommentInPost,
+    commentBody: newCommentInPost,
     username: newUsrForComment,
+    UserId: authState.id,
     PostId: id,
   };
 
@@ -64,7 +65,7 @@ function Post() {
       });
   };
 
-  const deletePost = async (commentId) => {
+  const deleteComment = async (commentId) => {
     await new Promise((r) => setTimeout(r, 500));
     axios
       .delete(`http://localhost:3213/comments/byId/${commentId}`, {
@@ -103,7 +104,7 @@ function Post() {
             </div>
             <input
               className="form-textarea"
-              name="commentBudy"
+              name="commentBody"
               type="text"
               placeholder="Your comment"
               value={newCommentInPost}
@@ -136,13 +137,13 @@ function Post() {
                     <td>
                       <RecommendIcon />{" "}
                       {authState.username === value.username && (
-                        <span onClick={() => deletePost(value.id)}>
+                        <span onClick={() => deleteComment(value.id)}>
                           <DeleteSweepIcon />
                         </span>
                       )}
                     </td>
                     <td>{ld.truncate(value.username, { length: 12 })}: </td>
-                    <td>{value.commentBudy}</td>
+                    <td>{value.commentBody}</td>
                     {/* <td><span onClick={() => null}>Delete</span></td> */}
                   </tr>
                 </tbody>

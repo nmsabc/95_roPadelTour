@@ -1,14 +1,13 @@
-import React from "react";
-import { useNavigate} from 'react-router-dom'
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, useField, Field } from "formik";
 import * as Yup from "yup";
 import styled from "@emotion/styled";
 import axios from "axios";
-
+import { AuthContext } from "../helpers/AuthContext";
 
 import "../styles/formik_styles.css";
 import "../styles/formik_styles-custom.css";
-
 
 const MyTextInput = ({ label, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
@@ -79,17 +78,15 @@ const MySelect = ({ label, ...props }) => {
 };
 
 const FormHeader = () => {
-  return(
-    <h3>Add your new message</h3>
-  )
-}
+  return <h3>Add your new message</h3>;
+};
 
 const formikInitialValues = {
   title: "",
   username: "",
   postText: "",
   acceptedTerms: true, // added for our checkbox
-}
+};
 
 const formikValidationSchem = Yup.object({
   title: Yup.string()
@@ -98,15 +95,14 @@ const formikValidationSchem = Yup.object({
   postText: Yup.string()
     .max(255, "Must be 255 characters or less")
     .required("Required"),
-  username: Yup.string()
-    .required("Required"),
+  username: Yup.string().required("Required"),
   acceptedTerms: Yup.boolean()
     .required("Required")
     .oneOf([true], "You must accept the terms and conditions."),
-})
+});
 
 const FormFields = () => {
-  return(
+  return (
     <Form>
       <MyTextInput
         label="Title"
@@ -136,49 +132,52 @@ const FormFields = () => {
         placeholder="some comment"
       /> */}
       <MyCheckbox name="acceptedTerms">
-        I accept the terms and conditions and follow-up <br /> emails and communications
+        I accept the terms and conditions and follow-up <br /> emails and
+        communications
       </MyCheckbox>
       <button type="submit">Add Post</button>
     </Form>
-  )
-}
+  );
+};
 
 const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
   // console.log(values);
-  await new Promise(r => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, 500));
   axios.post("http://localhost:3213/posts", values).then((response) => {
     // console.log("Data inserted");
     setSubmitting(false);
-    resetForm({values: ''});
+    resetForm({ values: "" });
   });
-}
+};
 
 function CreatePost() {
-  const [newPost, setNewPost] = React.useState('');
+  const [newPost, setNewPost] = React.useState("");
   const navigate = useNavigate();
+  const { authState } = useContext(AuthContext);
+
   return (
     <>
       <FormHeader />
       <Formik
         initialValues={formikInitialValues}
         validationSchema={formikValidationSchem}
-        
         ///////////////       ///////////////
-        // TODO 
+        // TODO
         // replaced with the onSubmit from below
-        // the reason I cannot use this outside is because 
-        // I cannot pass navigate to the const formikOnSubmit 
+        // the reason I cannot use this outside is because
+        // I cannot pass navigate to the const formikOnSubmit
 
-        // onSubmit={formikOnSumbit} 
+        // onSubmit={formikOnSumbit}
 
         ///////////////        ///////////////
 
         onSubmit={async (values, { setSubmitting, resetForm }) => {
-          await new Promise(r => setTimeout(r, 500));
+          values.UserId = authState.id;
+          await new Promise((r) => setTimeout(r, 500));
           axios.post("http://localhost:3213/posts", values).then((response) => {
             // console.log("Data inserted");
             setSubmitting(false);
-            resetForm({values: ''});
+            resetForm({ values: "" });
             navigate("/");
           });
         }}
@@ -187,6 +186,6 @@ function CreatePost() {
       </Formik>
     </>
   );
-};
+}
 
 export default CreatePost;
