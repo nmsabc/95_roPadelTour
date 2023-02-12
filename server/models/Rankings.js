@@ -1,14 +1,14 @@
 module.exports = (sequelize, DataTypes) => {
   const Rankings = sequelize.define("Rankings", {
-    r_name: {
+    rank_name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    r_description: {
+    rank_description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    r_category: {
+    rank_category: {
       type: DataTypes.STRING,
       allowNull: false,
     },

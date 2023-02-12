@@ -27,9 +27,7 @@ router.get("/byId/:id", async (req, res) => {
 
 router.post("/", validateToken, async (req, res) => {
   const comment = req.body;
-  const logedInUsename = req.user.username;
-  comment.username = logedInUsename;
-  comment.UserId = 1;
+  comment.UserId = req.user.id;
   await Comments.create(comment);
   res.json({
     id: comment.id,
