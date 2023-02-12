@@ -12,7 +12,6 @@ var ld = require("lodash");
 
 function Home() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
-  const [listOfUsers, setListOfUsers] = useState([]);
   const [listOfPosts, setListOfPosts] = useState([]);
   const [renderNow, setRenderToOnNow] = useState("");
   const navigate = useNavigate();
@@ -27,12 +26,6 @@ function Home() {
   useEffect(() => {
     axios.get("http://localhost:3213/players").then((response) => {
       setListOfPlayers(response.data);
-    });
-  }, []);
-
-  useEffect(() => {
-    axios.get("http://localhost:3213/auth/").then((response) => {
-      setListOfUsers(response.data);
     });
   }, []);
 
