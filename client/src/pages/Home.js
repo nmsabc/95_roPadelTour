@@ -36,7 +36,6 @@ function Home() {
   }, [renderNow]);
 
   const deletePost = async (postId) => {
-    console.log("post to be delete ...", postId);
     await new Promise((r) => setTimeout(r, 500));
     axios
       .delete(`http://localhost:3213/posts/byId/${postId}`, {
@@ -52,7 +51,6 @@ function Home() {
   return (
     <div className="hm-page">
       <div className="hm-page-players">
-        <p>List of Players!</p>
         {listOfPlayers.map((value, key) => {
           return (
             <div className="player_h" key={key}>
@@ -67,7 +65,6 @@ function Home() {
       </div>
 
       <div className="hm-page-posts">
-        <p>The list of posts </p>
         {listOfPosts.map((value, key) => {
           return (
             <div className="post" key={key}>

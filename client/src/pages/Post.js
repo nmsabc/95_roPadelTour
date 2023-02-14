@@ -35,7 +35,8 @@ function Post() {
   }, [id]);
   useEffect(() => {
     axios
-      .get(`http://localhost:3213/comments/byPostId/${id}`).then((response) => {
+      .get(`http://localhost:3213/comments/byPostId/${id}`)
+      .then((response) => {
         setCommentsList(response.data);
       });
   }, [id, renderNow]);
@@ -92,7 +93,9 @@ function Post() {
           </div>
           <div className="footer">
             <span>
-              {postObject.User ? ld.truncate(postObject.User.username, {length: 12}) : ""}
+              {postObject.User
+                ? ld.truncate(postObject.User.username, { length: 12 })
+                : ""}
             </span>
             <CommentIcon /> {commentsList.length}
           </div>
@@ -111,6 +114,11 @@ function Post() {
               ref={inputRef}
               onChange={(e) => {
                 setNewCommentInPost(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  addCommentInPost();
+                }
               }}
             />
             <div className="btn">
