@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Formik, Form, useField, Field } from "formik";
+import { Formik, Form, useField } from "formik";
 import * as Yup from "yup";
-import styled from "@emotion/styled";
 import axios from "axios";
 import { AuthContext } from "../helpers/AuthContext";
+import Button from "@mui/material/Button";
+import SendIcon from "@mui/icons-material/Send";
+
 
 import "../styles/formik_styles.css";
 import "../styles/formik_styles-custom.css";
@@ -39,51 +41,13 @@ const MyCheckbox = ({ children, ...props }) => {
   );
 };
 
-// Styled components ....
-const StyledSelect = styled.select`
-  color: var(--blue);
-`;
-
-const StyledErrorMessage = styled.div`
-  font-size: 12px;
-  color: var(--red-600);
-  width: 400px;
-  margin-top: 0.25rem;
-  &:before {
-    content: "❌ ";
-    font-size: 10px;
-  }
-  @media (prefers-color-scheme: dark) {
-    color: var(--red-300);
-  }
-`;
-
-const StyledLabel = styled.label`
-  margin-top: 1rem;
-`;
-
-const MySelect = ({ label, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-  // which we can spread on <input> and alse replace ErrorMessage entirely.
-  const [field, meta] = useField(props);
-  return (
-    <>
-      <StyledLabel htmlFor={props.id || props.name}>{label}</StyledLabel>
-      <StyledSelect {...field} {...props} />
-      {meta.touched && meta.error ? (
-        <StyledErrorMessage>{meta.error}</StyledErrorMessage>
-      ) : null}
-    </>
-  );
-};
-
 const FormHeader = () => {
   return <h3>Add your new message</h3>;
 };
 
 const formikInitialValues = {
   title: "",
-  username: "",
+  // username: "",
   postText: "",
   acceptedTerms: true, // added for our checkbox
 };
@@ -95,7 +59,6 @@ const formikValidationSchem = Yup.object({
   postText: Yup.string()
     .max(255, "Must be 255 characters or less")
     .required("Required"),
-  username: Yup.string().required("Required"),
   acceptedTerms: Yup.boolean()
     .required("Required")
     .oneOf([true], "You must accept the terms and conditions."),
@@ -111,47 +74,30 @@ const FormFields = () => {
         placeholder="Your post title"
       />
       <MyTextInput
-        label="Username"
-        name="username"
-        type="text"
-        placeholder="some form of username"
-      />
-      <MyTextInput
         label="Your text message (max 255 chars)"
         name="postText"
         type="textbox"
         placeholder="some comment"
       />
-      {/* <br /> */}
-      {/* <label for="postText">Post text message</label>
-      <Field 
-        label="Post text message"
-        name="postText"
-        as="textarea" 
-        className="form-textarea" 
-        placeholder="some comment"
-      /> */}
+      <div className="btn">
+              <Button
+                variant="contained"
+                endIcon={<SendIcon />}
+                type="submit"
+              >
+                Save Comment
+              </Button>
+            </div>
       <MyCheckbox name="acceptedTerms">
         I accept the terms and conditions and follow-up <br /> emails and
         communications
       </MyCheckbox>
-      <button type="submit">Add Post</button>
     </Form>
   );
 };
 
-const formikOnSumbit = async (values, { setSubmitting, resetForm }) => {
-  // console.log(values);
-  await new Promise((r) => setTimeout(r, 500));
-  axios.post("http://localhost:3213/posts", values).then((response) => {
-    // console.log("Data inserted");
-    setSubmitting(false);
-    resetForm({ values: "" });
-  });
-};
-
 function CreatePost() {
-  const [newPost, setNewPost] = React.useState("");
+  // const [newPost, setNewPost] = React.useState("");
   const navigate = useNavigate();
   const { authState } = useContext(AuthContext);
 
