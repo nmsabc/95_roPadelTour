@@ -24,7 +24,7 @@ function Post() {
   const { authState } = useContext(AuthContext);
 
   useEffect(() => {
-    if (!authState.validUser) {
+    if (!authState.validUser && !localStorage.getItem("sessionToken")) {
       navigate("/signin");
     }
   }, []);
