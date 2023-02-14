@@ -6,6 +6,7 @@ import RecommendIcon from "@mui/icons-material/Recommend";
 import EditIcon from "@mui/icons-material/Edit";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
+import DeleteIcon from "@mui/icons-material/Delete";
 import CommentIcon from "@mui/icons-material/Comment";
 import { AuthContext } from "../helpers/AuthContext";
 
@@ -32,7 +33,7 @@ function Post() {
     axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
     });
-  }, [id]);
+  }, [id, renderNow]);
   useEffect(() => {
     axios
       .get(`http://localhost:3213/comments/byPostId/${id}`)
@@ -81,10 +82,24 @@ function Post() {
       });
   };
 
+  const deletePost = async (postId) => {
+    await new Promise((r) => setTimeout(r, 500));
+    axios
+      .delete(`http://localhost:3213/posts/byId/${postId}`, {
+        headers: {
+          accessToken: localStorage.getItem("sessionToken"),
+        },
+      })
+      .then((res_post_delete) => {
+        setRenderToOnNow(Date.now);
+        navigate("/");
+      });
+  };
+
   return (
     <div className="postPage">
       <div className="leftSide">
-        <div className="post" id="individual">
+        <div className="post" key={id}>
           <div className="title">
             <EditIcon /> {postObject.title}
           </div>
@@ -92,12 +107,28 @@ function Post() {
             {postObject.postText} <EditIcon />
           </div>
           <div className="footer">
-            <span>
-              {postObject.User
-                ? ld.truncate(postObject.User.username, { length: 12 })
-                : ""}
-            </span>
-            <CommentIcon /> {commentsList.length}
+            <div className="post-grid-thirds">
+              <div className="footer-col">
+                {postObject.User
+                  ? ld.truncate(postObject.User.username, { length: 12 })
+                  : ""}
+              </div>
+              <div className="footer-col">
+                <CommentIcon /> {commentsList.length}
+              </div>
+              <div className="footer-col">
+                {authState.username && postObject.User
+                  ? authState.username === postObject.User.username && (
+                      <div
+                        className="footer-col"
+                        onClick={() => deletePost(postObject.id)}
+                      >
+                        <DeleteIcon />
+                      </div>
+                    )
+                  : " "}
+              </div>
+            </div>
           </div>
         </div>
         <div className="add-comment">
