@@ -9,24 +9,22 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
-
+  
   Users.associate = (models) => {
     Users.hasMany(models.Posts, {
+      foreignKey: "UserId",
       onDelete: "cascade",
     });
-  };
-
-  Users.associate = (models) => {
     Users.hasMany(models.Comments, {
+      foreignKey: "UserId",
+      onDelete: 'cascade'
+    });
+    Users.hasOne(models.Players, {
+      foreignKey: "UserId",
       onDelete: "cascade",
     });
   };
 
-  Users.associate = (models) => {
-    Users.hasOne(models.Players, {
-      onDelete: "cascade",
-    });
-  };
 
   return Users;
 };

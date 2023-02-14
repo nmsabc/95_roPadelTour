@@ -32,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
   
   Players.associate = (models) => {
     Players.belongsTo(models.Users, {
+      foreignKey: "UserId",
       onDelete: "cascade",
     });
   };

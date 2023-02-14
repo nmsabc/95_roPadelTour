@@ -32,9 +32,10 @@ function Post() {
     axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
     });
+  }, [id]);
+  useEffect(() => {
     axios
-      .get(`http://localhost:3213/comments/byPostId/${id}`)
-      .then((response) => {
+      .get(`http://localhost:3213/comments/byPostId/${id}`).then((response) => {
         setCommentsList(response.data);
       });
   }, [id, renderNow]);
@@ -91,8 +92,7 @@ function Post() {
           </div>
           <div className="footer">
             <span>
-              {"  "}
-              {postObject.username}
+              {postObject.User ? ld.truncate(postObject.User.username, {length: 12}) : ""}
             </span>
             <CommentIcon /> {commentsList.length}
           </div>
@@ -129,27 +129,35 @@ function Post() {
       {/* comments section */}
       <div className="rightSide">
         <div className="addCommentContainer">
-          {commentsList.map((value, key) => {
-            return (
-              <table className="table" key={key}>
-                <tbody>
-                  <tr key={key}>
-                    <td>
-                      <RecommendIcon />{" "}
-                      {authState.username === value.username && (
-                        <span onClick={() => deleteComment(value.id)}>
-                          <DeleteSweepIcon />
-                        </span>
-                      )}
-                    </td>
-                    <td>{ld.truncate(value.username, { length: 12 })}: </td>
-                    <td>{value.commentBody}</td>
-                    {/* <td><span onClick={() => null}>Delete</span></td> */}
-                  </tr>
-                </tbody>
-              </table>
-            );
-          })}
+          <div className="addCommentContainer">
+            {commentsList && commentsList.length > 0 ? (
+              commentsList.map((value, key) => {
+                return (
+                  <table className="table" key={key}>
+                    <tbody>
+                      <tr key={key}>
+                        <td>
+                          <RecommendIcon />{" "}
+                          {authState.username === value.User.username && (
+                            <span onClick={() => deleteComment(value.id)}>
+                              <DeleteSweepIcon />
+                            </span>
+                          )}
+                        </td>
+                        <td>
+                          {ld.truncate(value.User.username, { length: 12 })}:{" "}
+                        </td>
+                        <td>{value.commentBody}</td>
+                        {/* <td><span onClick={() => null}>Delete</span></td> */}
+                      </tr>
+                    </tbody>
+                  </table>
+                );
+              })
+            ) : (
+              <p>No comments to display</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

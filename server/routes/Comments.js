@@ -21,10 +21,10 @@ router.get("/byId/:id", async (req, res) => {
   res.json(comment);
 });
 
-router.get("/byPostId/:PostId", async (req, res) => {
+router.get("/byPostId/:PostId",async (req, res) => {
   const PostId = req.params.PostId;
-  const comments = await Comments.findOne({
-    include: { model: Users },
+  const comments = await Comments.findAll({
+    include: { model: Users},
     where: { PostId: PostId },
     order: [["createdAt", "DESC"]],
   });

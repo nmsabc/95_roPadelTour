@@ -12,12 +12,14 @@ module.exports = (sequelize, DataTypes) => {
 
   Posts.associate = (models) => {
     Posts.hasMany(models.Comments, {
+      foreignKey: "PostId",
       onDelete: "cascade",
     });
   };
 
   Posts.associate = (models) => {
     Posts.belongsTo(models.Users, {
+      foreignKey: "UserId",
       onDelete: "cascade",
     });
   };
