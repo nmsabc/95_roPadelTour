@@ -1,15 +1,29 @@
 .App {
   width: 90vw;
-  height: auto;
   display: flex;
   align-items: center;
   padding-top: 10px;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+.main_page_footer {
+  background-color: dodgerblue;;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: x-small;
+  padding: 25px 0;
+  
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .post {

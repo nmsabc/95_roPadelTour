@@ -7,8 +7,11 @@ import { AuthContext } from "../helpers/AuthContext";
 // delete posts
 import DeleteIcon from "@mui/icons-material/Delete";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import StickyFooter from "./StickyFooter";
+
 
 var ld = require("lodash");
+
 
 function Home() {
   const [listOfPlayers, setListOfPlayers] = useState([]);
@@ -115,6 +118,7 @@ function Home() {
           );
         })}
       </div>
+        {/* <StickyFooter /> */}
     </div>
   );
 }
