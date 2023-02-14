@@ -32,6 +32,7 @@ import { AuthContext } from "./helpers/AuthContext";
 import { useEffect, useState } from "react";
 import StickyFooterSe from "./pages/StickyFooterSe";
 import StickyFooter from "./pages/StickyFooter";
+import Palmares from "./pages/Palmares";
 
 //used to truncate the username in the menu
 var ld = require("lodash");
@@ -75,6 +76,7 @@ function App() {
               <>
                 <Link to="/">Home </Link>
                 <Link to="/createPost">New Post </Link>
+                <Link to="/Palmares">Palmares </Link>
                 {/* <Link to="/Post">Post </Link> */}
                 <Link to="/createPlayer">New Player </Link>
                 <Link to="/createRanking">New Ranking</Link>
@@ -82,7 +84,7 @@ function App() {
                 <Link to="/masterlifter">Master Lifter</Link>
                 <Link to="/dubleinputs">2xInputs</Link>
                 <Link to="/filterablelist">FilterableList</Link>
-                <Link to={data_str_in_js}>data_str_in_js</Link>
+                {/* <Link to={data_str_in_js}>data_str_in_js</Link> */}
                 <div className="loginContainer">
                   <Link to="/signout">
                     <LogoutIcon />
@@ -98,6 +100,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} exact />
             <Route path="/OldHome" element={<OldAppStart />} exact />
+            <Route path="/Palmares" element={<Palmares />} exact />
             <Route path="/hello-world" element={<HelloToTheWorld />} exact />
             <Route path="/createPost" element={<CreatePost />} exact />
             <Route path="/post/:id" element={<Post />} exact />
