@@ -1,20 +1,18 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import LockIcon from "@mui/icons-material/Lock";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../helpers/AuthContext";
 
 function Copyright(props) {
   return (
@@ -37,8 +35,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
-
   const navigate = useNavigate();
+  const { setAuthState } = useContext(AuthContext);
 
   //handle Submit action
   const handleSubmit = (event) => {
@@ -54,10 +52,17 @@ export default function SignIn() {
         if (response.data.error) {
           alert(response.data.error);
         } else {
-          sessionStorage.setItem("sessionToken", response.data);
+          // sessionStorage.setItem("sessionToken", response.data);
+          localStorage.setItem("sessionToken", response.data.accessToken);
+          //AuthContext
+          setAuthState({
+            username: response.data.username,
+            id: response.data.id,
+            validUser: true,
+          });
+          navigate("/");
         }
       });
-      navigate("/");
   };
 
   return (
@@ -105,12 +110,12 @@ export default function SignIn() {
               type="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={
                 <Checkbox value="true" name="remember" color="primary" />
               }
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth

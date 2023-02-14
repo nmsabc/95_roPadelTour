@@ -1,26 +1,49 @@
-import React, { useEffect, useState, useRef } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import DeleteSweepIcon from "@mui/icons-material/DeleteSweep";
 import RecommendIcon from "@mui/icons-material/Recommend";
 import EditIcon from "@mui/icons-material/Edit";
-import AddCommentIcon from "@mui/icons-material/AddComment";
 import Button from "@mui/material/Button";
-import CountComments from "./CountComments";
+import CommentIcon from "@mui/icons-material/Comment";
+import SendIcon from "@mui/icons-material/Send";
+import { AuthContext } from "../helpers/AuthContext";
+
 var ld = require("lodash");
 
 function Post() {
   let { id } = useParams();
+  const navigate = useNavigate();
   const [postObject, setPostObject] = useState([]);
   const [commentsList, setCommentsList] = useState([]);
   const [newCommentInPost, setNewCommentInPost] = useState("");
   const [newUsrForComment, setNewUsrForComment] = useState("");
   const [renderNow, setRenderToOnNow] = useState({});
   const inputRef = useRef(null);
+  const { authState } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (!authState.validUser) {
+      navigate("/signin");
+    }
+  }, []);
+
+  useEffect(() => {
+    axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
+      setPostObject(response.data);
+    });
+  }, [id]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3213/comments/byPostId/${id}`).then((response) => {
+        setCommentsList(response.data);
+      });
+  }, [id, renderNow]);
 
   const commentToInsert = {
-    commentBudy: newCommentInPost,
+    commentBody: newCommentInPost,
     username: newUsrForComment,
+    UserId: authState.id,
     PostId: id,
   };
 
@@ -28,7 +51,7 @@ function Post() {
     axios
       .post("http://localhost:3213/comments/", commentToInsert, {
         headers: {
-          accessToken: sessionStorage.getItem("sessionToken"),
+          accessToken: localStorage.getItem("sessionToken"),
         },
       })
       .then((response_insert) => {
@@ -39,33 +62,23 @@ function Post() {
           setNewCommentInPost("");
           setNewUsrForComment("");
           inputRef.current.focus();
-          const c1 = CountComments({ param2: 45, param3: 57, param1: 81 });
-          const c2 = CountComments({ param1: 5, param2: 345, param3: 98 });
-          console.log("testing one ...", c1, c2);
         }
       });
   };
 
-  const deletePost = async (commentId) => {
+  const deleteComment = async (commentId) => {
     await new Promise((r) => setTimeout(r, 500));
     axios
-      .delete(`http://localhost:3213/comments/byId/${commentId}`)
+      .delete(`http://localhost:3213/comments/byId/${commentId}`, {
+        headers: {
+          accessToken: localStorage.getItem("sessionToken"),
+        },
+      })
       .then((response_delete) => {
         setRenderToOnNow(Date.now);
         inputRef.current.focus();
       });
   };
-
-  useEffect(() => {
-    axios.get(`http://localhost:3213/posts/byId/${id}`).then((response) => {
-      setPostObject(response.data);
-    });
-    axios
-      .get(`http://localhost:3213/comments/byPostId/${id}`)
-      .then((response) => {
-        setCommentsList(response.data);
-      });
-  }, [renderNow]);
 
   return (
     <div className="postPage">
@@ -78,9 +91,10 @@ function Post() {
             {postObject.postText} <EditIcon />
           </div>
           <div className="footer">
-            {" "}
-            <RecommendIcon />
-            {postObject.username}
+            <span>
+              {postObject.User ? ld.truncate(postObject.User.username, {length: 12}) : ""}
+            </span>
+            <CommentIcon /> {commentsList.length}
           </div>
         </div>
         <div className="add-comment">
@@ -90,7 +104,7 @@ function Post() {
             </div>
             <input
               className="form-textarea"
-              name="commentBudy"
+              name="commentBody"
               type="text"
               placeholder="Your comment"
               value={newCommentInPost}
@@ -99,18 +113,12 @@ function Post() {
                 setNewCommentInPost(e.target.value);
               }}
             />
-            <input
-              className="text-input"
-              name="username"
-              type="text"
-              placeholder="Your username"
-              value={newUsrForComment}
-              onChange={(e) => {
-                setNewUsrForComment(e.target.value);
-              }}
-            />
             <div className="btn">
-              <Button variant="contained" onClick={addCommentInPost}>
+              <Button
+                variant="contained"
+                endIcon={<SendIcon />}
+                onClick={addCommentInPost}
+              >
                 Save Comment
               </Button>
             </div>
@@ -121,27 +129,35 @@ function Post() {
       {/* comments section */}
       <div className="rightSide">
         <div className="addCommentContainer">
-          {commentsList.map((value, key) => {
-            return (
-              <table className="table" key={key}>
-                <tbody>
-                  <tr key={key}>
-                    <td>
-                      <RecommendIcon />
-                    </td>
-                    <td>
-                      <span onClick={() => deletePost(value.id)}>
-                        <DeleteSweepIcon />
-                      </span>
-                    </td>
-                    <td>{ld.truncate(value.username, { length: 12 })}: </td>
-                    <td>{value.commentBudy}</td>
-                    {/* <td><span onClick={() => null}>Delete</span></td> */}
-                  </tr>
-                </tbody>
-              </table>
-            );
-          })}
+          <div className="addCommentContainer">
+            {commentsList && commentsList.length > 0 ? (
+              commentsList.map((value, key) => {
+                return (
+                  <table className="table" key={key}>
+                    <tbody>
+                      <tr key={key}>
+                        <td>
+                          <RecommendIcon />{" "}
+                          {authState.username === value.User.username && (
+                            <span onClick={() => deleteComment(value.id)}>
+                              <DeleteSweepIcon />
+                            </span>
+                          )}
+                        </td>
+                        <td>
+                          {ld.truncate(value.User.username, { length: 12 })}:{" "}
+                        </td>
+                        <td>{value.commentBody}</td>
+                        {/* <td><span onClick={() => null}>Delete</span></td> */}
+                      </tr>
+                    </tbody>
+                  </table>
+                );
+              })
+            ) : (
+              <p>No comments to display</p>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -81,3 +81,91 @@ jsonwebtoken - to be able to store sessions info
 with this you can validate if the user is logged in or not
 and move to next() actions
 
+
+### model redefinition
+
+drop table Players;drop table Comments;drop table Posts;drop table Users;
+
+desc Players;desc Comments;desc Posts;desc Users;
+
+
+### email reply
+<a href="mailto:Mohamed.Ali@soorce.de?subject=Ich%20habe%20Interesse%20am%20Projekt%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce&amp;body=Hallo%20Soorce%20Team,%20danke,%20ich%20bin%20an%20ihrem%20Projekt%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce%20interessiert.%20Lassen%20Sie%20uns%20dazu%20telefonieren." target="_blank"><font color="#ffffff" size="2">Ja, das ist interessant</font></a>
+
+<a href="mailto:Mohamed.Ali@soorce.de?subject=Nicht%20verf%C3%BCgbar%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce&amp;body=Hallo%20Soorce%20Team,%20Ich%20bin%20die%20n%C3%A4chsten%203%20Monate%20nicht%20verf%C3%BCgbar." target="_blank"><font color="#ffffff" size="2">Ich bin leider nicht verfügbar</font></a>
+
+### model defintion
+
+    module.exports = (sequelize, DataTypes) => {
+    const User_chatGptModel = sequelize.define("user_chatgpt_model", {
+        username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        },
+        email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        },
+        password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        },
+    });
+
+    const Post_chatGptModel = sequelize.define("post_chatgpt_model", {
+        title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        },
+        body: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        },
+    });
+
+    const Comment_chatGptModel = sequelize.define("comment_chatgpt_model", {
+        body: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+        },
+    });
+
+    // User
+    User_chatGptModel.hasMany(Post_chatGptModel, {
+        foreignKey: "UserId",
+        as: "posts",
+    });
+    
+        User_chatGptModel.hasMany(Comment_chatGptModel, {
+        foreignKey: "UserId",
+        as: "comments",
+        });
+
+        // Posts
+    Post_chatGptModel.belongsTo(User_chatGptModel, {
+        foreignKey: "UserId",
+        as: "author",
+    });
+
+    Post_chatGptModel.hasMany(Comment_chatGptModel, {
+        foreignKey: "PostId",
+        as: "comments",
+    });
+
+    // Comments
+
+    Comment_chatGptModel.belongsTo(User_chatGptModel, {
+        foreignKey: "UserId",
+        as: "author",
+    });
+
+
+    Comment_chatGptModel.belongsTo(Post_chatGptModel, {
+        foreignKey: "PostId",
+        as: "post",
+    });
+
+    return Comment_chatGptModel, User_chatGptModel, Post_chatGptModel;
+    };

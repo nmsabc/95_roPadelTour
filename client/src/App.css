@@ -49,7 +49,6 @@ body {
 
 .post .footer {
   flex: 20%;
-  text-align: right;
   padding-top: 5px;
   border-top: 1px solid lightgray;
   padding-right: 15px;
@@ -57,7 +56,6 @@ body {
   color: white;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-
 }
 
 .top-menu {
@@ -79,24 +77,26 @@ body {
 .postPage {
   display: flex;
   flex-direction: row;
-  width: 55%;
+  width: 80%;
   height: 100%;
 }
 
 .leftSide {
-  flex: 50%;
+  flex: 20%;
   height: calc(30vh - 50px);
   display: grid;
   place-items: center;
   padding-left: 15px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .rightSide {
-  flex: 50%;
+  flex: 80%;
   height: calc(30vh - 50px);
   display: grid;
-  place-items: center;
-  padding-left: 15px;
+  place-items: left;
+  padding-left: 25px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .existing-comments{
@@ -181,6 +181,21 @@ body {
   align-self: center;
 }
 
+.post-grid-thirds {
+  display: flex;
+  justify-content: space-between;
+}
+.post-grid-thirds .footer-col {
+  text-align: center;
+  width: 32%;
+}
+
+.post-grid-thirds .footer-col-ts {
+  text-align: center;
+  width: 32%;
+  font-size: small;
+}
+
 .rightSide .addCommentContainer {
   flex: 20%;
   width: 100%;
@@ -204,6 +219,19 @@ button {
 
 .addCommentContainer input {
   border: 2px solid dodgerblue;
+}
+
+.addCommentContainer td {
+  border: 0px solid dodgerblue;
+  place-items: left;
+  display:inline;
+}
+
+.loginContainer {
+  width: 200px;
+  display:inline;
+  place-items: right;
+
 }
 
 .rightSide .listOfComments {
@@ -254,4 +282,19 @@ button {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: small;
+}
+
+.pagenotfound{
+    width: 400px;
+    height: 200px;
+    padding-left: 5px;
+    padding-top: 5px;
+    place-content: center;
+    border-radius: 10px;
+    margin-top: 20px;
+    border: 0px solid lightgray;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: small;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }

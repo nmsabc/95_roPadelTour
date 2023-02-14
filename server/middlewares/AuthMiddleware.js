@@ -7,14 +7,12 @@ const validateToken = (req, res, next) => {
 
   try {
     const validToken = verify(accessToken, "Geheim");
+    req.user = validToken;
     if (validToken) {
       return next();
     }
   } catch (error) {
-    return {
-      Error: error,
-      Message: "AccessToken is invalid, please SignIn!",
-    };
+    return res.json({ error: error });
   }
 };
 
