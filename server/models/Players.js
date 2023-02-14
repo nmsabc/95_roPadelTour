@@ -8,10 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         },
-        username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        },
         email: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -34,5 +30,11 @@ module.exports = (sequelize, DataTypes) => {
         },
     });
   
+  Players.associate = (models) => {
+    Players.belongsTo(models.Users, {
+      foreignKey: "UserId",
+      onDelete: "cascade",
+    });
+  };
     return Players;
   };
