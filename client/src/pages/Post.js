@@ -96,9 +96,47 @@ function Post() {
       });
   };
 
-  const editPostTet = async (postId) =>{
-    
-  }
+  // we edit the post based on title or header with
+  // the info from an prompt & with the BackEend PUT
+  const editPost = (options) => {
+    if (options === "title") {
+      let newT = prompt("what is your desired new title?");
+      if (newT != null) {
+        axios
+          .put(
+            "http://localhost:3213/posts/modPostTitle",
+            {
+              newTitle: newT,
+              id: id,
+            },
+            {
+              headers: {
+                accessToken: localStorage.getItem("sessionToken"),
+              },
+            }
+          )
+          .then((updR) => {setRenderToOnNow(Date.now)});
+      }
+    } else {
+      let newB = prompt("what is your desired new postText?");
+      if (newB != null) {
+        axios
+          .put(
+            "http://localhost:3213/posts/modPostText",
+            {
+              newBodyText: newB,
+              id: id,
+            },
+            {
+              headers: {
+                accessToken: localStorage.getItem("sessionToken"),
+              },
+            }
+          )
+          .then((updR) => {setRenderToOnNow(Date.now)});
+      }
+    }
+  };
 
   return (
     <div className="postPage">
@@ -109,7 +147,14 @@ function Post() {
               {postObject.title}
               {authState.username && postObject.User
                 ? authState.username === postObject.User.username && (
-                    <EditIcon />
+                    <div
+                      className="editIcon"
+                      onClick={() => {
+                        editPost("title");
+                      }}
+                    >
+                      <EditIcon />
+                    </div>
                   )
                 : ""}
             </div>
@@ -119,12 +164,14 @@ function Post() {
               {postObject.postText}
               {authState.username && postObject.User
                 ? authState.username === postObject.User.username && (
-                  <div className="editIcon"
-                  onClick={()=>{editPostTet(postObject.id)}}
-                  
-                  >
-                    <EditIcon />
-                  </div>
+                    <div
+                      className="editIcon"
+                      onClick={() => {
+                        editPost("postText");
+                      }}
+                    >
+                      <EditIcon />
+                    </div>
                   )
                 : ""}
             </div>
