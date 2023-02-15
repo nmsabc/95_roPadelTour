@@ -89,6 +89,11 @@ drop table Players;drop table Comments;drop table Posts;drop table Users;
 desc Players;desc Comments;desc Posts;desc Users;
 
 
+## read more here
+  let data_str_in_js =
+    "https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/";
+
+
 ### email reply
 <a href="mailto:Mohamed.Ali@soorce.de?subject=Ich%20habe%20Interesse%20am%20Projekt%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce&amp;body=Hallo%20Soorce%20Team,%20danke,%20ich%20bin%20an%20ihrem%20Projekt%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce%20interessiert.%20Lassen%20Sie%20uns%20dazu%20telefonieren." target="_blank"><font color="#ffffff" size="2">Ja, das ist interessant</font></a>
 

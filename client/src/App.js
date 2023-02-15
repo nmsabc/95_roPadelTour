@@ -19,7 +19,6 @@ import SignIn from "./pages/SigIn";
 import SignUp from "./pages/SignUp";
 import ResetPassword from "./pages/ResetPassword";
 import SignOut from "./pages/SignOut";
-import LogoutIcon from "@mui/icons-material/Logout";
 import axios from "axios";
 
 //learn props propagation and state sharing in React
@@ -38,15 +37,14 @@ import Pricing from "./pages/Pricing";
 import ResponsiveAppBar from "./pages/ResponsiveAppBar";
 import StickyFooterSeba from "./pages/StickyFooterSeba";
 
-//used to truncate the username in the menu
-var ld = require("lodash");
-
 function App() {
   const [authState, setAuthState] = useState({
     username: "",
     id: 0,
     validUser: false,
   });
+
+  const import_this_theme="https://github.com/mui/material-ui/blob/master/docs/src/pages/premium-themes/onepirate/ForgotPassword.js"
 
   useEffect(() => {
     axios
@@ -68,8 +66,6 @@ function App() {
       });
   }, []);
 
-  let data_str_in_js =
-    "https://www.freecodecamp.org/news/data-structures-in-javascript-with-examples/";
   return (
     <div className="App">
       <AuthContext.Provider value={{ authState, setAuthState }}>
@@ -134,6 +130,11 @@ function App() {
             <Route path="/resetpassword" element={<ResetPassword />} exact />
             <Route path="/signout" element={<SignOut />} exact />
             <Route path="*" element={<PageNotFound />} exact />
+
+            <Route path="/userprofile" element={<PageNotFound />} exact />
+            <Route path="/myaccount" element={<PageNotFound />} exact />
+            <Route path="/usersettings" element={<PageNotFound />} exact />
+            <Route path="/forgotpassword" element={import_this_theme} exact />
           </Routes>
         </Router>
       </AuthContext.Provider>

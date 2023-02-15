@@ -6,7 +6,6 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
@@ -15,27 +14,10 @@ import Logout from "@mui/icons-material/Logout";
 import { AuthContext } from "../helpers/AuthContext";
 
 import { useNavigate } from "react-router-dom";
-import { object } from "yup";
 
 //used to truncate the username in the menu
 var ld = require("lodash");
 
-const pages = ["Products", "Pricing", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
-
-function ObjectMapper() {
-  const objectMap = (obj, fn) =>
-    Object.fromEntries(
-      Object.entries(obj).map(([k, v], i) => [k, fn(v, k, i)])
-    );
-  const settings_actions_lst = {
-    Profile: "/signin",
-    Account: "/signin",
-    Dashboard: "/signin",
-    Logout: "/signin",
-  };
-  const set_act = objectMap(settings_actions_lst, (v) => v * 2);
-}
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
@@ -52,33 +34,34 @@ function ResponsiveAppBar() {
     setAnchorEl(null);
   };
 
-  const addAccountClick = () => {
+  const handleProfile = () => {
+    setAnchorEl(null);
+    navigate("/userprofile");
+  };
+
+  const handleMyAccount = () => {
+    setAnchorEl(null);
+    navigate("/myaccount");
+  };
+  const handleAddAccount = () => {
     setAnchorEl(null);
     navigate("/signup");
   };
 
-  const singOutClick = () => {
+  const handleSettings = () => {
+    setAnchorEl(null);
+    navigate("/usersettings");
+  };
+
+  const handleSingOut = () => {
     setAnchorEl(null);
     navigate("/signout");
   };
 
-  const settings_actions_raw = [
-    { id: 1, entry: "a_SignIn", link: "/signin" },
-    { id: 2, entry: "a_Account", link: "/createUser" },
-    { id: 3, entry: "a_Dashboard", link: "/post" },
-    { id: 4, entry: "a_Logout", link: "/signout" },
-  ];
-
-  let dd = Object.fromEntries(
-    settings_actions_raw.map((x) => [x.entry, x.link])
-  );
-
-  let dd_k = Object.keys(dd);
-  let dd_v = Object.values(dd);
-  let dd_e = Object.entries(dd);
-
-  // console.log("dd...", dd_k, dd_v, dd_e);
-  // dd_e.forEach((en) => console.log(typeof en[0], "calls", en[1]));
+  const handlePassChange = () => {
+    setAnchorEl(null);
+    navigate("/forgotpassword");
+  };
 
   return (
     <React.Fragment>
@@ -137,27 +120,34 @@ function ResponsiveAppBar() {
       >
         <MenuItem>{authState.username}</MenuItem>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleProfile}>
           <Avatar /> Profile
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleMyAccount}>
           <Avatar /> My account
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        
+        <Divider />
+        <MenuItem onClick={handlePassChange}>
+          <Avatar /> Change Password
+        </MenuItem>
+        
+        <Divider />
+        <MenuItem onClick={handleSettings}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>{" "}
         <Divider />
-        <MenuItem onClick={addAccountClick}>
+        <MenuItem onClick={handleAddAccount}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           Add another account
         </MenuItem>
         <Divider />
-        <MenuItem onClick={singOutClick}>
+        <MenuItem onClick={handleSingOut} >
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
