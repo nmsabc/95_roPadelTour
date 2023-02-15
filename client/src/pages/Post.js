@@ -115,7 +115,9 @@ function Post() {
               },
             }
           )
-          .then((updR) => {setRenderToOnNow(Date.now)});
+          .then((updRres) => {
+            setRenderToOnNow(Date.now);
+          });
       }
     } else {
       let newB = prompt("what is your desired new postText?");
@@ -133,10 +135,32 @@ function Post() {
               },
             }
           )
-          .then((updR) => {setRenderToOnNow(Date.now)});
+          .then((updRres) => {
+            setRenderToOnNow(Date.now);
+          });
       }
     }
-  };
+  }; // edit post
+
+  const editComment = (commentID) => {
+    let newC = prompt("what is your desired new CommentText?");
+    if (newC != null) {
+      axios.put(
+        "http://localhost:3213/comments/modCommentText",
+        {
+          newComText: newC,
+          id: commentID,
+        },
+        {
+          headers: {
+            accessToken: localStorage.getItem("sessionToken"),
+          },
+        }
+      ).then((updRes) => {
+        setRenderToOnNow(Date.now);
+      });
+    }
+  }; // edit comment
 
   return (
     <div className="postPage">
@@ -246,15 +270,19 @@ function Post() {
                     <tbody>
                       <tr key={key}>
                         <td>
-                          <RecommendIcon />{" "}
                           {authState.username === value.User.username && (
-                            <span onClick={() => deleteComment(value.id)}>
-                              <DeleteSweepIcon />
-                            </span>
+                            <>
+                              <span onClick={() => editComment(value.id)}>
+                                <EditIcon />
+                              </span>
+                              <span onClick={() => deleteComment(value.id)}>
+                                <DeleteSweepIcon />
+                              </span>
+                            </>
                           )}
                         </td>
                         <td>
-                          {ld.truncate(value.User.username, { length: 12 })}:{" "}
+                          {ld.truncate(value.User.username, { length: 12 })}:
                         </td>
                         <td>{value.commentBody}</td>
                         {/* <td><span onClick={() => null}>Delete</span></td> */}

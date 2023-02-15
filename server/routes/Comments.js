@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { Comments, Users } = require("../models");
 const { validateToken } = require("../middlewares/AuthMiddleware");
+const { route } = require("./Posts");
 
 router.get("/", async (req, res) => {
   const listOfComments = await Comments.findAll({
@@ -21,10 +22,10 @@ router.get("/byId/:id", async (req, res) => {
   res.json(comment);
 });
 
-router.get("/byPostId/:PostId",async (req, res) => {
+router.get("/byPostId/:PostId", async (req, res) => {
   const PostId = req.params.PostId;
   const comments = await Comments.findAll({
-    include: { model: Users},
+    include: { model: Users },
     where: { PostId: PostId },
     order: [["createdAt", "DESC"]],
   });
@@ -48,6 +49,14 @@ router.delete("/byId/:commentId", validateToken, async (req, res) => {
     id: commentId,
     message: "comment was deleted ",
   });
+});
+
+//update comment bodyText
+router.put("/modCommentText", validateToken, async (req, res) => {
+  const newC = req.body.newComText;
+  const id = req.body.id;
+  await Comments.update({ commentBody: newC }, { where: { id: id } });
+  res.json({ id: id, newC: newC });
 });
 
 module.exports = router;
