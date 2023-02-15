@@ -35,6 +35,10 @@ import StickyFooter from "./pages/StickyFooter";
 import Palmares from "./pages/Palmares";
 import Pricing from "./pages/Pricing";
 
+
+//responsive App Bar
+import ResponsiveAppBar from "./pages/ResponsiveAppBar";
+
 //used to truncate the username in the menu
 var ld = require("lodash");
 
@@ -88,10 +92,11 @@ function App() {
                 <Link to="/filterablelist">FilterableList</Link>
                 {/* <Link to={data_str_in_js}>data_str_in_js</Link> */}
                 <div className="loginContainer">
-                  <Link to="/signout">
+                  {/* <Link to="/signout">
                     <LogoutIcon />
                   </Link>
-                  {ld.truncate(authState.username, { length: 10 })}
+                  {ld.truncate(authState.username, { length: 10 })} */}
+                <ResponsiveAppBar />
                 </div>
               </>
             </div>
