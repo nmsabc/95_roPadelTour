@@ -22,7 +22,7 @@ function Home() {
     if (!authState.validUser && !localStorage.getItem("sessionToken")) {
       navigate("/signin");
     }
-  }, []);
+  }, [authState.validUser, navigate]);
 
   useEffect(() => {
     axios.get("http://localhost:3213/players").then((response) => {
