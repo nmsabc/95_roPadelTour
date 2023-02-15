@@ -30,14 +30,13 @@ import FilterableList from "./pages/stateSharing/FilterableList";
 // AuthContext for admin, users and menu
 import { AuthContext } from "./helpers/AuthContext";
 import { useEffect, useState } from "react";
-import StickyFooterSe from "./pages/StickyFooterSe";
-import StickyFooter from "./pages/StickyFooter";
 import Palmares from "./pages/Palmares";
 import Pricing from "./pages/Pricing";
 
 
 //responsive App Bar
 import ResponsiveAppBar from "./pages/ResponsiveAppBar";
+import StickyFooterSeba from "./pages/StickyFooterSeba";
 
 //used to truncate the username in the menu
 var ld = require("lodash");
@@ -138,8 +137,8 @@ function App() {
           </Routes>
         </Router>
       </AuthContext.Provider>
-      <div className="main_page_footer">
-        <StickyFooterSe />
+      <div className="bottom-menu">
+        <StickyFooterSeba />
       </div>
     </div>
   );
