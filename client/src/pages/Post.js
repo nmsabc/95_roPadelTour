@@ -96,15 +96,38 @@ function Post() {
       });
   };
 
+  const editPostTet = async (postId) =>{
+    
+  }
+
   return (
     <div className="postPage">
       <div className="leftSide">
         <div className="post" key={id}>
           <div className="title">
-            <EditIcon /> {postObject.title}
+            <div className="post-grid-thirds">
+              {postObject.title}
+              {authState.username && postObject.User
+                ? authState.username === postObject.User.username && (
+                    <EditIcon />
+                  )
+                : ""}
+            </div>
           </div>
           <div className="body">
-            {postObject.postText} <EditIcon />
+            <div className="post-grid-thirds">
+              {postObject.postText}
+              {authState.username && postObject.User
+                ? authState.username === postObject.User.username && (
+                  <div className="editIcon"
+                  onClick={()=>{editPostTet(postObject.id)}}
+                  
+                  >
+                    <EditIcon />
+                  </div>
+                  )
+                : ""}
+            </div>
           </div>
           <div className="footer">
             <div className="post-grid-thirds">
