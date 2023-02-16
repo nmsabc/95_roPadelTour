@@ -18,17 +18,13 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 var ld = require("lodash");
 
-function InformationCard({ note }) {
+function InformationCard({ note, changeFavorite, favIcon}) {
   const [expanded, setExpanded] = React.useState(false);
-  const [favIcon, setFavIcon] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const changeFavoriteIcon = () => {
-    setFavIcon(!favIcon);
-  };
 
   return (
     <div>
@@ -45,26 +41,21 @@ function InformationCard({ note }) {
             </IconButton>
           }
           title={note.title}
-          subheader={note.description}
+          subheader={note.subtitle}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
             {note.description}
-            <br /> This impressive paella is a perfect party dish and a fun meal
-            to cook together with your guests. Add 1 cup of frozen peas along
-            with the mussels, if you like.
           </Typography>
         </CardContent>
 
         <CardActions disableSpacing>
           <IconButton
             onClick={() => {
-              console.log("fav this... ", note.title, favIcon);
-              changeFavoriteIcon();
+              changeFavorite(note.id);
             }}
           >
-            {favIcon ? <FavoriteIcon /> : <FavoriteBorderIcon />}
-            {/* {favIcon ? FavoriteIcon : FavoriteBorderIcon} */}
+            {note.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </IconButton>
           <IconButton onClick={() => console.log("isShared", note.title)}>
             <ShareIcon />
