@@ -5,45 +5,60 @@ import {
   CardContent,
   CardHeader,
   IconButton,
+  makeStyles,
   Typography,
 } from "@mui/material";
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
 import React from "react";
-import { red } from "@mui/material/colors";
+import { red, yellow, green, blue, pink, orange } from "@mui/material/colors";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 var ld = require("lodash");
 
-function InformationCard({ note, changeFavorite, favIcon}) {
-  const [expanded, setExpanded] = React.useState(false);
+function defStyles(note) {
+      if (note.category === "work") {
+        return red[500];
+      }
+      if (note.category === "travel") {
+        return yellow[500];
+      }
+      if (note.category === "money") {
+        return green[500];
+      }
+      if (note.category === "personal") {
+        return orange["A700"];
+      }
+      if (note.category === "hobby") {
+        return pink["A700"];
+      }
+      if (note.category === "sport") {
+        return blue[700];
+      }
+};
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
-
+function InformationCard({ note, changeFavorite, favIcon }) {
   return (
     <div>
       <Card elevation={3}>
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red }} aria-label="recipe">
+            <Avatar sx={{ bgcolor: defStyles(note) }} aria-label="recipe">
               {ld.truncate(note.title, { length: 1, omission: "" })}
             </Avatar>
           }
-          action={
-            <IconButton onClick={() => console.log("delete", note.title)}>
-              <DeleteOutlineIcon />
-            </IconButton>
-          }
           title={note.title}
-          subheader={note.subtitle}
+          subheader={[note.category, " :: ", note.entry_ts]}
         />
         <CardContent>
+          <Typography
+            sx={{ mb: 1.5 }}
+            color="text.secondary"
+            variant="subtitle1"
+          >
+           {note.subtitle}
+          </Typography>
           <Typography variant="body2" color="text.secondary">
             {note.description}
           </Typography>
@@ -57,7 +72,8 @@ function InformationCard({ note, changeFavorite, favIcon}) {
           >
             {note.favorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
           </IconButton>
-          <IconButton onClick={() => console.log("isShared", note.title)}>
+
+          <IconButton onClick={() => {}}>
             <ShareIcon />
           </IconButton>
         </CardActions>
