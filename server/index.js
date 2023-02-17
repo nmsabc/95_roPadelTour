@@ -26,6 +26,10 @@ app.use("/rankings", rankingRouter);
 const userRouter = require("./routes/Users");
 app.use("/auth", userRouter);
 
+//weather API // 17 Feb 2023
+const weatherRouter = require("./routes/OpenWeatherMap");
+app.use("/weather", weatherRouter);
+
 db.sequelize.sync().then(() => {
   app.listen(3213, () => {
     console.log("Server running on port 3213");
