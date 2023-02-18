@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
-  
+
   Users.associate = (models) => {
     Users.hasMany(models.Posts, {
       foreignKey: "UserId",
@@ -17,14 +17,21 @@ module.exports = (sequelize, DataTypes) => {
     });
     Users.hasMany(models.Comments, {
       foreignKey: "UserId",
-      onDelete: 'cascade'
+      onDelete: "cascade",
     });
     Users.hasOne(models.Players, {
       foreignKey: "UserId",
       onDelete: "cascade",
     });
+    Users.hasOne(models.Padel_UserType, {
+      foreignKey: "UserId",
+      onDelete: "cascade",
+    });
+    Users.hasOne(models.Padel_Player, {
+      foreignKey: "UserId",
+      onDelete: "cascade",
+    });
   };
-
 
   return Users;
 };

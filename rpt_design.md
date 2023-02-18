@@ -1,5 +1,11 @@
 
 
+# operations
+drop table Padel_Categories; drop table Padel_Championships table Padel_Events; drop table Padel_Games; drop table Padel_Sponsors; drop table Padel_Teams; drop table Padel_Trainings; drop table Padel_UserTypes; drop table Padel_Players;       
+
+
+desc Padel_Categories;desc Padel_Championships;desc Padel_Events;desc Padel_Games;desc Padel_Sponsors;desc Padel_Teams;desc Padel_Trainings;desc Padel_UserTypes;desc Padel_Players;
+
 # chat GPT req info
 18 Feb 2023
 

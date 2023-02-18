@@ -75,5 +75,39 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  Padel_Player.associate = (models) => {
+    Padel_Player.hasMany(models.Padel_Category, {
+      foreignKey: "PadelPlayerId",
+      onDelete: "cascade",
+    });
+
+    Padel_Player.hasMany(models.Padel_Championship, {
+      foreignKey: "PadelPlayerId",
+      onDelete: "cascade",
+    });
+
+    Padel_Player.hasMany(models.Padel_Event, {
+      foreignKey: "PadelPlayerId",
+      onDelete: "cascade",
+    });
+
+    Padel_Player.hasMany(models.Padel_Game, {
+      foreignKey: "PadelPlayerId",
+      onDelete: "cascade",
+    });
+
+    Padel_Player.hasMany(models.Padel_Team, {
+      foreignKey: "PadelPlayerId",
+      onDelete: "cascade",
+    });
+
+    Padel_Player.belongsTo(models.Users, {
+      foreignKey: "UserId",
+      onDelete: "cascade",
+    });
+  };
+
   return Padel_Player;
+
 };
+

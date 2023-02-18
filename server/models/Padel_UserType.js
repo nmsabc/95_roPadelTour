@@ -34,6 +34,12 @@ module.exports = (sequelize, DataTypes) => {
 //   Training.belongsTo(Category);
 //   Training.belongsTo(Player, { as: 'trainer' });
 
+Padel_UserType.associate = (models) => {
+  Padel_UserType.belongsTo(models.Users, {
+    foreignKey: "UserId",
+    onDelete: "cascade",
+  });
+};
 
   return Padel_UserType;
 };
