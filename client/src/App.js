@@ -138,7 +138,7 @@ function App() {
           </Routes>
         </Router>
       </AuthContext.Provider>
-      <div className="bottom-menu">
+      <div className="sticky-footer">
         <StickyFooterSeba />
       </div>
     </div>

@@ -174,3 +174,10 @@ desc Players;desc Comments;desc Posts;desc Users;
 
     return Comment_chatGptModel, User_chatGptModel, Post_chatGptModel;
     };
+
+## Weather usage
+
+https://home.openweathermap.org/dashboard/trigger
+
+API keys
+https://home.openweathermap.org/api_keys
