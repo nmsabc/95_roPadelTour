@@ -26,6 +26,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: "secret"
       MYSQL_DB: rpt
+      MYSQL_TCP_PORT: 3313
     networks:
       - public
       - private
@@ -37,6 +38,10 @@ services:
     environment: 
       MYSQL_ROOT_PASSWORD: /run/secrets/db-password
       MYSQL_DATABASE: rpt
+    ports:
+    - 3313:3306
+    expose:
+    - 3313
     networks:
       - private
 volumes:
