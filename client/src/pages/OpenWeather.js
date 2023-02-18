@@ -28,8 +28,7 @@ function OpenWeather({ weatherCity, loopCities }) {
       {ld.capitalize(weatherCity)}
       {" with "}
       {temp} 
-      {" °C "}
-      {"and wind spped of "}
+      {" °C and wind speed of "}
       {windSpeed}
       <LoopIcon onClick={() => loopCities(weatherCity)} />
     </>
