@@ -95,9 +95,9 @@ desc Players;desc Comments;desc Posts;desc Users;
 
 
 ### email reply
-<a href="mailto:Mohamed.Ali@soorce.de?subject=Ich%20habe%20Interesse%20am%20Projekt%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce&amp;body=Hallo%20Soorce%20Team,%20danke,%20ich%20bin%20an%20ihrem%20Projekt%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce%20interessiert.%20Lassen%20Sie%20uns%20dazu%20telefonieren." target="_blank"><font color="#ffffff" size="2">Ja, das ist interessant</font></a>
+<a href="mailto:a.b@c.com?subject=Ich%20habe%20Interesse%20am%20Projekt%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce&amp;body=Hallo%20Soorce%20Team,%20danke,%20ich%20bin%20an%20ihrem%20Projekt%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce%20interessiert.%20Lassen%20Sie%20uns%20dazu%20telefonieren." target="_blank"><font color="#ffffff" size="2">Ja, das ist interessant</font></a>
 
-<a href="mailto:Mohamed.Ali@soorce.de?subject=Nicht%20verf%C3%BCgbar%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce&amp;body=Hallo%20Soorce%20Team,%20Ich%20bin%20die%20n%C3%A4chsten%203%20Monate%20nicht%20verf%C3%BCgbar." target="_blank"><font color="#ffffff" size="2">Ich bin leider nicht verfügbar</font></a>
+<a href="mailto:a.b@c.com?subject=Nicht%20verf%C3%BCgbar%20Technischer+Aufbau+von+Dialogmarketingkampagnen+in+Salesforce&amp;body=Hallo%20Soorce%20Team,%20Ich%20bin%20die%20n%C3%A4chsten%203%20Monate%20nicht%20verf%C3%BCgbar." target="_blank"><font color="#ffffff" size="2">Ich bin leider nicht verfügbar</font></a>
 
 ### model defintion
 
@@ -181,3 +181,10 @@ https://home.openweathermap.org/dashboard/trigger
 
 API keys
 https://home.openweathermap.org/api_keys
+
+
+v3.0 with pay over 1k calls
+
+https://api.openweathermap.org/data/2.5/weather?q=Baden,AT&APPID=
+v 3.0
+https://api.openweathermap.org/data/3.0/onecall?lat=48.00&lon=16.21&appid=
