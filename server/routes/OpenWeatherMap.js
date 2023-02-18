@@ -4,11 +4,11 @@ const { validateToken } = require("../middlewares/AuthMiddleware");
 
 
 const london =
-  "https://api.openweathermap.org/data/2.5/weather?q=Timisoara,ro&APPID=e6a01a8a7d7cf235e594d91f349012fa";
+  "https://api.openweathermap.org/data/2.5/weather?q=Timisoara,ro&APPID=";
 const timisoara =
-  "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=17091c25e9959ba12e7b677314fe4d86";
+  "https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=";
 const baden =
-  "https://api.openweathermap.org/data/2.5/weather?lat=48.00&lon=16.21&APPID=e6a01a8a7d7cf235e594d91f349012fa";
+  "https://api.openweathermap.org/data/2.5/weather?lat=48.00&lon=16.21&APPID=";
 
 router.get("/:city", async (req, res) => {
   city_req = req.params.city;
