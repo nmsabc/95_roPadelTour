@@ -30,6 +30,13 @@ app.use("/auth", userRouter);
 const weatherRouter = require("./routes/OpenWeatherMap");
 app.use("/weather", weatherRouter);
 
+// Padel Padel Padel Padel Padel Padel Padel Padel Padel
+// Padel_events
+const eventsRouter = require('./routes/PadelEvents');
+app.use('/events', eventsRouter);
+
+// Padel Padel Padel Padel Padel Padel Padel Padel Padel
+
 db.sequelize.sync().then(() => {
   app.listen(3213, () => {
     console.log("Server running on port 3213");

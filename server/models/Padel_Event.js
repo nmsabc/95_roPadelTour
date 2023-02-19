@@ -12,6 +12,7 @@
 //     Training: trainer (linked to username), list of players(from the username), category
 
 // Define the Player model
+
 module.exports = (sequelize, DataTypes) => {
   // Define the Event model
   const Padel_Event = sequelize.define("Padel_Event", {
@@ -35,17 +36,5 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: "cascade",
     });
   }
-  //   // Define the relationships between models
-  //   Player.belongsTo(Category);
-  //   Player.belongsTo(UserType);
-  //   Player.belongsTo(Sponsor);
-  //   Team.belongsTo(Category);
-  //   Game.belongsTo(Team, { as: 'team1' });
-  //   Game.belongsTo(Team, { as: 'team2' });
-  //   Championship.belongsTo(Category);
-  //   Championship.hasMany(Game);
-  //   ChampionshipScoreTable.belongsTo(Championship);
-  //   Training.belongsTo(Category);
-  //   Training.belongsTo(Player, { as: 'trainer' });
   return Padel_Event;
 };
