@@ -13,29 +13,21 @@
 
 // Define the Player model
 module.exports = (sequelize, DataTypes) => {
-  // Define the Game model
-  const Padel_Game = sequelize.define("Padel_Game", {
-    gameDate: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    duration: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    score: {
+  // Define the Sponsor model
+  const PadelSponsor = sequelize.define("PadelSponsor", {
+    fullName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    winner: {
+    contactPerson: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    team1: {
-      type: DataTypes.INTEGER,
+    eventsSponsored: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    team2: {
+    amountsSponsored: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -53,5 +45,5 @@ module.exports = (sequelize, DataTypes) => {
   //   ChampionshipScoreTable.belongsTo(Championship);
   //   Training.belongsTo(Category);
   //   Training.belongsTo(Player, { as: 'trainer' });
-  return Padel_Game;
+  return PadelSponsor;
 };

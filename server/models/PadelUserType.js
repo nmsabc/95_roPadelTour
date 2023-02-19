@@ -12,29 +12,35 @@
 //     Training: trainer (linked to username), list of players(from the username), category
 
 // Define the Player model
-
 module.exports = (sequelize, DataTypes) => {
-  // Define the Event model
-  const Padel_Event = sequelize.define("Padel_Event", {
-    event_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    startDate: {
-      type: DataTypes.DATEONLY,
-      allowNull: false,
-    },
-    event_type: {
-      type: DataTypes.ENUM("Training", "Simple Tournament", "Championship"),
-      allowNull: false,
-    },
+    // Define the UserType model
+  const PadelUserType = sequelize.define('PadelUserType', {
+    type: {
+      type: DataTypes.ENUM('player', 'manager', 'administrator', 'editor', 'sponsor'),
+      allowNull: false
+    }
   });
 
-  Padel_Event.associate = (models) => {
-    Padel_Event.hasOne(models.Padel_Championship, {
-      foreignKey: "EventId",
-      onDelete: "cascade",
-    });
-  }
-  return Padel_Event;
+//   // Define the relationships between models
+//   Player.belongsTo(Category);
+//   Player.belongsTo(UserType);
+//   Player.belongsTo(Sponsor);
+//   Team.belongsTo(Category);
+//   Game.belongsTo(Team, { as: 'team1' });
+//   Game.belongsTo(Team, { as: 'team2' });
+//   Championship.belongsTo(Category);
+//   Championship.hasMany(Game);
+//   ChampionshipScoreTable.belongsTo(Championship);
+//   Training.belongsTo(Category);
+//   Training.belongsTo(Player, { as: 'trainer' });
+
+PadelUserType.associate = (models) => {
+  PadelUserType.belongsTo(models.Users, {
+    foreignKey: "UserId",
+    onDelete: "cascade",
+  });
 };
+
+  return PadelUserType;
+};
+

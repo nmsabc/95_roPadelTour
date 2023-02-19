@@ -13,14 +13,30 @@
 
 // Define the Player model
 module.exports = (sequelize, DataTypes) => {
-  // Define the Championship model
-  const Padel_Championship = sequelize.define("Padel_Championship", {
-    name: {
+  const PadelPlayer = sequelize.define("PadelPlayer", {
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    phone: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     gender: {
       type: DataTypes.ENUM("male", "female"),
+      allowNull: false,
+    },
+    birthDate: {
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     category: {
@@ -37,70 +53,61 @@ module.exports = (sequelize, DataTypes) => {
       ),
       allowNull: false,
     },
-    city: {
-      type: DataTypes.STRING,
+    points: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
-    startDate: {
-      type: DataTypes.DATEONLY,
+    games: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
-    endDate: {
-      type: DataTypes.DATEONLY,
+    wonGames: {
+      type: DataTypes.INTEGER,
       allowNull: false,
+      defaultValue: 0,
     },
-    venue: {
-      type: DataTypes.STRING,
+    lostGames: {
+      type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    prize1stPlace: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-    },
-    prize2ndPlace: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-    },
-    prize3rdPlace: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-    },
-    prize4thPlace: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-    },
-    totalCost: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-    },
-    totalRevenue: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
-    },
-    profit: {
-      type: DataTypes.DECIMAL(10, 2),
-      allowNull: false,
+      defaultValue: 0,
     },
   });
 
-  Padel_Championship.associate = (models) =>{
-    Padel_Championship.belongsTo(models.Padel_Event, {
-      foreignKey: "EventId",
+  PadelPlayer.associate = (models) => {
+    PadelPlayer.hasMany(models.PadelCategory, {
+      foreignKey: "PadelPlayerId",
       onDelete: "cascade",
     });
-  }
 
-  //   // Define the relationships between models
-  //   Player.belongsTo(Category);
-  //   Player.belongsTo(UserType);
-  //   Player.belongsTo(Sponsor);
-  //   Team.belongsTo(Category);
-  //   Game.belongsTo(Team, { as: 'team1' });
-  //   Game.belongsTo(Team, { as: 'team2' });
-  //   Championship.belongsTo(Category);
-  //   Championship.hasMany(Game);
-  //   ChampionshipScoreTable.belongsTo(Championship);
-  //   Training.belongsTo(Category);
-  //   Training.belongsTo(Player, { as: 'trainer' });
-  return Padel_Championship;
+    PadelPlayer.hasMany(models.PadelChampionship, {
+      foreignKey: "PadelPlayerId",
+      onDelete: "cascade",
+    });
+
+    PadelPlayer.hasMany(models.PadelEvent, {
+      foreignKey: "PadelPlayerId",
+      onDelete: "cascade",
+    });
+
+    PadelPlayer.hasMany(models.PadelGame, {
+      foreignKey: "PadelPlayerId",
+      onDelete: "cascade",
+    });
+
+    PadelPlayer.hasMany(models.PadelTeam, {
+      foreignKey: "PadelPlayerId",
+      onDelete: "cascade",
+    });
+
+    PadelPlayer.belongsTo(models.Users, {
+      foreignKey: "UserId",
+      onDelete: "cascade",
+    });
+  };
+
+  return PadelPlayer;
+
 };
+

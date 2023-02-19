@@ -14,37 +14,27 @@
 // Define the Player model
 
 module.exports = (sequelize, DataTypes) => {
-  // Define the Category model
-  const Padel_Category = sequelize.define("Padel_Category", {
-    padel_cat_name: {
+  // Define the Event model
+  const PadelEvent = sequelize.define("PadelEvent", {
+    eventName: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    padel_cat_type: {
-      type: DataTypes.ENUM(
-        "Male 1",
-        "Male 2",
-        "Male 3",
-        "Female 1",
-        "Female 2",
-        "Female 3",
-        "Mixt 1",
-        "Mixt 2",
-        "Mixt 3"
-      ),
+    startDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    eventType: {
+      type: DataTypes.ENUM("Training", "Simple Tournament", "Championship"),
       allowNull: false,
     },
   });
 
-  Padel_Category.associate = (models) => {
-    Padel_Category.belongsTo(models.Padel_Player, {
-      foreignKey: "PadelPlayerId",
+  PadelEvent.associate = (models) => {
+    PadelEvent.hasOne(models.PadelChampionship, {
+      foreignKey: "EventId",
       onDelete: "cascade",
     });
-  };
-
-  //   Championship.belongsTo(Category);
-  //   Training.belongsTo(Category);
-
-  return Padel_Category;
+  }
+  return PadelEvent;
 };

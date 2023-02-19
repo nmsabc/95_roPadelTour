@@ -13,34 +13,45 @@
 
 // Define the Player model
 module.exports = (sequelize, DataTypes) => {
-    // Define the UserType model
-  const Padel_UserType = sequelize.define('Padel_UserType', {
-    type: {
-      type: DataTypes.ENUM('player', 'manager', 'administrator', 'editor', 'sponsor'),
-      allowNull: false
-    }
+  // Define the Game model
+  const PadelGame = sequelize.define("PadelGame", {
+    gameDate: {
+      type: DataTypes.DATE,
+      allowNull: false,
+    },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    score: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    winner: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    team1: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    team2: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 
-//   // Define the relationships between models
-//   Player.belongsTo(Category);
-//   Player.belongsTo(UserType);
-//   Player.belongsTo(Sponsor);
-//   Team.belongsTo(Category);
-//   Game.belongsTo(Team, { as: 'team1' });
-//   Game.belongsTo(Team, { as: 'team2' });
-//   Championship.belongsTo(Category);
-//   Championship.hasMany(Game);
-//   ChampionshipScoreTable.belongsTo(Championship);
-//   Training.belongsTo(Category);
-//   Training.belongsTo(Player, { as: 'trainer' });
-
-Padel_UserType.associate = (models) => {
-  Padel_UserType.belongsTo(models.Users, {
-    foreignKey: "UserId",
-    onDelete: "cascade",
-  });
+  //   // Define the relationships between models
+  //   Player.belongsTo(Category);
+  //   Player.belongsTo(UserType);
+  //   Player.belongsTo(Sponsor);
+  //   Team.belongsTo(Category);
+  //   Game.belongsTo(Team, { as: 'team1' });
+  //   Game.belongsTo(Team, { as: 'team2' });
+  //   Championship.belongsTo(Category);
+  //   Championship.hasMany(Game);
+  //   ChampionshipScoreTable.belongsTo(Championship);
+  //   Training.belongsTo(Category);
+  //   Training.belongsTo(Player, { as: 'trainer' });
+  return PadelGame;
 };
-
-  return Padel_UserType;
-};
-

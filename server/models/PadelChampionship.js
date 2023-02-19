@@ -13,25 +13,82 @@
 
 // Define the Player model
 module.exports = (sequelize, DataTypes) => {
-  // Define the Sponsor model
-  const Padel_Sponsor = sequelize.define("Padel_Sponsor", {
-    fullName: {
+  // Define the Championship model
+  const PadelChampionship = sequelize.define("PadelChampionship", {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    contactPerson: {
+    gender: {
+      type: DataTypes.ENUM("male", "female"),
+      allowNull: false,
+    },
+    category: {
+      type: DataTypes.ENUM(
+        "Male 1",
+        "Male 2",
+        "Male 3",
+        "Female 1",
+        "Female 2",
+        "Female 3",
+        "Mixt 1",
+        "Mixt 2",
+        "Mixt 3"
+      ),
+      allowNull: false,
+    },
+    city: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    eventsSponsored: {
+    startDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    endDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    venue: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    amountsSponsored: {
-      type: DataTypes.INTEGER,
+    prize1stPlace: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    prize2ndPlace: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    prize3rdPlace: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    prize4thPlace: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    totalCost: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    totalRevenue: {
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: false,
+    },
+    profit: {
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
     },
   });
+
+  PadelChampionship.associate = (models) =>{
+    PadelChampionship.belongsTo(models.PadelEvent, {
+      foreignKey: "EventId",
+      onDelete: "cascade",
+    });
+  }
 
   //   // Define the relationships between models
   //   Player.belongsTo(Category);
@@ -45,5 +102,5 @@ module.exports = (sequelize, DataTypes) => {
   //   ChampionshipScoreTable.belongsTo(Championship);
   //   Training.belongsTo(Category);
   //   Training.belongsTo(Player, { as: 'trainer' });
-  return Padel_Sponsor;
+  return PadelChampionship;
 };

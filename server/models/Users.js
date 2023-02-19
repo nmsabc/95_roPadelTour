@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: "UserId",
       onDelete: "cascade",
     });
-    Users.hasOne(models.Padel_UserType, {
+    Users.hasOne(models.PadelUserType, {
       foreignKey: "UserId",
       onDelete: "cascade",
     });
-    Users.hasOne(models.Padel_Player, {
+    Users.hasOne(models.PadelPlayer, {
       foreignKey: "UserId",
       onDelete: "cascade",
     });

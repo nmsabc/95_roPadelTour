@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../models');
-const Padel_Event = db.Padel_Event;
+const PadelEvent = db.PadelEvent;
 
 // GET all events
 router.get('/', async (req, res) => {
   try {
-    const events = await Padel_Event.findAll();
+    const events = await PadelEvent.findAll();
     res.json(events);
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 // GET an event by ID
 router.get('/:id', async (req, res) => {
   try {
-    const event = await Padel_Event.findOne({ where: { id: req.params.id } });
+    const event = await PadelEvent.findOne({ where: { id: req.params.id } });
     if (event) {
       res.json(event);
     } else {
@@ -30,7 +30,7 @@ router.get('/:id', async (req, res) => {
 // CREATE an event
 router.post('/', async (req, res) => {
   try {
-    const event = await Padel_Event.create(req.body);
+    const event = await PadelEvent.create(req.body);
     res.json(event);
   } catch (error) {
     res.status(500).send({ message: error.message });
@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 // UPDATE an event
 router.put('/:id', async (req, res) => {
   try {
-    const event = await Padel_Event.findOne({ where: { id: req.params.id } });
+    const event = await PadelEvent.findOne({ where: { id: req.params.id } });
     if (event) {
       const updatedEvent = await event.update(req.body);
       res.json(updatedEvent);
@@ -55,7 +55,7 @@ router.put('/:id', async (req, res) => {
 // DELETE an event
 router.delete('/:id', async (req, res) => {
   try {
-    const event = await Padel_Event.findOne({ where: { id: req.params.id } });
+    const event = await PadelEvent.findOne({ where: { id: req.params.id } });
     if (event) {
       await event.destroy();
       res.json({ message: 'Event deleted successfully' });

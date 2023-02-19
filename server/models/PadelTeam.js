@@ -13,34 +13,38 @@
 
 // Define the Player model
 module.exports = (sequelize, DataTypes) => {
-  
-  // Define the Training model
-  const Padel_Training = sequelize.define('Padel_Training', {
-    trainer: {
-    type: DataTypes.STRING,
-    allowNull: false
+
+  // Define the Team model
+  const PadelTeam = sequelize.define('PadelTeam', {
+    player1: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    // players: {
-    // type: DataTypes.ARRAY(DataTypes.STRING),
-    // allowNull: false
-    // },
+    player2: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    type: {
+      type: DataTypes.ENUM('men', 'women', 'mixt'),
+      allowNull: false
+    },
     category: {
-    type: DataTypes.ENUM('Male 1', 'Male 2', 'Male 3', 'Female 1', 'Female 2', 'Female 3', 'Mixt 1', 'Mixt 2', 'Mixt 3'),
-    allowNull: false
+      type: DataTypes.ENUM('Male 1', 'Male 2', 'Male 3', 'Female 1', 'Female 2', 'Female 3', 'Mixt 1', 'Mixt 2', 'Mixt 3'),
+      allowNull: false
     }
-    });
+  });
 
   //   // Define the relationships between models
-  //   Player.belongsTo(Category);
-  //   Player.belongsTo(UserType);
-  //   Player.belongsTo(Sponsor);
-  //   Team.belongsTo(Category);
-  //   Game.belongsTo(Team, { as: 'team1' });
-  //   Game.belongsTo(Team, { as: 'team2' });
-  //   Championship.belongsTo(Category);
-  //   Championship.hasMany(Game);
-  //   ChampionshipScoreTable.belongsTo(Championship);
-  //   Training.belongsTo(Category);
-  //   Training.belongsTo(Player, { as: 'trainer' });
-  return Padel_Training;
+//   Player.belongsTo(Category);
+//   Player.belongsTo(UserType);
+//   Player.belongsTo(Sponsor);
+//   Team.belongsTo(Category);
+//   Game.belongsTo(Team, { as: 'team1' });
+//   Game.belongsTo(Team, { as: 'team2' });
+//   Championship.belongsTo(Category);
+//   Championship.hasMany(Game);
+//   ChampionshipScoreTable.belongsTo(Championship);
+//   Training.belongsTo(Category);
+//   Training.belongsTo(Player, { as: 'trainer' });
+  return PadelTeam;
 };
