@@ -32,10 +32,10 @@ import { useEffect, useState } from "react";
 import Palmares from "./pages/Palmares";
 import Pricing from "./pages/Pricing";
 
-
 //responsive App Bar
 import ResponsiveAppBar from "./pages/ResponsiveAppBar";
 import StickyFooterSeba from "./pages/StickyFooterSeba";
+import PadelAppBar from "./pages/PadelAppBar";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -44,7 +44,8 @@ function App() {
     validUser: false,
   });
 
-  const import_this_theme="https://github.com/mui/material-ui/blob/master/docs/src/pages/premium-themes/onepirate/ForgotPassword.js"
+  const import_this_theme =
+    "https://github.com/mui/material-ui/blob/master/docs/src/pages/premium-themes/onepirate/ForgotPassword.js";
 
   useEffect(() => {
     axios
@@ -86,12 +87,15 @@ function App() {
                 <Link to="/dubleinputs">2xInputs</Link>
                 <Link to="/filterablelist">FilterableList</Link>
                 {/* <Link to={data_str_in_js}>data_str_in_js</Link> */}
+                <div className="padelContainer">
+                  <PadelAppBar />
+                </div>
                 <div className="loginContainer">
                   {/* <Link to="/signout">
                     <LogoutIcon />
                   </Link>
                   {ld.truncate(authState.username, { length: 10 })} */}
-                <ResponsiveAppBar />
+                  <ResponsiveAppBar />
                 </div>
               </>
             </div>

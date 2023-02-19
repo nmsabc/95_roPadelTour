@@ -31,9 +31,12 @@ const weatherRouter = require("./routes/OpenWeatherMap");
 app.use("/weather", weatherRouter);
 
 // Padel Padel Padel Padel Padel Padel Padel Padel Padel
-// Padel_events
+// PadelEvents
 const eventsRouter = require('./routes/PadelEvents');
-app.use('/events', eventsRouter);
+app.use('/padel/events', eventsRouter);
+// PadelChampionship
+const championshipRouter = require('./routes/PadelChampionship');
+app.use('/padel/championship', championshipRouter);
 
 // Padel Padel Padel Padel Padel Padel Padel Padel Padel
 
