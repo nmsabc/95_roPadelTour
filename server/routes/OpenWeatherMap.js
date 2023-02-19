@@ -3,10 +3,10 @@ const router = express.Router();
 const { validateToken } = require("../middlewares/AuthMiddleware");
 require("dotenv").config();
 
-const timisoara = `https://api.openweathermap.org/data/2.5/weather?q=Timisoara,ro&APPID=${process.env.OWM_DEFAUL_KEY}`;
-const london = `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${process.env.OWM_DEFAUL_KEY}`;
-const baden = `https://api.openweathermap.org/data/2.5/weather?lat=48.00&lon=16.21&APPID=${process.env.OWM_DEFAUL_KEY}`;
-const baden30 =`https://api.openweathermap.org/data/3.0/onecall?lat=48.00&lon=16.21&appid=${process.env.OWM_DEFAUL_KEY}`
+const timisoara = `https://api.openweathermap.org/data/2.5/weather?q=Timisoara,ro&APPID=${process.env.RPT_API_KEY}`;
+const london = `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${process.env.RPT_API_KEY}`;
+const baden = `https://api.openweathermap.org/data/2.5/weather?lat=48.00&lon=16.21&APPID=${process.env.RPT_API_KEY}`;
+const baden30 =`https://api.openweathermap.org/data/3.0/onecall?lat=48.00&lon=16.21&appid=${process.env.RPT_API_KEY}`
 
 router.get("/:city", async (req, res) => {
   city_req = req.params.city;
