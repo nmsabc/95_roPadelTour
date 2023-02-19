@@ -34,6 +34,7 @@ function PadelAppBar() {
 
   const handleAddPadelEvent = () => {
     console.log("clicked on handleAddPadelEvent ...");
+    navigate("/CreatePadelEvent")
   };
   const handleAddPadelChampionship = () => {
     console.log("clicked on handleAddPadelChampionship ...");
@@ -53,24 +54,18 @@ function PadelAppBar() {
 
   return (
     <React.Fragment>
-      <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        {/* <Typography sx={{ minWidth: 100 }}>Contact</Typography>
-      <Typography sx={{ minWidth: 100 }}>Profile</Typography> */}
+     
         <Tooltip title="Padel Pages">
           <IconButton
             onClick={handleClick}
             size="small"
-            sx={{ ml: 2 }}
             aria-controls={open ? "account-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32 }}>
-              {ld.truncate(authState.username, { length: 1, omission: "" })}
-            </Avatar>
+          Padel
           </IconButton>
         </Tooltip>
-      </Box>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"

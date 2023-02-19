@@ -37,6 +37,9 @@ import ResponsiveAppBar from "./pages/ResponsiveAppBar";
 import StickyFooterSeba from "./pages/StickyFooterSeba";
 import PadelAppBar from "./pages/PadelAppBar";
 
+//Padel specific pages
+import CreatePadelEvent from "./pages/CreatePadelEvent";
+
 function App() {
   const [authState, setAuthState] = useState({
     username: "",
@@ -139,6 +142,13 @@ function App() {
             <Route path="/myaccount" element={<PageNotFound />} exact />
             <Route path="/usersettings" element={<PageNotFound />} exact />
             <Route path="/forgotpassword" element={import_this_theme} exact />
+
+            {/* Padel Events Routes */}
+            <Route
+              path="/CreatePadelEvent"
+              element={<CreatePadelEvent />}
+              exact
+            />
           </Routes>
         </Router>
       </AuthContext.Provider>

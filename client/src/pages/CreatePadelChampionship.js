@@ -8,7 +8,7 @@ import {
   Button,
 } from "@material-ui/core";
 
-const PadelChampionshipForm = () => {
+const CreatePadelChampionship = () => {
   const [name, setName] = useState("");
   const [gender, setGender] = useState("");
   const [category, setCategory] = useState("");
@@ -122,4 +122,4 @@ const PadelChampionshipForm = () => {
   );
 };
 
-export default PadelChampionshipForm;
+export default CreatePadelChampionship;

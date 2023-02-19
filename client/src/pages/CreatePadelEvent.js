@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Container, TextField, Button } from "@material-ui/core";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Container from '@mui/material/Container';
 
-const EventForm = () => {
+
+
+
+function CreatePadelEvent() {
   const [eventName, setEventName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [eventType, setEventType] = useState("");
@@ -54,4 +59,4 @@ const EventForm = () => {
   );
 };
 
-export default EventForm;
+export default CreatePadelEvent;
