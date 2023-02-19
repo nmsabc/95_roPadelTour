@@ -83,6 +83,13 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  Padel_Championship.associate = (models) =>{
+    Padel_Championship.belongsTo(models.Padel_Event, {
+      foreignKey: "EventId",
+      onDelete: "cascade",
+    });
+  }
+
   //   // Define the relationships between models
   //   Player.belongsTo(Category);
   //   Player.belongsTo(UserType);

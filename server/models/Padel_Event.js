@@ -15,12 +15,26 @@
 module.exports = (sequelize, DataTypes) => {
   // Define the Event model
   const Padel_Event = sequelize.define("Padel_Event", {
-    type: {
+    event_name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    startDate: {
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    event_type: {
       type: DataTypes.ENUM("Training", "Simple Tournament", "Championship"),
       allowNull: false,
     },
   });
 
+  Padel_Event.associate = (models) => {
+    Padel_Event.hasOne(models.Padel_Championship, {
+      foreignKey: "EventId",
+      onDelete: "cascade",
+    });
+  }
   //   // Define the relationships between models
   //   Player.belongsTo(Category);
   //   Player.belongsTo(UserType);
