@@ -52,6 +52,8 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: "secret"
     volumes:
       - ropadeltour-mongo-data:/data/db
+    ports:
+      - 27017:27017
 
   mongo-express:
     image: mongo-express
@@ -70,6 +72,7 @@ volumes:
 networks:
   public:
   private:
+  
 
 secrets:
   db-password:
