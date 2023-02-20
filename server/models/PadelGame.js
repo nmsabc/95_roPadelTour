@@ -19,18 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    duration: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    score: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    winner: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     team1: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -39,19 +27,93 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    setsPlayed:{
+      type: DataTypes.ENUM(
+        "1",
+        "2",
+        "3",
+      ),
+      allowNull: true,
+    },
+    set1ScoreTeam1:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    set1ScoreTeam2:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    set2ScoreTeam1:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    set2ScoreTeam2:{
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    set3ScoreTeam1:{
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    set3ScoreTeam2:{
+      type: DataTypes.INTEGER,
+      allowNull: true
+    },
+    set_scores: {
+      type: DataTypes.JSON,
+      allowNull: false,
+    },
+  // In this refactored model, set_scores is now of data type JSON. 
+  // You can structure the data for set_scores as an object where 
+  // each key represents the set number and the value 
+  // is an array of scores for that set.
+  // {
+  //   "1": [6, 2],
+  //   "2": [3, 6],
+  //   "3": [7, 6]
+  // }
+    winnerTeam: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      // references: {
+      //   model: "PadelTeam",
+      //   key: 'id',
+      // },
+    },
+    loserTeam: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      // references: {
+      //   model: "PadelTeam",
+      //   key: 'id',
+      // },
+    },
+ 
+
   });
 
-  //   // Define the relationships between models
-  //   Player.belongsTo(Category);
-  //   Player.belongsTo(UserType);
-  //   Player.belongsTo(Sponsor);
-  //   Team.belongsTo(Category);
-  //   Game.belongsTo(Team, { as: 'team1' });
-  //   Game.belongsTo(Team, { as: 'team2' });
-  //   Championship.belongsTo(Category);
-  //   Championship.hasMany(Game);
-  //   ChampionshipScoreTable.belongsTo(Championship);
-  //   Training.belongsTo(Category);
-  //   Training.belongsTo(Player, { as: 'trainer' });
+  PadelGame.associate = (models) =>{
+    PadelGame.belongsTo(models.PadelEvent, {
+      foreignKey: "EventId",
+      onDelete: "cascade",
+    });
+    PadelGame.belongsTo(models.PadelChampionship, {
+      foreignKey: "ChampionshipId",
+      onDelete: "cascade",
+    });
+    PadelGame.hasMany(models.PadelTeam, {
+      foreignKey: "winnerTeam",
+      as: "winningTeam",
+    });
+    PadelGame.hasMany(models.PadelTeam, {
+      foreignKey: "loserTeam",
+      as: "losingTeam",
+    });
+  }
+
   return PadelGame;
 };
