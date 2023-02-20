@@ -35,10 +35,11 @@ import Pricing from "./pages/Pricing";
 //responsive App Bar
 import ResponsiveAppBar from "./pages/ResponsiveAppBar";
 import StickyFooterSeba from "./pages/StickyFooterSeba";
-import PadelAppBar from "./pages/PadelAppBar";
+import PadelAppBar from "./pages/Padel/PadelAppBar";
 
 //Padel specific pages
-import CreatePadelEvent from "./pages/CreatePadelEvent";
+import CreatePadelEvent from "./pages/Padel/CreatePadelEvent";
+import SavePadelGameInfo from "./pages/Padel/SavePadelGameInfo";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -144,11 +145,8 @@ function App() {
             <Route path="/forgotpassword" element={import_this_theme} exact />
 
             {/* Padel Events Routes */}
-            <Route
-              path="/CreatePadelEvent"
-              element={<CreatePadelEvent />}
-              exact
-            />
+            <Route path="/CreatePadelEvent" element={<CreatePadelEvent />} exact/>
+            <Route path="/SavePadelGameInfo" element={<SavePadelGameInfo />} exact/>
           </Routes>
         </Router>
       </AuthContext.Provider>

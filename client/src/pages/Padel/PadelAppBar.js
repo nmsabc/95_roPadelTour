@@ -11,7 +11,7 @@ import PersonAdd from "@mui/icons-material/PersonAdd";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 
-import { AuthContext } from "../helpers/AuthContext";
+import { AuthContext } from "../../helpers/AuthContext";
 
 import { useNavigate } from "react-router-dom";
 
@@ -39,8 +39,9 @@ function PadelAppBar() {
   const handleAddPadelChampionship = () => {
     console.log("clicked on handleAddPadelChampionship ...");
   };
-  const handlePassPadelPlayerChange = () => {
+  const handleSavePadelGameInfo = () => {
     console.log("clicked on handlePassPadelPlayerChange ...");
+    navigate("/SavePadelGameInfo")
   };
   const handlePadelPlayerSettings = () => {
     console.log("clicked on handlePadelPlayerSettings ...");
@@ -110,8 +111,8 @@ function PadelAppBar() {
           <Avatar /> Add Padel Championship
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handlePassPadelPlayerChange}>
-          <Avatar /> PadelPlayer pass change
+        <MenuItem onClick={handleSavePadelGameInfo}>
+          <Avatar /> Save Padel Game Info
         </MenuItem>
         <Divider />
         <MenuItem onClick={handlePadelPlayerSettings}>
