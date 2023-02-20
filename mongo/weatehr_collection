@@ -1,0 +1,29 @@
+// MongoDB Playground
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+const database = 'mongo-rpt';
+const collection = 'weather';
+
+// The current database to use.
+use(database);
+
+// Create a new collection.
+// db.createCollection(collection);
+
+// db.getCollectionNames()
+const timestamp = new Date().getTime();
+
+db.weather.insertOne({
+  location: "Baden, AT, manual",
+  timeStamp: timestamp,
+  temp: 13.48,
+  windSpeed: 13,
+});
+
+
+// const documentToUpdate = db.weather.findOne({ name: "Baden-1" })
+// const timestamp = new Date().getTime()
+// const newName = `${documentToUpdate.name}_${timestamp}`
+// db.weather.updateOne({ _id: documentToUpdate._id }, { $set: { name: newName } })
+
+db.weather.find();

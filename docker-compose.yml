@@ -2,7 +2,7 @@ version: "2.15.1"
 
 services:
   frontend_server:
-    build: ./client
+    # build: ./client
     image: client_fe
     command: sh -c "yarn install && npm start"
     ports: 
@@ -15,7 +15,7 @@ services:
       - private
 
   backend_server:
-    build: ./server
+    # build: ./server
     image: server_be
     command: sh -c "yarn install && yarn run start"
     ports: 
@@ -72,7 +72,7 @@ volumes:
 networks:
   public:
   private:
-  
+
 
 secrets:
   db-password:
