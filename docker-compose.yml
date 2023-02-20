@@ -1,7 +1,8 @@
-version: '1.0'
+version: "2.15.1"
 
 services:
   frontend_server:
+    build: ./client
     image: client_fe
     command: sh -c "yarn install && npm start"
     ports: 
@@ -14,6 +15,7 @@ services:
       - private
 
   backend_server:
+    build: ./server
     image: server_be
     command: sh -c "yarn install && yarn run start"
     ports: 
@@ -40,12 +42,31 @@ services:
       MYSQL_DATABASE: rpt
     ports:
     - 3313:3306
-    expose:
-    - 3313
     networks:
       - private
+
+  mogo_for_rpt:
+    image: mongo:4.0-xenial  # mongo:4.4.19-rc2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: "secret"
+    volumes:
+      - ropadeltour-mongo-data:/data/db
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 27013:8081
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: "secret"
+      ME_CONFIG_MONGODB_URL: mongodb://root:secret@mogo_for_rpt:27017/
+
 volumes:
   ropadeltour-mysql-data:
+  ropadeltour-mongo-data:
+
 networks:
   public:
   private:
