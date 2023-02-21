@@ -43,8 +43,9 @@ function PadelAppBar() {
     console.log("clicked on handlePassPadelPlayerChange ...");
     navigate("/SavePadelGameInfo")
   };
-  const handlePadelPlayerSettings = () => {
-    console.log("clicked on handlePadelPlayerSettings ...");
+  const handlePadelTeamsSettings = () => {
+    console.log("clicked on handlePadelTeamsSettings ...");
+    navigate("/SavePadelTeamInfo")
   };
   const handleAddPadelPlayerAccount = () => {
     console.log("clicked on handleAddPadelPlayerAccount ...");
@@ -111,17 +112,18 @@ function PadelAppBar() {
           <Avatar /> Add Padel Championship
         </MenuItem>
         <Divider />
+        <MenuItem onClick={handlePadelTeamsSettings}>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Padel Teams Settings
+        </MenuItem>{" "}
+        <Divider />
         <MenuItem onClick={handleSavePadelGameInfo}>
           <Avatar /> Save Padel Game Info
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handlePadelPlayerSettings}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Padel Player Settings
-        </MenuItem>{" "}
-        <Divider />
+
         <MenuItem onClick={handleAddPadelPlayerAccount}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />

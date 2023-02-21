@@ -40,6 +40,7 @@ import PadelAppBar from "./pages/Padel/PadelAppBar";
 //Padel specific pages
 import CreatePadelEvent from "./pages/Padel/CreatePadelEvent";
 import SavePadelGameInfo from "./pages/Padel/SavePadelGameInfo";
+import SavePadelTeamInfo from "./pages/Padel/SavePadelTeamInfo";
 
 function App() {
   const [authState, setAuthState] = useState({
@@ -147,6 +148,7 @@ function App() {
             {/* Padel Events Routes */}
             <Route path="/CreatePadelEvent" element={<CreatePadelEvent />} exact/>
             <Route path="/SavePadelGameInfo" element={<SavePadelGameInfo />} exact/>
+            <Route path="/SavePadelTeamInfo" element={<SavePadelTeamInfo />} exact/>
           </Routes>
         </Router>
       </AuthContext.Provider>
