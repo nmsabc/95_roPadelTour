@@ -34,18 +34,18 @@ function PadelAppBar() {
 
   const handleAddPadelEvent = () => {
     console.log("clicked on handleAddPadelEvent ...");
-    navigate("/CreatePadelEvent")
+    navigate("/CreatePadelEvent");
   };
   const handleAddPadelChampionship = () => {
     console.log("clicked on handleAddPadelChampionship ...");
   };
   const handleSavePadelGameInfo = () => {
     console.log("clicked on handlePassPadelPlayerChange ...");
-    navigate("/SavePadelGameInfo")
+    navigate("/SavePadelGameInfo");
   };
   const handlePadelTeamsSettings = () => {
     console.log("clicked on handlePadelTeamsSettings ...");
-    navigate("/SavePadelTeamInfo")
+    navigate("/SavePadelTeamInfo");
   };
   const handleAddPadelPlayerAccount = () => {
     console.log("clicked on handleAddPadelPlayerAccount ...");
@@ -53,21 +53,27 @@ function PadelAppBar() {
   const handleAddSponsor = () => {
     console.log("clicked on handleAddSponsor ...");
   };
+  const handlePadelClasament = () => {
+    console.log("clicked on handlePadelClasament ...");
+    navigate("/palmares");
+  };
+  const handlePadelRanking = () => {
+    console.log("clicked on handlePadelRanking ...");
+  };
 
   return (
     <React.Fragment>
-     
-        <Tooltip title="Padel Pages">
-          <IconButton
-            onClick={handleClick}
-            size="small"
-            aria-controls={open ? "account-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-          >
+      <Tooltip title="Padel Pages">
+        <IconButton
+          onClick={handleClick}
+          size="small"
+          aria-controls={open ? "account-menu" : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? "true" : undefined}
+        >
           Padel
-          </IconButton>
-        </Tooltip>
+        </IconButton>
+      </Tooltip>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -111,6 +117,12 @@ function PadelAppBar() {
         <MenuItem onClick={handleAddPadelChampionship}>
           <Avatar /> Add Padel Championship
         </MenuItem>
+        <MenuItem onClick={handlePadelRanking}>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          Add Padel Ranking
+        </MenuItem>
         <Divider />
         <MenuItem onClick={handlePadelTeamsSettings}>
           <ListItemIcon>
@@ -123,7 +135,6 @@ function PadelAppBar() {
           <Avatar /> Save Padel Game Info
         </MenuItem>
         <Divider />
-
         <MenuItem onClick={handleAddPadelPlayerAccount}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
@@ -136,6 +147,13 @@ function PadelAppBar() {
             <Logout fontSize="small" />
           </ListItemIcon>
           Add Sponsor
+        </MenuItem>
+        <Divider />
+        <MenuItem onClick={handlePadelClasament}>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          RO Padel Tour :: Clasament
         </MenuItem>
       </Menu>
     </React.Fragment>

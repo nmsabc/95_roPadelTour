@@ -82,11 +82,11 @@ function App() {
               <>
                 <Link to="/">Home </Link>
                 <Link to="/createPost">New Post </Link>
-                <Link to="/palmares">Palma </Link>
                 <Link to="/pricing">pricing </Link>
                 {/* <Link to="/OldHome">OldHome </Link> */}
-                <Link to="/createPlayer">New Player </Link>
-                <Link to="/createRanking">New Ranking</Link>
+                {/* <Link to="/palmares">Palma </Link> */}
+                {/* <Link to="/createPlayer">New Player </Link>
+                <Link to="/createRanking">New Ranking</Link> */}
                 {/* learn props propagation and state sharing in React */}
                 <Link to="/masterlifter">Master Lifter</Link>
                 <Link to="/dubleinputs">2xInputs</Link>

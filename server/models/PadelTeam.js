@@ -16,12 +16,12 @@ module.exports = (sequelize, DataTypes) => {
 
   // Define the Team model
   const PadelTeam = sequelize.define('PadelTeam', {
-    player1: {
-      type: DataTypes.STRING,
+    playerOne: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    player2: {
-      type: DataTypes.STRING,
+    playerTwo: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
     type: {
@@ -31,8 +31,41 @@ module.exports = (sequelize, DataTypes) => {
     category: {
       type: DataTypes.ENUM('Male 1', 'Male 2', 'Male 3', 'Female 1', 'Female 2', 'Female 3', 'Mixt 1', 'Mixt 2', 'Mixt 3'),
       allowNull: false
-    }
+    },
+    gamesPlayed: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    gamesWon: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    gamesLost: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+
   });
+
+  PadelTeam.associate = (models) =>{
+    PadelTeam.belongsTo(models.PadelEvent, {
+      foreignKey: "EventId",
+      onDelete: "cascade",
+    });
+    PadelTeam.belongsTo(models.PadelChampionship, {
+      foreignKey: "ChampionshipId",
+      onDelete: "cascade",
+    });
+    PadelTeam.hasOne(models.PadelPlayer, {
+      foreignKey: "playerOne",
+      as: "player1",
+    });
+    PadelTeam.hasOne(models.PadelPlayer, {
+      foreignKey: "playerTwo",
+      as: "player2",
+    });
+  }
+
 
   //   // Define the relationships between models
 //   Player.belongsTo(Category);
