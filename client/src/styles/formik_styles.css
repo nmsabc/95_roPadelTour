@@ -63,7 +63,7 @@
     caret-color: var(--text-color);
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     body {
       color: white;
       background-color: var(--gray-900);
@@ -145,13 +145,13 @@
     }
   }
   
-  @media (hover: hover) and (prefers-color-scheme: dark) {
+  @media (hover: hover) and (prefers-color-scheme: darkula) {
     a:hover {
       text-decoration-color: white;
     }
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     a {
       text-decoration-color: var(--gray-700);
       -webkit-text-decoration-color: var(--gray-700);
@@ -195,7 +195,7 @@
     appearance: none;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     input[type="email"],
     input[type="username"],
     input[type="text"],
@@ -256,7 +256,7 @@
     background-position: center right 0.5rem;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     select {
       background-color: var(--gray-800);
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 125.304 125.304"><path d="M62.652 103.895L0 21.41h125.304" fill="%23ffffff"/></svg>');
@@ -282,7 +282,7 @@
       sans-serif;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     textarea {
       background-color: var(--gray-800);
       border-color: var(--gray-700);
@@ -319,7 +319,7 @@
     margin-right: 0.5rem;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     input[type="checkbox"] {
       background-color: var(--gray-800);
       border-color: var(--gray-600);
@@ -342,7 +342,7 @@
     border-color: var(--focus-ring-color);
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     input[type="checkbox"]:checked {
       background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="78.369" height="78.369" viewBox="0 0 78.369 78.369"><path fill="%23343434" d="M78.05 19.015l-48.592 48.59c-.428.43-1.12.43-1.548 0L.32 40.016c-.427-.426-.427-1.12 0-1.547l6.704-6.704c.428-.427 1.12-.427 1.548 0l20.113 20.112 41.113-41.113c.43-.427 1.12-.427 1.548 0l6.703 6.704c.427.427.427 1.12 0 1.548z"/></svg>');
       background-color: white;
@@ -365,7 +365,7 @@
     display: flex;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     input[type="radio"] {
       border: 2px solid white;
     }
@@ -386,7 +386,7 @@
     border-color: var(--focus-ring-color);
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     input[type="radio"]:checked {
       border: 2px solid white;
     }
@@ -401,7 +401,7 @@
     border-radius: 50%;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     input[type="radio"]:checked::before {
       background-color: white;
     }
@@ -432,7 +432,7 @@
     user-select: none;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     input[type="submit"],
     input[type="reset"],
     input[type="button"],
@@ -453,7 +453,7 @@
     }
   }
   
-  @media (hover: hover) and (prefers-color-scheme: dark) {
+  @media (hover: hover) and (prefers-color-scheme: darkula) {
     input[type="submit"]:hover,
     input[type="reset"]:hover,
     input[type="button"]:hover,
@@ -493,7 +493,7 @@
     color: var(--gray-300);
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     th {
       border-color: var(--gray-700);
       color: var(--gray-700);
@@ -504,7 +504,7 @@
     border-bottom: 2px solid var(--gray-300);
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     td {
       border-color: var(--gray-700);
     }
@@ -524,7 +524,7 @@
     border-radius: 10px;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     code {
       background-color: var(--gray-700);
     }
@@ -556,7 +556,7 @@
     margin-bottom: 1.563rem;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     blockquote {
       border-left: 0.25rem solid var(--gray-700);
     }
@@ -621,7 +621,7 @@
     margin-top: 0.25rem;
   }
   
-  @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: darkula) {
     .error {
       color: var(--red-400);
     }
