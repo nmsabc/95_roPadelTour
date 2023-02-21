@@ -4,7 +4,9 @@ import OpenWeather from "./OpenWeather";
 
 export default function StickyFooterSeba() {
   const citiesList = ["baden", "timisoara", "london"];
+  const citiesCountryList = [["baden", "at"], ["timisoara", "ro"], ["london", "uk"], ["vienna", "at"]];
   const [weatherCity, setWeatherCity] = useState("baden");
+  const [weatherCountry, setWeatherCountry] = useState("at");
   const [cityIndex, setCityIndex] = useState(0);
 
   function circularLoop(list) {
@@ -25,10 +27,12 @@ export default function StickyFooterSeba() {
   };
 
   const loopCities = (city) => {
-    if (city === citiesList[cityIndex] || city === "") {
-      let nextIndex = (cityIndex + 1) % citiesList.length;
+    console.log(cityIndex, citiesCountryList[cityIndex][0], citiesCountryList[cityIndex][1])
+    if (city === citiesCountryList[cityIndex][0] || city === "") {
+      let nextIndex = (cityIndex + 1) % citiesCountryList.length;
       setCityIndex(nextIndex);
-      setWeatherCity(citiesList[nextIndex]);
+      setWeatherCity(citiesCountryList[nextIndex][0]);
+      setWeatherCountry(citiesCountryList[nextIndex][1]);
     }
   };
   return (
